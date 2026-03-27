@@ -1,0 +1,36 @@
+Business Source License 1.1
+
+Licensor: William Ferrell
+Licensed Work: Resonance
+Change Date: Four years from the date of this release
+Change License: Apache License, Version 2.0
+
+Use Limitation: The Licensed Work may not be used in a production environment
+by any entity that generates more than $1,000,000 USD in annual revenue,
+without a separate commercial license agreement with the Licensor.
+
+For commercial licensing inquiries contact: wpferrell@gmail.com
+
+---
+
+The Business Source License (this document, or the "License") is not an Open
+Source license. However, the Licensed Work will eventually be made available
+under an Open Source License, as stated in this License.
+
+License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
+
+Licensor: The individual or entity that is licensing the Licensed Work under
+this License.
+
+Licensed Work: The Licensed Work is the software known as Resonance, an
+Affective Memory Layer for AI, as made available by the Licensor.
+
+Additional Use Grant: None.
+
+Change Date: Four years from the initial public release date of the Licensed Work.
+
+Change License: Apache License, Version 2.0 as published by the Apache
+Software Foundation.
+
+For information about alternative licensing arrangements, contact the Licensor.

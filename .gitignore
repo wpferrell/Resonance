@@ -1,0 +1,5 @@
+data/
+resonance/model/checkpoint-*
+resonance/model/*.safetensors
+resonance/model/*.pt
+resonance/model/*.bin
