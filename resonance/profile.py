@@ -1,3 +1,5 @@
+# Copyright (c) 2026 William Ferrell. All rights reserved.
+# Licensed under the Business Source License 1.1 — see LICENSE for details.
 # resonance/profile.py
 # Step 10 — Profile Engine
 # Reads temporal patterns and correction history.

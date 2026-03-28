@@ -1,3 +1,5 @@
+# Copyright (c) 2026 William Ferrell. All rights reserved.
+# Licensed under the Business Source License 1.1 — see LICENSE for details.
 # Resonance — extractor.py
 # Step 5C: Upgraded with trained ModernBERT emotion model (92% accuracy)
 # All 8 psychology frameworks preserved. Same interface as before.
@@ -273,3 +275,4 @@ class Extractor:
             raw_nrc_scores=dict(nrc),
             raw_empath_scores={k: v for k, v in empath.items() if v and v > 0},
         )
+
