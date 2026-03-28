@@ -16,7 +16,7 @@ from pathlib import Path
 QUEUE_DIR = Path("resonance_data/feedback_queue")
 
 # Stub URL — replaced with live endpoint in Phase 6
-FEEDBACK_ENDPOINT = "https://feedback.resonance-layer.com/corrections"
+FEEDBACK_ENDPOINT = "http://192.168.0.159:8000/corrections"
 
 
 def queue_correction(detected: str, corrected: str, vad: dict, confidence: float):
