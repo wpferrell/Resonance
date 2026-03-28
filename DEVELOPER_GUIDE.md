@@ -4,6 +4,38 @@
 
 ---
 
+## Installation
+
+**Linux / Mac:**
+```bash
+python3 -m venv ~/resonance-test
+source ~/resonance-test/bin/activate
+pip install resonance-layer
+```
+
+**Windows:**
+```powershell
+python -m venv resonance-test
+resonance-test\Scripts\Activate.ps1
+pip install resonance-layer
+```
+
+**Universal install script (coming soon):**
+
+Linux / Mac:
+```bash
+curl -fsSL https://install.resonance-layer.com | sh
+```
+
+Windows:
+```powershell
+irm https://install.resonance-layer.com/win | iex
+```
+
+**Requirements:** Python 3.10+, runs fully embedded, no external server required.
+
+---
+
 ## How Resonance Works in Practice
 
 Resonance sits between the user's message and the LLM. Every time a user sends a message, Resonance processes it first. It detects the emotional state, updates the user's profile, checks for flags, and then prepends an emotional context block to the conversation before the LLM ever sees it.

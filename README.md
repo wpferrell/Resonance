@@ -78,6 +78,32 @@ The science is serious because the people using it are real.
 
 ---
 
+## Improving Over Time
+
+Resonance gets more accurate the more it is used — both for you personally, and for everyone.
+
+**For you** — every correction you make teaches Resonance your specific patterns. The more you use it, the more it knows you.
+
+**For everyone** — when you first run Resonance, it will ask you one question: whether you want to share anonymous correction data to help improve the model for all users. Corrections only — no message text, no identity, nothing personal. You must make a conscious choice. There is no default. You can change your answer at any time:
+
+```python
+r.set_feedback(True)   # turn on
+r.set_feedback(False)  # turn off
+```
+
+**Version updates** — when a new version of Resonance is available, it will tell you once at startup:
+
+```
+┌─ Resonance Update Available ─────────────────────────┐
+│  New version: 1.0.1  (you have 1.0.0)                │
+│  pip install --upgrade resonance-layer               │
+└───────────────────────────────────────────────────────┘
+```
+
+It never updates silently. You always choose when to update.
+
+---
+
 ## What It Is Not
 
 Resonance is not a therapy tool and makes no clinical claims.
@@ -109,9 +135,34 @@ Resonance handles everything else — detection, profiling, injection, flagging.
 **Requirements:** Python 3.10+, runs fully embedded, no external server required.
 
 **Install:**
+
+Linux / Mac:
+```bash
+python3 -m venv ~/resonance-test
+source ~/resonance-test/bin/activate
+pip install resonance-layer
 ```
-pip install resonance
+
+Windows:
+```powershell
+python -m venv resonance-test
+resonance-test\Scripts\Activate.ps1
+pip install resonance-layer
 ```
+
+**Universal install script (coming soon):**
+
+Linux / Mac:
+```bash
+curl -fsSL https://install.resonance-layer.com | sh
+```
+
+Windows:
+```powershell
+irm https://install.resonance-layer.com/win | iex
+```
+
+The universal script handles everything automatically — virtual environment, dependencies, and installation in one command. Available in a future release.
 
 For full integration documentation including edge cases, flags reference, and developer responsibilities — read the [Developer Guide](DEVELOPER_GUIDE.md).
 
