@@ -6,6 +6,7 @@
 # On import: checks for updates, runs first-time config prompt if needed,
 # then exposes the main Resonance interface.
 
+from .model_loader import ensure_model_downloaded
 from .version import __version__, check_for_update
 from .config import ensure_config
 from .extractor import EmotionExtractor, EmotionResult
@@ -17,6 +18,8 @@ from .feedback import record_correction, drain_queue
 # Run version check and config on import
 check_for_update()
 _config = ensure_config()
+
+ensure_model_downloaded()
 
 # Drain any queued feedback corrections in the background
 if _config.get("feedback_enabled"):
