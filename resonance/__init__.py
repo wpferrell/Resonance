@@ -11,7 +11,7 @@ from .version import __version__, check_for_update
 from .config import ensure_config
 from .extractor import Extractor, EmotionResult
 from .storage import Storage
-from .temporal_graph import TemporalGraph)
+from .temporal_graph import TemporalGraph
 from .reinforcement import ReinforcementLoop
 from .profile import ProfileEngine
 from .injector import LLMContextInjector
