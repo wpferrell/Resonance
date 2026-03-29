@@ -1,10 +1,10 @@
 [build-system]
 requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "resonance-layer"
-version = "1.0.0"
+version = "1.0.1"
 description = "The emotional memory layer for AI."
 readme = "README.md"
 license = { file = "LICNSE" }
@@ -14,7 +14,7 @@ keywords = ["emotion", "ai", "llm", "affective computing", "memory", "nlp"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: Other/Proprietary License",
+    
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
