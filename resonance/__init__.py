@@ -53,7 +53,7 @@ class Resonance:
             temporal_graph=self.temporal_graph,
             reinforcement_loop=self.reinforcement_loop
         )
-        self.injector = LLMContextInjector()
+        self.injector = LLMContextInjector(temporal_graph=self.temporal_graph, reinforcement_loop=self.reinforcement_loop)
 
     def process(self, message: str, modality: str = "text") -> "LLMContextInjector":
         """
