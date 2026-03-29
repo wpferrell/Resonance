@@ -61,7 +61,7 @@ class Resonance:
         Returns a context injector ready to pass to any LLM.
         """
         result = self.extractor.extract(message, modality=modality)
-        self.storage.store(self.user_id, result)
+        self.storage.save(result, self.user_id, session_id="default")
         profile = self.profile_engine.build(self.user_id)
         return self.injector.prepare(result, profile)
 
