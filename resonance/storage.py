@@ -20,7 +20,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from surrealdb import AsyncSurreal
 
-from extractor import EmotionResult
+from .extractor import EmotionResult
 
 DATA_DIR = Path(__file__).parent / "resonance_data"
 QDRANT_PATH = str(DATA_DIR / "qdrant")

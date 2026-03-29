@@ -9,16 +9,19 @@
 from .model_loader import ensure_model_downloaded
 from .version import __version__, check_for_update
 from .config import ensure_config
-from .extractor import EmotionExtractor, EmotionResult
-from .storage import ResonanceStorage
+from .extractor import Extractor, EmotionResult
+from .storage import Storage
+from .temporal_graph import TemporalGraph)
+from .reinforcement import ReinforcementLoop
 from .profile import ProfileEngine
-from .injector import ContextInjector
+from .injector import LLMContextInjector
 from .feedback import record_correction, drain_queue
 
 # Run version check and config on import
 check_for_update()
 _config = ensure_config()
 
+# Download model weights on first run
 ensure_model_downloaded()
 
 # Drain any queued feedback corrections in the background
@@ -39,15 +42,20 @@ class Resonance:
         llm.chat(system=context.to_prompt(), message=message)
     """
 
-    def __init__(self, user_id: str, data_dir: str = "resonance_data"):
+    def __init__(self, user_id: str):
         self.user_id = user_id
         self.feedback_enabled = _config.get("feedback_enabled", False)
-        self.extractor = EmotionExtractor()
-        self.storage = ResonanceStorage(data_dir=data_dir)
-        self.profile_engine = ProfileEngine(storage=self.storage)
-        self.injector = ContextInjector()
+        self.extractor = Extractor()
+        self.storage = Storage()
+        self.temporal_graph = TemporalGraph()
+        self.reinforcement_loop = ReinforcementLoop()
+        self.profile_engine = ProfileEngine(
+            temporal_graph=self.temporal_graph,
+            reinforcement_loop=self.reinforcement_loop
+        )
+        self.injector = LLMContextInjector()
 
-    def process(self, message: str, modality: str = "text") -> "ContextInjector":
+    def process(self, message: str, modality: str = "text") -> "LLMContextInjector":
         """
         Process a message. Detect emotion, store it, update profile.
         Returns a context injector ready to pass to any LLM.
