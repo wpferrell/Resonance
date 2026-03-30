@@ -131,8 +131,12 @@ class Extractor:
             with open(label_map_path) as f:
                 self._label_map = {int(k): v for k, v in json.load(f).items()}
 
+            import os
+            import io
+            from contextlib import redirect_stderr
             self._tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH))
-            self._model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH))
+            with redirect_stderr(io.StringIO()):
+                self._model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), local_files_only=True)
             self._model.eval()
 
             if torch.cuda.is_available():
