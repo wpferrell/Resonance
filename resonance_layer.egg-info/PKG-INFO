@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: resonance-layer
-Version: 1.0.17
+Version: 1.0.18
 Summary: The emotional memory layer for AI.
 Author: William Ferrell
 Project-URL: Homepage, https://github.com/wpferrell/Resonance
@@ -26,6 +26,7 @@ Requires-Dist: empath>=0.89
 Requires-Dist: sentencepiece>=0.1.99
 Requires-Dist: flask>=3.0.0
 Requires-Dist: flask-socketio>=5.3.0
+Requires-Dist: eventlet>=0.33.0
 Requires-Dist: qdrant-client>=1.7.0
 Requires-Dist: surrealdb>=1.0.0
 Requires-Dist: transformers>=4.30.0
