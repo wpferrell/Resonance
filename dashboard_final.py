@@ -18,7 +18,7 @@ for _n in ['werkzeug', 'engineio', 'socketio', 'flask']:
 _TEMPLATE_DIR = str(Path(__file__).parent / 'templates')
 _app = Flask(__name__, template_folder=_TEMPLATE_DIR)
 _app.config['SECRET_KEY'] = 'resonance-panel'
-_socketio = SocketIO(_app, cors_allowed_origins="*", async_mode='eventlet', logger=False, engineio_logger=False)
+_socketio = SocketIO(_app, cors_allowed_origins="*", async_mode='threading', logger=False, engineio_logger=False)
 
 _latest_result = None
 _server_thread = None
@@ -131,9 +131,9 @@ def start(port=7731, open_browser=True):
     _port = port
 
     def _run():
-        import eventlet
-        eventlet.monkey_patch()
-        _socketio.run(_app, port=port, host='127.0.0.1')
+        from werkzeug.serving import make_server
+        srv = make_server('127.0.0.1', port, _app)
+        srv.serve_forever()
 
     _server_thread = threading.Thread(target=_run, daemon=True)
     _server_thread.start()

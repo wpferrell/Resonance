@@ -1,4 +1,5 @@
 LICENSE
+MANIFEST.in
 README.md
 pyproject.toml
 resonance/__init__.py
@@ -14,6 +15,7 @@ resonance/reinforcement.py
 resonance/storage.py
 resonance/temporal_graph.py
 resonance/version.py
+resonance/templates/dashboard.html
 resonance_layer.egg-info/PKG-INFO
 resonance_layer.egg-info/SOURCES.txt
 resonance_layer.egg-info/dependency_links.txt
