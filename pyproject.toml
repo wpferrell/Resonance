@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "resonance-layer"
-version = "1.0.7"
+version = "1.0.8"
 description = "The emotional memory layer for AI."
 readme = "README.md"
 license = { file = "LICNSE" }
@@ -27,7 +27,7 @@ classifiers = [
 dependencies = [
     "nrclex>=4.0.0",
     "textblob>=0.18.0",
-    "empath>=0.89",
+    "empath>=0.89","sentencepiece>=0.1.99",
     "qdrant-client>=1.7.0",
     "surrealdb>=1.0.0",
     "transformers>=4.30.0",
