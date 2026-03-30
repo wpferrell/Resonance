@@ -13,7 +13,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-QUEUE_DIR = Path("resonance_data/feedback_queue")
+QUEUE_DIR = Path.home() / ".resonance" / "feedback_queue"
 
 # Stub URL — replaced with live endpoint in Phase 6
 FEEDBACK_ENDPOINT = "https://feedback.resonance-layer.com/corrections"

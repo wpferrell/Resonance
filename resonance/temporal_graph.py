@@ -1,3 +1,4 @@
+from pathlib import Path
 # Copyright (c) 2026 William Ferrell. All rights reserved.
 # Licensed under the Business Source License 1.1 — see LICENSE for details.
 # resonance/temporal_graph.py
@@ -32,7 +33,7 @@ class TemporalPattern:
 
 class TemporalGraph:
 
-    def __init__(self, db_path: str = "C:/Users/Shadow/Documents/Resonance/resonance/resonance_data/temporal"):
+    def __init__(self, db_path: str = str(Path.home() / ".resonance" / "temporal")):
         self.db_path = db_path
         self._db: Optional[AsyncSurreal] = None
 

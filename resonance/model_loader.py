@@ -11,7 +11,7 @@ from huggingface_hub import hf_hub_download
 
 REPO_ID = "wpferrell/resonance-model"
 HF_TOKEN = "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"
-CACHE_DIR = Path("resonance_data/model_cache")
+CACHE_DIR = Path.home() / ".resonance" / "model_cache"
 MODEL_FILE = CACHE_DIR / "model.safetensors"
 ARGS_FILE = CACHE_DIR / "training_args.bin"
 

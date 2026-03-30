@@ -10,7 +10,7 @@ import json
 import os
 from pathlib import Path
 
-CONFIG_DIR = Path("resonance_data")
+CONFIG_DIR = Path.home() / ".resonance"
 CONFIG_FILE = CONFIG_DIR / "config.json"
 
 DEFAULTS = {
