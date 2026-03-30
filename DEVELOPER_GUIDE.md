@@ -6,31 +6,27 @@
 
 ## Installation
 
-**Linux / Mac:**
+**Linux:**
 ```bash
-python3 -m venv ~/resonance-test
-source ~/resonance-test/bin/activate
-pip install resonance-layer
+curl -fsSL https://install.resonance-layer.com/install-linux.sh | sh
+```
+
+**Mac:**
+```bash
+curl -fsSL https://install.resonance-layer.com/install-mac.sh | sh
 ```
 
 **Windows:**
 ```powershell
-python -m venv resonance-test
-resonance-test\Scripts\Activate.ps1
+irm https://install.resonance-layer.com/install-win.ps1 | iex
+```
+
+**Manual install (any OS):**
+```bash
 pip install resonance-layer
 ```
 
-**Universal install script (coming soon):**
-
-Linux / Mac:
-```bash
-curl -fsSL https://install.resonance-layer.com | sh
-```
-
-Windows:
-```powershell
-irm https://install.resonance-layer.com/win | iex
-```
+The install script handles everything automatically — virtual environment, dependencies, first-run setup, and model download in one command.
 
 **Requirements:** Python 3.10+, runs fully embedded, no external server required.
 
