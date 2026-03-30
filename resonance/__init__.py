@@ -62,8 +62,7 @@ class Resonance:
         """
         result = self.extractor.extract(message, modality=modality)
         self.storage.save(result, self.user_id, session_id="default")
-        profile = self.profile_engine.build(self.user_id)
-        return self.injector.prepare(result, profile)
+        return self.injector
 
     def correct(self, detected: str, corrected: str, result: EmotionResult):
         """
