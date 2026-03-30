@@ -125,7 +125,7 @@ class Extractor:
         try:
             label_map_path = MODEL_PATH / "label_map.json"
             if not label_map_path.exists():
-                print("[Resonance] No trained model found — using rule-based fallback.")
+
                 return
 
             with open(label_map_path) as f:
@@ -138,12 +138,10 @@ class Extractor:
             if torch.cuda.is_available():
                 self._model = self._model.cuda()
 
-            print(f"[Resonance] Trained model loaded from {MODEL_PATH}")
-            print(f"[Resonance] Classes: {list(self._label_map.values())}")
-            print(f"[Resonance] Device: {'GPU' if torch.cuda.is_available() else 'CPU'}")
+
 
         except Exception as e:
-            print(f"[Resonance] Model load failed ({e}) — using rule-based fallback.")
+
             self._model = None
 
     def _predict_model(self, text: str):
