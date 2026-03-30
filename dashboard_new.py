@@ -11,6 +11,9 @@ from pathlib import Path
 from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, emit
 
+from .temporal_graph import TemporalGraph
+from .reinforcement import ReinforcementLoop
+from .profile import ProfileEngine
 
 _app = Flask(__name__, template_folder='templates')
 _app.config['SECRET_KEY'] = 'resonance-panel'
@@ -31,8 +34,12 @@ def _run_async(coro):
     finally:
         new_loop.close()
 
-def _get_dashboard_data_sync():
-    """Build dashboard data from latest pushed result. No DB connection needed."""
+async def _get_dashboard_data():
+    await _graph.connect()
+    await _loop_obj.connect()
+    profile = await _engine.build_profile(limit=200)
+    await _graph.close()
+    await _loop_obj.close()
 
     emotion_map = {
         "joy":      {"word": "happy",      "color": "#68d391", "emoji": "😊", "short": "Lighter today."},
@@ -44,11 +51,11 @@ def _get_dashboard_data_sync():
         "neutral":  {"word": "okay",       "color": "#4fd1c5", "emoji": "🙂", "short": "Getting by."},
     }
 
-    dominant = _latest_result.primary_emotion if _latest_result else "neutral"
+    dominant = profile.emotional_tendency.lower() if hasattr(profile, 'emotional_tendency') else "neutral"
     pill = emotion_map.get(dominant, {"word": dominant, "color": "#4fd1c5", "emoji": "okay", "short": "Here with you."})
 
-    mood_pct = int((_latest_result.valence + 1) / 2 * 100) if _latest_result else 50
-    energy_pct = int(_latest_result.arousal * 100) if _latest_result else 30
+    mood_pct = int((getattr(profile, 'baseline_valence', 0) + 1) / 2 * 100)
+    energy_pct = int(getattr(profile, 'baseline_arousal', 0.3) * 100)
 
     mood_word = "very low" if mood_pct < 20 else "low" if mood_pct < 40 else "moderate" if mood_pct < 60 else "good" if mood_pct < 80 else "very high"
     energy_word = "very low" if energy_pct < 20 else "low" if energy_pct < 40 else "moderate" if energy_pct < 60 else "high" if energy_pct < 80 else "very high"
@@ -56,7 +63,7 @@ def _get_dashboard_data_sync():
     mood_color = "#fc8181" if mood_pct < 35 else "#f6ad55" if mood_pct < 55 else "#4fd1c5" if mood_pct < 75 else "#68d391"
     energy_color = "#a0aec0" if energy_pct < 35 else "#f6ad55" if energy_pct < 65 else "#fc8181"
 
-    trend = 'stable'
+    trend = getattr(profile, 'current_trend', 'stable')
     senses_map = {
         "improving": "Something is shifting. The weight is lifting slowly.",
         "declining":  "Things feel harder than they did. Something is building.",
@@ -68,19 +75,15 @@ def _get_dashboard_data_sync():
     chip_map = {
         "happy":   [{"e":"😊","n":"happy","d":True},{"e":"😌","n":"calm"},{"e":"😁","n":"excited"},{"e":"🙂","n":"just okay"}],
         "angry":   [{"e":"😡","n":"angry","d":True},{"e":"😤","n":"frustrated"},{"e":"🥺","n":"hurt underneath"},{"e":"😒","n":"irritated"}],
-        "fear":    [{"e":"😟","n":"worried","d":True},{"e":"😰","n":"overwhelmed"},{"e":"😓","n":"stressed"},{"e":"😬","n":"uneasy"}],
-        "sadness": [{"e":"😔","n":"sad","d":True},{"e":"😶","n":"empty"},{"e":"🥺","n":"hurt"},{"e":"😑","n":"done"}],
+        "anxious": [{"e":"😟","n":"worried","d":True},{"e":"😰","n":"overwhelmed"},{"e":"😓","n":"stressed"},{"e":"😬","n":"uneasy"}],
+        "sad":     [{"e":"😔","n":"sad","d":True},{"e":"😶","n":"empty"},{"e":"🥺","n":"hurt"},{"e":"😑","n":"done"}],
         "neutral": [{"e":"🙂","n":"okay","d":True},{"e":"😌","n":"calm"},{"e":"😐","n":"numb"},{"e":"😔","n":"a little down"}],
-        "shame":   [{"e":"😳","n":"ashamed","d":True},{"e":"🫣","n":"embarrassed"},{"e":"😞","n":"guilty"},{"e":"😔","n":"regretful"}],
-        "anger":   [{"e":"😡","n":"angry","d":True},{"e":"😤","n":"frustrated"},{"e":"😒","n":"irritated"},{"e":"😠","n":"upset"}],
-        "surprise":[{"e":"😮","n":"surprised","d":True},{"e":"😕","n":"confused"},{"e":"😲","n":"shocked"},{"e":"🤔","n":"unsure"}],
-        "joy":     [{"e":"😊","n":"happy","d":True},{"e":"😁","n":"excited"},{"e":"😌","n":"calm"},{"e":"🙂","n":"content"}],
     }
     chips = chip_map.get(dominant, [
-        {"e":"🙂","n": dominant, "d": True},
-        {"e":"😌","n": "calm"},
-        {"e":"😔","n": "sad"},
-        {"e":"😟","n": "anxious"}
+        {"e": "🙂", "n": dominant, "d": True},
+        {"e": "😌", "n": "calm"},
+        {"e": "😔", "n": "sad"},
+        {"e": "😟", "n": "anxious"}
     ])
 
     live = {}
@@ -110,7 +113,7 @@ def index():
 @_app.route("/api/state")
 def state():
     try:
-        data = _get_dashboard_data_sync()
+        data = _run_async(_get_dashboard_data())
         return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -143,6 +146,10 @@ def start(port=7731, open_browser=True):
     """Start the Resonance panel server in a background thread."""
     global _graph, _loop_obj, _engine, _port, _server_thread
     _port = port
+
+    _graph = TemporalGraph()
+    _loop_obj = ReinforcementLoop()
+    _engine = ProfileEngine(_graph, _loop_obj)
 
     def _run():
         _socketio.run(_app, port=port, debug=False, use_reloader=False, log_output=False)

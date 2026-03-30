@@ -119,9 +119,9 @@ function render(data){
         <div class="feeling-word">You seem ${data.pill.word}</div>
         <div class="feeling-short">${data.pill.short}</div>
       </div>
-      <div class="live-bar" id="liveBar" style="display:${data.live && data.live.emotion ? 'block' : 'none'}">
+      <div class="live-bar" id="liveBar">
         <div class="live-label">just now</div>
-        <div><span class="live-emotion" id="liveEmotion">${data.live ? data.live.emotion : ''}</span> <span class="live-conf" id="liveConf">${data.live && data.live.confidence ? data.live.confidence + '% confidence' : ''}</span></div>
+        <div><span class="live-emotion" id="liveEmotion"></span> <span class="live-conf" id="liveConf"></span></div>
       </div>
       <div class="bars">
         <div class="bar-row">
@@ -159,7 +159,7 @@ function render(data){
   data.chips.forEach(c=>{
     const el=document.createElement('div');
     el.className='chip'+(c.d?' detected':'');
-    el.textContent=(c.e ? c.e+' ' : '')+c.n;
+    el.textContent=c.e+' '+c.n;
     if(!c.d)el.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('saved'));el.classList.add('saved');el.textContent='saved '+c.e+' '+c.n;};
     chips.appendChild(el);
   });

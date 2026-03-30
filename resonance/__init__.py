@@ -65,7 +65,26 @@ class Resonance:
         """
         result = self.extractor.extract(message, modality=modality)
         self.storage.save(result, self.user_id, session_id="default")
+        try:
+            from .dashboard import push_update
+            push_update(result)
+        except Exception:
+            pass
         return self.injector
+
+    def start_panel(self, port: int = 7731, open_browser: bool = True) -> str:
+        """
+        Start the Resonance panel in your browser.
+        Returns the URL. Panel updates live with every process() call.
+
+        Usage:
+            r = Resonance(user_id="you")
+            r.start_panel()  # opens http://localhost:7731
+        """
+        from .dashboard import start
+        url = start(port=port, open_browser=open_browser)
+        print(f"[Resonance] Panel running at {url}")
+        return url
 
     def correct(self, detected: str, corrected: str, result: EmotionResult):
         """
