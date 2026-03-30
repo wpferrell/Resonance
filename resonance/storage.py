@@ -69,6 +69,12 @@ class Storage:
     def __init__(self):
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         self._qdrant = QdrantClient(path=QDRANT_PATH)
+
+    def __del__(self):
+        try:
+            self._qdrant.close()
+        except Exception:
+            pass
         self._ensure_collection()
         self._loop = asyncio.new_event_loop()
         self._db = None
