@@ -13,6 +13,7 @@ Data lives in resonance_data/ inside your project folder.
 """
 
 import asyncio
+import atexit
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -74,13 +75,16 @@ class Storage:
         self._loop = asyncio.new_event_loop()
         self._db = None
         self._loop.run_until_complete(self._init_surreal())
+        atexit.register(self._close)
 
-    def __del__(self):
+    def _close(self):
         try:
-            if hasattr(self, '_qdrant'):
-                self._qdrant.close()
+            self._qdrant.close()
         except Exception:
             pass
+
+    def __del__(self):
+        pass
 
     def _ensure_collection(self):
         existing = [c.name for c in self._qdrant.get_collections().collections]

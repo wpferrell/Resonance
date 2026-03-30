@@ -1,6 +1,6 @@
 import warnings
 warnings.filterwarnings("ignore", message=".*sys.meta_path.*")
-warnings.filterwarnings("ignore", category=ImportError)
+
 # Copyright (c) 2026 William Ferrell. All rights reserved.
 # Licensed under the Business Source License 1.1 — see LICENSE for details.
 
