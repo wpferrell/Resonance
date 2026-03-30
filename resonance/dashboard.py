@@ -12,7 +12,7 @@ from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, emit
 
 
-_app = Flask(__name__, template_folder='templates')
+_app = Flask(__name__, template_folder=str(Path(__file__).parent / 'templates'))
 _app.config['SECRET_KEY'] = 'resonance-panel'
 _socketio = SocketIO(_app, cors_allowed_origins="*", async_mode='threading')
 
@@ -145,7 +145,15 @@ def start(port=7731, open_browser=True):
     _port = port
 
     def _run():
-        _socketio.run(_app, port=port, debug=False, use_reloader=False, log_output=False)
+        import logging
+        for logger_name in ['werkzeug', 'engineio', 'socketio', 'flask']:
+            logging.getLogger(logger_name).setLevel(logging.CRITICAL)
+        import logging
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.ERROR)
+        import os
+        os.environ['WERKZEUG_RUN_MAIN'] = 'true'
+        _socketio.run(_app, port=port, debug=False, use_reloader=False)
 
     _server_thread = threading.Thread(target=_run, daemon=True)
     _server_thread.start()
