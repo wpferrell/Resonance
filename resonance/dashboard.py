@@ -139,7 +139,7 @@ def start(port=7731, open_browser=True):
     _server_thread.start()
 
     import time
-    time.sleep(1.5)
+    time.sleep(15)
 
     if open_browser:
         webbrowser.open(f"http://localhost:{port}")
