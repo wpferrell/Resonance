@@ -70,15 +70,17 @@ class Storage:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         self._qdrant = QdrantClient(path=QDRANT_PATH)
 
-    def __del__(self):
-        try:
-            self._qdrant.close()
-        except Exception:
-            pass
         self._ensure_collection()
         self._loop = asyncio.new_event_loop()
         self._db = None
         self._loop.run_until_complete(self._init_surreal())
+
+    def __del__(self):
+        try:
+            if hasattr(self, '_qdrant'):
+                self._qdrant.close()
+        except Exception:
+            pass
 
     def _ensure_collection(self):
         existing = [c.name for c in self._qdrant.get_collections().collections]
