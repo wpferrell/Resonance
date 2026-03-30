@@ -18,9 +18,12 @@ from textblob import TextBlob
 from empath import Empath
 
 # ── Model path ─────────────────────────────────────────────────
-MODEL_PATH = Path(__file__).parent / "resonance" / "model"
+MODEL_PATH = Path.home() / ".resonance" / "model_cache"
 if not MODEL_PATH.exists():
-    MODEL_PATH = Path(__file__).parent / "model"
+    # fallback to local model directory for development
+    _local = Path(__file__).parent / "model"
+    if _local.exists():
+        MODEL_PATH = _local
 
 # ── EmotionResult ──────────────────────────────────────────────
 @dataclass

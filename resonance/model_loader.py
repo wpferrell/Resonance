@@ -43,6 +43,12 @@ def ensure_model_downloaded() -> Path:
             local_dir=str(CACHE_DIR),
             token=HF_TOKEN,
         )
+        hf_hub_download(
+            repo_id=REPO_ID,
+            filename="label_map.json",
+            local_dir=str(CACHE_DIR),
+            token=HF_TOKEN,
+        )
         print("✓ Model weights downloaded and cached.\n")
     except Exception as e:
         print(f"⚧ Could not download model weights: {e}")
