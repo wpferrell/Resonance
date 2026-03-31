@@ -40,7 +40,7 @@ Write-Host ""
 
 $job = Start-Job -ScriptBlock {
     param($venvDir)
-    & "$venvDir\Scripts\pip" install --quiet --disable-pip-version-check resonance-layer 2>&1
+    & "$venvDir\Scripts\pip" install --quiet --disable-pip-version-check --upgrade resonance-layer 2>&1
 } -ArgumentList $venvDir
 
 $width = 40
@@ -62,14 +62,16 @@ while ($job.State -eq 'Running') {
     if ($filled -lt $target) { $filled++ }
     $pct = [int](($filled / $width) * 100)
     $bar = ("#" * $filled) + ("-" * ($width - $filled))
-    Write-Host -NoNewline "  [$bar] $pct%  "
+    Write-Host -NoNewline "
+  [$bar] $pct%  "
     Start-Sleep -Milliseconds 300
 }
 
 Receive-Job $job | Out-Null
 Remove-Job $job
 $bar = "#" * $width
-Write-Host "  [$bar] 100%  "
+Write-Host "
+  [$bar] 100%  "
 Write-Host ""
 Write-Host "OK: Resonance installed"
 Write-Host ""
