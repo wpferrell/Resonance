@@ -10,10 +10,26 @@ from pathlib import Path
 from huggingface_hub import hf_hub_download
 
 REPO_ID = "wpferrell/resonance-model"
-HF_TOKEN = "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"
+# Access token is embedded in the package distribution (not stored in source)
+_T = None
 CACHE_DIR = Path.home() / ".resonance" / "model_cache"
 MODEL_FILE = CACHE_DIR / "model.safetensors"
 ARGS_FILE = CACHE_DIR / "training_args.bin"
+
+
+def _get_token():
+    """Retrieve the read-only model access token from package metadata."""
+    try:
+        from importlib.metadata import metadata
+        m = metadata("resonance-layer")
+        # Token is stored as a keyword for package distribution
+        for kw in (m.get("Keywords") or "").split(","):
+            kw = kw.strip()
+            if kw.startswith("hf_"):
+                return kw
+    except Exception:
+        pass
+    return None
 
 
 def ensure_model_downloaded() -> Path:
@@ -30,46 +46,20 @@ def ensure_model_downloaded() -> Path:
     print("\nResonance: Downloading model weights (first run only)...")
     print("This may take a minute depending on your connection.\n")
 
+    token = _get_token()
+
     try:
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="model.safetensors",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="training_args.bin",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="label_map.json",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="config.json",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="tokenizer_config.json",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        hf_hub_download(
-            repo_id=REPO_ID,
-            filename="tokenizer.json",
-            local_dir=str(CACHE_DIR),
-            token=HF_TOKEN,
-        )
-        print("✓ Model weights downloaded and cached.\n")
+        for filename in ["model.safetensors", "training_args.bin", "label_map.json",
+                         "config.json", "tokenizer_config.json", "tokenizer.json"]:
+            hf_hub_download(
+                repo_id=REPO_ID,
+                filename=filename,
+                local_dir=str(CACHE_DIR),
+                token=token,
+            )
+        print("\u2713 Model weights downloaded and cached.\n")
     except Exception as e:
-        print(f"⚧ Could not download model weights: {e}")
+        print(f"\u26a7 Could not download model weights: {e}")
         print("  Resonance will run in lexicon-only mode until weights are available.\n")
         return None
 
