@@ -1,5 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Data and training
 data/
-resonance/model/checkpoint-*
-resonance/model/*.safetensors
-resonance/model/*.pt
-resonance/model/*.bin
+training.csv
+train_model.py
+
+# Database and runtime data
+resonance_data/
+resonance/resonance_data/
+*.db
+*.sqlite
+
+# Model files
+resonance/model/
+*.safetensors
+*.bin
+
+# Fix and debug scripts
+fix_*.py
+debug_*.py
+run_*.py
+dashboard_*.py
+dashboard_*.html
+add_panel.py
+
+# Test scripts
+test_*.py
+test_*.pycode
+
+# Zip files
+*.zip
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.vscode/
