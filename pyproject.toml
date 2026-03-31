@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "resonance-layer"
-version = "1.0.21"
+version = "1.0.22"
 description = "The emotional memory layer for AI."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "BUSL-1.1"
 authors = [{ name = "William Ferrell" }]
 requires-python = ">=3.10"
 keywords = ["emotion", "ai", "llm", "affective computing", "memory", "nlp"]
