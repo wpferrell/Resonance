@@ -124,7 +124,7 @@ Add emotional awareness to any LLM in three lines:
 from resonance import Resonance
 
 r = Resonance()
-context = r.process(user_id="123", message="I've been so anxious about this")
+context = r.process("I've been so anxious about this")
 
 # Pass context to your LLM before the conversation
 llm.chat(system=context.to_prompt(), message=message)
