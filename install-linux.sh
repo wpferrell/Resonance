@@ -25,7 +25,7 @@ if [ "$PYTHON_VERSION" -lt 10 ]; then
     exit 1
 fi
 
-echo "OK: Python $(python3 --version) found"
+echo "OK: $(python3 --version) found"
 
 VENV_DIR="$HOME/resonance"
 echo "Creating virtual environment at $VENV_DIR..."
