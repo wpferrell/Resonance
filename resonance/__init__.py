@@ -45,7 +45,7 @@ class Resonance:
         llm.chat(system=context.to_prompt(), message=message)
     """
 
-    def __init__(self, user_id: str):
+    def __init__(self, user_id: str = None):
         self.user_id = user_id
         self.feedback_enabled = _config.get("feedback_enabled", False)
         self.extractor = Extractor()
@@ -112,3 +112,4 @@ class Resonance:
 
 
 __all__ = ["Resonance", "EmotionResult", "__version__"]
+
