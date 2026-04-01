@@ -1,5 +1,8 @@
 # Resonance
 
+[![PyPI version](https://badge.fury.io/py/resonance-layer.svg)](https://pypi.org/project/resonance-layer/)
+
+
 *The emotional memory layer for AI.*
 
 ---
@@ -173,7 +176,11 @@ Free for individual and non-commercial use. Commercial use requires a license.
 ---
 
 ## Links
+- [Website](https://resonance-layer.com)
+- [PyPI](https://pypi.org/project/resonance-layer/)
 
 - [Developer Guide](DEVELOPER_GUIDE.md) — integration, edge cases, flags reference
 - [Ethics & Principles](ETHICS.md) — what Resonance will and will not do
 - [GitHub](https://github.com/wpferrell/Resonance) — source code, issues, contributions
+
+

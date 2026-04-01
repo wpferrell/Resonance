@@ -1,8 +1,7 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
 # Licensed under the Business Source License 1.1 — see LICENSE for details.
 # Resonance — extractor.py
-# Step 5C: Upgraded with trained ModernBERT emotion model (92% accuracy)
-# All 8 psychology frameworks preserved. Same interface as before.
+# v2 — retrained model, ensemble blending, per-class confidence floors, WoT fix
 
 import os
 import json
@@ -20,10 +19,12 @@ from empath import Empath
 # ── Model path ─────────────────────────────────────────────────
 MODEL_PATH = Path.home() / ".resonance" / "model_cache"
 if not MODEL_PATH.exists():
-    # fallback to local model directory for development
     _local = Path(__file__).parent / "model"
     if _local.exists():
         MODEL_PATH = _local
+
+# ── Ensemble threshold ─────────────────────────────────────────
+ENSEMBLE_THRESHOLD = 0.65
 
 # ── EmotionResult ──────────────────────────────────────────────
 @dataclass
@@ -68,6 +69,18 @@ VAD = {
     "neutral":  (0.00, 0.20, 0.50),
 }
 
+# ── NRC emotion → Resonance class map ─────────────────────────
+NRC_TO_CLASS = {
+    "anger":    "anger",
+    "fear":     "fear",
+    "joy":      "joy",
+    "sadness":  "sadness",
+    "surprise": "surprise",
+    "disgust":  "anger",
+    "trust":    "joy",
+    "anticipation": "neutral",
+}
+
 # ── Secondary emotion map (TONE/Parrott ontology) ──────────────
 SECONDARY_MAP = {
     "joy":      ["contentment", "happiness", "pride", "optimism", "enthusiasm", "hope", "relief", "love", "affection", "longing"],
@@ -79,7 +92,7 @@ SECONDARY_MAP = {
     "neutral":  ["neutral"],
 }
 
-# ── Guilt keywords (PoliGuilt 2025) ───────────────────────────
+# ── Guilt keywords ─────────────────────────────────────────────
 GUILT_KEYWORDS = {
     "shame":       ["ashamed", "shameful", "humiliated", "disgrace", "embarrassed"],
     "self-blame":  ["my fault", "i failed", "i should have", "i didn't", "blame myself"],
@@ -114,64 +127,94 @@ EMOJI_MAP = {
 class Extractor:
     def __init__(self):
         self.empath = Empath()
+        self._confidence_profile = {}
+        self._load_confidence_profile()
         self._load_model()
 
+    def _load_confidence_profile(self):
+        profile_path = MODEL_PATH / "confidence_profile.json"
+        if profile_path.exists():
+            try:
+                with open(profile_path) as f:
+                    self._confidence_profile = json.load(f)
+            except Exception:
+                self._confidence_profile = {}
+
+    def _get_confidence_floor(self, emotion: str) -> float:
+        if emotion in self._confidence_profile:
+            return self._confidence_profile[emotion].get("confidence_floor", ENSEMBLE_THRESHOLD)
+        return ENSEMBLE_THRESHOLD
+
     def _load_model(self):
-        """Load trained ModernBERT model if available."""
         self._model = None
         self._tokenizer = None
         self._label_map = None
-
         try:
             label_map_path = MODEL_PATH / "label_map.json"
             if not label_map_path.exists():
-
                 return
-
             with open(label_map_path) as f:
                 self._label_map = {int(k): v for k, v in json.load(f).items()}
-
-            import os
             import io
             from contextlib import redirect_stderr
             self._tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH))
             with redirect_stderr(io.StringIO()):
-                self._model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), local_files_only=True)
+                self._model = AutoModelForSequenceClassification.from_pretrained(
+                    str(MODEL_PATH), local_files_only=True
+                )
             self._model.eval()
-
             if torch.cuda.is_available():
                 self._model = self._model.cuda()
-
-
-
-        except Exception as e:
-
+        except Exception:
             self._model = None
 
     def _predict_model(self, text: str):
-        """Run trained model inference. Returns (emotion, confidence)."""
         inputs = self._tokenizer(
             text, return_tensors="pt", truncation=True,
             max_length=128, padding=True
         )
         if torch.cuda.is_available():
             inputs = {k: v.cuda() for k, v in inputs.items()}
-
         with torch.no_grad():
             logits = self._model(**inputs).logits
             probs  = torch.softmax(logits, dim=1)[0]
             idx    = int(probs.argmax())
-
         return self._label_map[idx], float(probs[idx])
 
-    def _predict_rules(self, text: str, nrc: dict):
-        """Rule-based fallback when model is unavailable."""
+    def _predict_nrc(self, nrc: dict):
         scores = {e: 0.0 for e in VAD}
-        for emotion, score in nrc.items():
-            if emotion in scores:
-                scores[emotion] += score
+        for nrc_emotion, score in nrc.items():
+            mapped = NRC_TO_CLASS.get(nrc_emotion)
+            if mapped and score > 0:
+                scores[mapped] += score
         best = max(scores, key=scores.get)
-        return best, min(0.5, scores[best] / 5.0) if scores[best] > 0 else ("neutral", 0.3)
+        best_score = scores[best]
+        if best_score == 0:
+            return "neutral", 0.30
+        return best, min(0.60, best_score / 5.0)
+
+    def _predict_ensemble(self, text: str, nrc: dict):
+        if self._model is None:
+            return self._predict_nrc(nrc)
+
+        model_emotion, model_conf = self._predict_model(text)
+        floor = self._get_confidence_floor(model_emotion)
+
+        if model_conf >= floor:
+            return model_emotion, model_conf
+
+        nrc_emotion, nrc_conf = self._predict_nrc(nrc)
+        model_weight = model_conf / floor
+        nrc_weight   = 1.0 - model_weight
+
+        if model_emotion == nrc_emotion:
+            blended_conf = (model_conf * model_weight) + (nrc_conf * nrc_weight)
+            return model_emotion, round(blended_conf, 4)
+
+        if (model_conf * model_weight) >= (nrc_conf * nrc_weight):
+            return model_emotion, round(model_conf * model_weight, 4)
+        else:
+            return nrc_emotion, round(nrc_conf * nrc_weight, 4)
 
     def _detect_emoji_emotion(self, text: str):
         for emoji, emotion in EMOJI_MAP.items():
@@ -196,21 +239,23 @@ class Extractor:
 
     def _detect_reappraisal(self, text: str):
         words = text.lower().split()
-        fp = sum(1 for w in words if w in FIRST_PERSON)
+        fp   = sum(1 for w in words if w in FIRST_PERSON)
         dist = sum(1 for w in words if w in DISTANCING_WORDS)
         return dist > fp and len(words) > 5
 
     def _detect_suppression(self, text: str):
         words = text.lower().split()
-        fp = sum(1 for w in words if w in FIRST_PERSON)
+        fp  = sum(1 for w in words if w in FIRST_PERSON)
         neg = sum(1 for w in words if w in NEGATIVE_AFFECT)
         return fp >= 2 and neg >= 1
 
     def _detect_wot(self, valence: float, arousal: float, text: str):
         lower = text.lower()
-        if any(w in lower for w in HYPER_WORDS) or arousal > 0.80:
+        has_hyper_word = any(w in lower for w in HYPER_WORDS)
+        has_hypo_word  = any(w in lower for w in HYPO_WORDS)
+        if has_hyper_word and arousal > 0.82:
             return "hyperarousal", "hyperarousal_words"
-        if any(w in lower for w in HYPO_WORDS) or (valence < -0.60 and arousal < 0.25):
+        if has_hypo_word or (valence < -0.60 and arousal < 0.25):
             return "hypoarousal", "hypoarousal_words"
         return "in", "none"
 
@@ -228,39 +273,29 @@ class Extractor:
         if not text or not text.strip():
             return EmotionResult(modality=modality)
 
-        # ── NRC and Empath scores ──────────────────────────────
-        nrc_obj = NRCLex(text); nrc_obj.load_raw_text(text)
-        nrc     = nrc_obj.affect_frequencies
-        empath  = self.empath.analyze(text, normalize=True) or {}
+        nrc_obj = NRCLex(text)
+        nrc_obj.load_raw_text(text)
+        nrc    = nrc_obj.affect_frequencies
+        empath = self.empath.analyze(text, normalize=True) or {}
 
-        # ── Primary emotion ────────────────────────────────────
         emoji_emotion = self._detect_emoji_emotion(text)
-
         if emoji_emotion:
             primary    = emoji_emotion
             confidence = 0.90
-        elif self._model is not None:
-            primary, confidence = self._predict_model(text)
         else:
-            primary, confidence = self._predict_rules(text, nrc)
+            primary, confidence = self._predict_ensemble(text, nrc)
 
-        # ── VAD ────────────────────────────────────────────────
         valence, arousal, dominance = VAD.get(primary, (0.0, 0.2, 0.5))
-
-        # ── TextBlob valence refinement ────────────────────────
         blob_polarity = TextBlob(text).sentiment.polarity
         valence = (valence + blob_polarity) / 2
 
-        # ── Secondary emotion ──────────────────────────────────
-        secondary = self._get_secondary(primary, text)
-
-        # ── Psychology frameworks ──────────────────────────────
-        wot, wot_trigger     = self._detect_wot(valence, arousal, text)
-        wise_mind            = self._detect_wise_mind(text)
-        reappraisal          = self._detect_reappraisal(text)
-        suppression          = self._detect_suppression(text)
-        guilt_type           = self._detect_guilt(text)
-        alexithymia          = self._detect_alexithymia(nrc, text)
+        secondary        = self._get_secondary(primary, text)
+        wot, wot_trigger = self._detect_wot(valence, arousal, text)
+        wise_mind        = self._detect_wise_mind(text)
+        reappraisal      = self._detect_reappraisal(text)
+        suppression      = self._detect_suppression(text)
+        guilt_type       = self._detect_guilt(text)
+        alexithymia      = self._detect_alexithymia(nrc, text)
 
         return EmotionResult(
             valence=round(valence, 4),
@@ -280,4 +315,3 @@ class Extractor:
             raw_nrc_scores=dict(nrc),
             raw_empath_scores={k: v for k, v in empath.items() if v and v > 0},
         )
-

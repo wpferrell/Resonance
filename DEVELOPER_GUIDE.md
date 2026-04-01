@@ -260,3 +260,17 @@ Resonance handles detection, profiling, injection, and flagging. Developers are 
 ---
 
 *If something in this guide is unclear, incomplete, or wrong — raise it at [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues). This document will be updated as Resonance evolves.*
+
+## Visual Dashboard Panel
+
+Resonance also ships with a live visual panel that shows the current emotional state in real time as a conversation progresses. It sits beside your chat interface, updates automatically, and does not interrupt the user experience.
+
+The panel is off by default. To start it, call:
+
+```python
+r.start_panel()
+```
+
+This opens a local server at `http://localhost:7731` and launches the panel in your browser. The panel shows the detected emotion, energy and mood bars, a tonal reflection of what Resonance senses, and a `does this feel right?` feedback row so users can confirm or correct the reading.
+
+The panel is optional — Resonance works fully without it. It is useful during development to verify that detections look right, and can be offered to end users as an ambient emotional awareness layer alongside your interface.
