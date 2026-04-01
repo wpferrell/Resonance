@@ -1,5 +1,5 @@
 #!/bin/sh
-# Resonance -- Linux Install Script
+# Resonance -- Mac Install Script
 # https://resonance-layer.com
 
 set -e
