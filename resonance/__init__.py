@@ -70,7 +70,7 @@ class Resonance:
             push_update(result)
         except Exception:
             pass
-        return self.injector
+        return result
 
     def start_panel(self, port: int = 7731, open_browser: bool = True) -> str:
         """
@@ -112,4 +112,5 @@ class Resonance:
 
 
 __all__ = ["Resonance", "EmotionResult", "__version__"]
+
 
