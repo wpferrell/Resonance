@@ -1,12 +1,12 @@
 #!/bin/sh
-# Resonance -- Mac Install Script
+# Resonance -- Linux Install Script
 # https://resonance-layer.com
 
 set -e
 
 echo ""
 echo "+----------------------------------------------------------+"
-echo "|          Resonance -- Emotional Memory for AI            |"
+echo "|          Resonance -- Emotional Memory for AI           |"
 echo "+----------------------------------------------------------+"
 echo ""
 echo "Installing Resonance on Mac..."
@@ -35,7 +35,7 @@ echo ""
 echo "Installing resonance-layer..."
 echo ""
 
-"$VENV_DIR/bin/pip" install --disable-pip-version-check resonance-layer > /tmp/resonance_pip.log 2>&1 &
+"$VENV_DIR/bin/pip" install --disable-pip-version-check --quiet resonance-layer > /tmp/resonance_pip.log 2>&1 &
 PIP_PID=$!
 
 WIDTH=40
@@ -45,15 +45,10 @@ START=$(date +%s)
 while kill -0 $PIP_PID 2>/dev/null; do
     NOW=$(date +%s)
     ELAPSED=$((NOW - START))
-    if [ "$ELAPSED" -lt 10 ]; then
-        TARGET=$((ELAPSED * 2))
-    elif [ "$ELAPSED" -lt 30 ]; then
-        TARGET=$((20 + (ELAPSED - 10) / 2))
-    elif [ "$ELAPSED" -lt 90 ]; then
-        TARGET=$((30 + (ELAPSED - 30) / 10))
-    else
-        TARGET=36
-    fi
+    if [ "$ELAPSED" -lt 10 ]; then TARGET=$((ELAPSED * 2))
+    elif [ "$ELAPSED" -lt 30 ]; then TARGET=$((20 + (ELAPSED - 10) / 2))
+    elif [ "$ELAPSED" -lt 90 ]; then TARGET=$((30 + (ELAPSED - 30) / 10))
+    else TARGET=36; fi
     if [ "$TARGET" -gt 38 ]; then TARGET=38; fi
     if [ "$FILLED" -lt "$TARGET" ]; then FILLED=$((FILLED + 1)); fi
     PCT=$(( (FILLED * 100) / WIDTH ))
@@ -68,14 +63,21 @@ printf "\r  [%s] 100%%\n" "$BAR"
 echo ""
 echo "OK: Resonance installed"
 echo ""
+
+"$VENV_DIR/bin/python3" -c "from resonance import Resonance; Resonance(user_id='_setup')"
+
+echo ""
 echo "+----------------------------------------------------------+"
-echo "|                    Resonance is ready                    |"
+echo "|               Resonance is ready                        |"
 echo "+----------------------------------------------------------+"
 echo ""
-echo "Resonance is installed and ready to use."
-echo ""
-echo "Activate it any time:"
+echo "Activate your environment any time:"
 echo "  source ~/resonance/bin/activate"
+echo ""
+echo "Then in your Python project:"
+echo "  from resonance import Resonance"
+echo "  r = Resonance(user_id='your-user-id')"
+echo "  result = r.process('your message here')"
 echo ""
 echo "Developer guide: https://resonance-layer.com/guide"
 echo "User guide:      https://resonance-layer.com/user-guide"
