@@ -1,13 +1,13 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
 # Licensed under the Business Source License 1.1 — see LICENSE for details.
 # Resonance — extractor.py
-# v2 — retrained model, ensemble blending, per-class confidence floors, WoT fix
+# v3 — ethics safeguards: crisis_detected, sustained_distress, outward_reflection
 
 import os
 import json
 import re
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, List
 from pathlib import Path
 
 import torch
@@ -16,17 +16,32 @@ from nrclex import NRCLex
 from textblob import TextBlob
 from empath import Empath
 
-# ── Model path ─────────────────────────────────────────────────
 MODEL_PATH = Path.home() / ".resonance" / "model_cache"
 if not MODEL_PATH.exists():
     _local = Path(__file__).parent / "model"
     if _local.exists():
         MODEL_PATH = _local
 
-# ── Ensemble threshold ─────────────────────────────────────────
 ENSEMBLE_THRESHOLD = 0.65
 
-# ── EmotionResult ──────────────────────────────────────────────
+CRISIS_PHRASES = [
+    "want to die", "want to kill myself", "kill myself", "end my life",
+    "ending my life", "end it all", "suicide", "suicidal",
+    "don't want to be here", "don't want to live", "no reason to live",
+    "can't go on", "can't do this anymore", "rather be dead",
+    "hurting myself", "hurt myself", "cutting myself", "self harm",
+    "self-harm", "overdose", "nothing to live for", "better off dead",
+    "better off without me", "no point in living", "wish i was dead",
+    "wish i were dead",
+]
+
+DISTRESS_VALENCE_THRESHOLD  = -0.40
+DISTRESS_AROUSAL_THRESHOLD  = 0.55
+SUSTAINED_DISTRESS_COUNT    = 3
+
+OUTWARD_VALENCE_THRESHOLD   = -0.30
+OUTWARD_SESSION_COUNT       = 5
+
 @dataclass
 class EmotionResult:
     valence: float = 0.0
@@ -45,20 +60,25 @@ class EmotionResult:
     modality: str = "text"
     raw_nrc_scores: dict = field(default_factory=dict)
     raw_empath_scores: dict = field(default_factory=dict)
+    crisis_detected: bool = False
+    sustained_distress: bool = False
+    outward_reflection: bool = False
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
+        crisis_flag = " 🚨CRISIS" if self.crisis_detected else ""
+        distress_flag = " ⚠DISTRESS" if self.sustained_distress else ""
         return (
             f"EmotionResult(\n"
-            f"  primary={self.primary_emotion} / secondary={self.secondary_emotion}\n"
+            f"  primary={self.primary_emotion} / secondary={self.secondary_emotion}{crisis_flag}{distress_flag}\n"
             f"  VAD: valence={self.valence:+.2f}  arousal={self.arousal:.2f}  dominance={self.dominance:.2f}\n"
             f"  WoT={wot_flag} [{self.wot_triggered_by}]\n"
             f"  wise_mind={self.wise_mind_signal}  reappraisal={self.reappraisal_signal}  suppression={self.suppression_signal}\n"
             f"  confidence={self.confidence:.2f}  alexithymia={self.alexithymia_flag}  modality={self.modality}\n"
+            f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
             f")"
         )
 
-# ── VAD lookup ─────────────────────────────────────────────────
 VAD = {
     "joy":      (0.88, 0.60, 0.75),
     "anger":    (-0.60, 0.85, 0.65),
@@ -69,19 +89,17 @@ VAD = {
     "neutral":  (0.00, 0.20, 0.50),
 }
 
-# ── NRC emotion → Resonance class map ─────────────────────────
 NRC_TO_CLASS = {
-    "anger":    "anger",
-    "fear":     "fear",
-    "joy":      "joy",
-    "sadness":  "sadness",
-    "surprise": "surprise",
-    "disgust":  "anger",
-    "trust":    "joy",
+    "anger":        "anger",
+    "fear":         "fear",
+    "joy":          "joy",
+    "sadness":      "sadness",
+    "surprise":     "surprise",
+    "disgust":      "anger",
+    "trust":        "joy",
     "anticipation": "neutral",
 }
 
-# ── Secondary emotion map (TONE/Parrott ontology) ──────────────
 SECONDARY_MAP = {
     "joy":      ["contentment", "happiness", "pride", "optimism", "enthusiasm", "hope", "relief", "love", "affection", "longing"],
     "anger":    ["frustration", "irritability", "rage", "disgust", "envy", "contempt", "aggression"],
@@ -92,7 +110,6 @@ SECONDARY_MAP = {
     "neutral":  ["neutral"],
 }
 
-# ── Guilt keywords ─────────────────────────────────────────────
 GUILT_KEYWORDS = {
     "shame":       ["ashamed", "shameful", "humiliated", "disgrace", "embarrassed"],
     "self-blame":  ["my fault", "i failed", "i should have", "i didn't", "blame myself"],
@@ -100,19 +117,15 @@ GUILT_KEYWORDS = {
     "social_guilt":["let down", "disappointed", "failed them", "i owe", "i neglected"],
 }
 
-# ── Reappraisal / suppression markers ─────────────────────────
 DISTANCING_WORDS = ["one", "people", "they", "someone", "person", "you", "we", "it"]
 FIRST_PERSON     = ["i", "me", "my", "myself", "i'm", "i've", "i'll", "i'd"]
 NEGATIVE_AFFECT  = ["hate", "angry", "sad", "depressed", "anxious", "scared", "hurt", "upset", "crying", "pain"]
 
-# ── WoT clinical word lists ────────────────────────────────────
 HYPER_WORDS = ["furious", "terrified", "panicking", "overwhelmed", "exploding", "screaming", "raging", "frantic", "desperate"]
 HYPO_WORDS  = ["numb", "empty", "shutdown", "frozen", "disconnected", "blank", "nothing", "void", "dissociated"]
 
-# ── Wise mind markers ─────────────────────────────────────────
 WISE_MIND_PHRASES = ["i understand", "i see both", "on one hand", "on the other hand", "makes sense", "i accept", "even though", "and yet", "both"]
 
-# ── Emoji map ─────────────────────────────────────────────────
 EMOJI_MAP = {
     "😊": "joy", "😂": "joy", "❤️": "joy", "😍": "joy", "🥰": "joy",
     "😢": "sadness", "😭": "sadness", "💔": "sadness",
@@ -123,7 +136,6 @@ EMOJI_MAP = {
     "😐": "neutral", "🙂": "neutral",
 }
 
-# ── Extractor class ────────────────────────────────────────────
 class Extractor:
     def __init__(self):
         self.empath = Empath()
@@ -196,21 +208,16 @@ class Extractor:
     def _predict_ensemble(self, text: str, nrc: dict):
         if self._model is None:
             return self._predict_nrc(nrc)
-
         model_emotion, model_conf = self._predict_model(text)
         floor = self._get_confidence_floor(model_emotion)
-
         if model_conf >= floor:
             return model_emotion, model_conf
-
         nrc_emotion, nrc_conf = self._predict_nrc(nrc)
         model_weight = model_conf / floor
         nrc_weight   = 1.0 - model_weight
-
         if model_emotion == nrc_emotion:
             blended_conf = (model_conf * model_weight) + (nrc_conf * nrc_weight)
             return model_emotion, round(blended_conf, 4)
-
         if (model_conf * model_weight) >= (nrc_conf * nrc_weight):
             return model_emotion, round(model_conf * model_weight, 4)
         else:
@@ -269,7 +276,35 @@ class Extractor:
         density = emotion_word_count / max(len(words), 1)
         return density < 0.02 and len(words) > 10
 
-    def extract(self, text: str, modality: str = "text") -> EmotionResult:
+    def _detect_crisis(self, text: str) -> bool:
+        lower = text.lower()
+        return any(phrase in lower for phrase in CRISIS_PHRASES)
+
+    def _detect_sustained_distress(self, history: List["EmotionResult"]) -> bool:
+        if len(history) < SUSTAINED_DISTRESS_COUNT:
+            return False
+        recent = history[-SUSTAINED_DISTRESS_COUNT:]
+        return all(
+            r.valence <= DISTRESS_VALENCE_THRESHOLD and
+            r.arousal >= DISTRESS_AROUSAL_THRESHOLD
+            for r in recent
+        )
+
+    def _detect_outward_reflection(self, history: List["EmotionResult"]) -> bool:
+        if len(history) < OUTWARD_SESSION_COUNT:
+            return False
+        recent = history[-OUTWARD_SESSION_COUNT:]
+        return all(r.valence <= OUTWARD_VALENCE_THRESHOLD for r in recent)
+
+    def extract(
+        self,
+        text: str,
+        modality: str = "text",
+        history: Optional[List["EmotionResult"]] = None
+    ) -> "EmotionResult":
+        if history is None:
+            history = []
+
         if not text or not text.strip():
             return EmotionResult(modality=modality)
 
@@ -296,6 +331,9 @@ class Extractor:
         suppression      = self._detect_suppression(text)
         guilt_type       = self._detect_guilt(text)
         alexithymia      = self._detect_alexithymia(nrc, text)
+        crisis           = self._detect_crisis(text)
+        sustained        = self._detect_sustained_distress(history)
+        outward          = self._detect_outward_reflection(history)
 
         return EmotionResult(
             valence=round(valence, 4),
@@ -314,4 +352,7 @@ class Extractor:
             modality=modality,
             raw_nrc_scores=dict(nrc),
             raw_empath_scores={k: v for k, v in empath.items() if v and v > 0},
+            crisis_detected=crisis,
+            sustained_distress=sustained,
+            outward_reflection=outward,
         )
