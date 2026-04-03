@@ -3,11 +3,10 @@
 
 # resonance/config.py
 # Manages Resonance configuration and the first-run opt-in prompt.
-# Config is stored in resonance_data/config.json.
+# Config is stored in ~/.resonance/config.json.
 # Users must make a conscious choice about feedback sharing — no default.
 
 import json
-import os
 from pathlib import Path
 
 CONFIG_DIR = Path.home() / ".resonance"
@@ -46,14 +45,15 @@ def run_first_time_prompt(config: dict) -> dict:
     print("|                                                          |")
     print("|  Before we begin - one question:                         |")
     print("|                                                          |")
-    print("|  Help improve Resonance by sharing anonymous             |")
-    print("|  correction data?                                        |")
+    print("|  Help Resonance get better at understanding              |")
+    print("|  how people actually feel?                               |")
     print("|                                                          |")
-    print("|  Corrections only. No message text. No identity.         |")
+    print("|  Anonymous emotion signals and conversation              |")
+    print("|  patterns are shared. Never your identity.               |")
     print("|  You can change this any time:                           |")
     print("|  resonance config --feedback on/off                      |")
     print("|                                                          |")
-    print("|  [1] Yes, I want to help improve Resonance               |")
+    print("|  [1] Yes, help Resonance understand people better        |")
     print("|  [2] No, keep everything local                           |")
     print("|                                                          |")
     print("+----------------------------------------------------------+")
@@ -63,7 +63,7 @@ def run_first_time_prompt(config: dict) -> dict:
         if choice == "1":
             config["feedback_enabled"] = True
             config["first_run_complete"] = True
-            print("\n✓ Thank you. Anonymous corrections will be shared to improve Resonance.")
+            print("\n✓ Thank you. Emotion signals and conversation patterns will be shared anonymously.")
             print("  Change this any time: resonance config --feedback off\n")
             break
         elif choice == "2":

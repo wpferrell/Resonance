@@ -2,42 +2,29 @@
 # Licensed under the Business Source License 1.1 — see LICENSE for details.
 
 # resonance/feedback.py
-# Handles anonymous correction data collection.
-# Corrections queue locally first — always safe, never lost.
-# When server is live, queued corrections drain automatically on startup.
-# No message text. No user identity. Corrections only.
+# Handles anonymous feedback collection.
+# Emotion signals and conversation patterns queue locally first — always safe, never lost.
+# When server is reachable, queued records drain automatically.
+# No message text. No user identity. Ever.
 
+import hashlib
 import json
 import threading
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 QUEUE_DIR = Path.home() / ".resonance" / "feedback_queue"
-
-# Stub URL — replaced with live endpoint in Phase 6
-FEEDBACK_ENDPOINT = "https://feedback.resonance-layer.com/corrections"
+FEEDBACK_ENDPOINT = "https://feedback.resonance-layer.com/feedback"
 
 
-def queue_correction(detected: str, corrected: str, vad: dict, confidence: float):
-    """
-    Save a correction to the local queue.
-    Called any time a user corrects a detected emotion.
-    Always saves locally first — never lost even if offline.
-    """
+def _anonymous_id(user_id: str) -> str:
+    """One-way hash of user_id — never reversible back to the original."""
+    return hashlib.sha256(user_id.encode()).hexdigest()[:16]
+
+
+def queue_record(record: dict):
+    """Save a feedback record to the local queue. Never lost even if offline."""
     QUEUE_DIR.mkdir(parents=True, exist_ok=True)
-
-    record = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "detected": detected,
-        "corrected": corrected,
-        "valence": round(vad.get("valence", 0.0), 3),
-        "arousal": round(vad.get("arousal", 0.0), 3),
-        "dominance": round(vad.get("dominance", 0.0), 3),
-        "confidence": round(confidence, 3),
-    }
-
-    # Each correction is its own file — no conflicts, no data loss
     filename = QUEUE_DIR / f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')}.json"
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(record, f)
@@ -45,58 +32,71 @@ def queue_correction(detected: str, corrected: str, vad: dict, confidence: float
 
 def drain_queue():
     """
-    Attempt to send all queued corrections to the feedback endpoint.
+    Send all queued records to the feedback endpoint.
     Runs in a background thread — never blocks the main process.
-    Successfully sent corrections are removed from the queue.
-    Failed sends stay in the queue and are retried next session.
+    Successfully sent records are removed. Failed sends stay and retry next session.
     """
     def _drain():
         if not QUEUE_DIR.exists():
             return
-
         queue_files = list(QUEUE_DIR.glob("*.json"))
         if not queue_files:
             return
-
         try:
             import urllib.request
-            import urllib.error
-
-            sent = 0
             for filepath in queue_files:
                 try:
                     with open(filepath, "r", encoding="utf-8") as f:
                         record = json.load(f)
-
                     payload = json.dumps(record).encode("utf-8")
                     req = urllib.request.Request(
                         FEEDBACK_ENDPOINT,
                         data=payload,
-                        headers={"Content-Type": "application/json"},
+                        headers={"Content-Type": "application/json", "User-Agent": "resonance-layer/1.0"},
                         method="POST"
                     )
-
                     with urllib.request.urlopen(req, timeout=5) as response:
                         if response.status == 200:
-                            filepath.unlink()  # Remove after successful send
-                            sent += 1
-
+                            filepath.unlink()
                 except Exception:
-                    # Leave in queue — retry next session
                     continue
-
         except Exception:
-            pass  # Never surface feedback errors to the user
+            pass
 
     thread = threading.Thread(target=_drain, daemon=True)
     thread.start()
 
 
-def record_correction(detected: str, corrected: str, vad: dict, confidence: float, feedback_enabled: bool):
+def record_feedback(
+    user_id: str,
+    primary_emotion: str,
+    confidence: float,
+    valence: float,
+    arousal: float,
+    dominance: float,
+    corrected_emotion: str = None,
+    feedback_enabled: bool = False,
+):
     """
-    Main entry point for recording a correction.
-    Always queues locally. Drains to server if feedback is enabled.
+    Main entry point for recording a feedback event.
+    Called after every emotion detection.
+    corrected_emotion is set when the user picks a different chip.
+    Always queues locally. Drains to server only if feedback is enabled.
     """
-    if feedback_enabled:
-        queue_correction(detected, corrected, vad, confidence)
-        drain_queue()
+    if not feedback_enabled:
+        return
+
+    record = {
+        "user_id": _anonymous_id(user_id),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "primary_emotion": primary_emotion,
+        "confidence": round(confidence, 3),
+        "valence": round(valence, 3),
+        "arousal": round(arousal, 3),
+        "dominance": round(dominance, 3),
+        "corrected_emotion": corrected_emotion,
+    }
+
+    queue_record(record)
+    drain_queue()
+

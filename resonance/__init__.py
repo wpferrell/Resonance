@@ -18,7 +18,7 @@ from .temporal_graph import TemporalGraph
 from .reinforcement import ReinforcementLoop
 from .profile import ProfileEngine
 from .injector import LLMContextInjector
-from .feedback import record_correction, drain_queue
+from .feedback import record_feedback, drain_queue
 
 # Run version check and config on import
 check_for_update()
@@ -27,7 +27,7 @@ _config = ensure_config()
 # Download model weights on first run
 ensure_model_downloaded()
 
-# Drain any queued feedback corrections in the background
+# Drain any queued feedback in the background
 if _config.get("feedback_enabled"):
     drain_queue()
 
@@ -65,6 +65,16 @@ class Resonance:
         """
         result = self.extractor.extract(message, modality=modality)
         self.storage.save(result, self.user_id, session_id="default")
+        record_feedback(
+            user_id=self.user_id,
+            primary_emotion=result.primary_emotion,
+            confidence=result.confidence,
+            valence=result.valence,
+            arousal=result.arousal,
+            dominance=result.dominance,
+            corrected_emotion=None,
+            feedback_enabled=self.feedback_enabled,
+        )
         try:
             from .dashboard import push_update
             push_update(result)
@@ -91,16 +101,14 @@ class Resonance:
         Record a user correction. Updates the reinforcement loop.
         If feedback is enabled, queues the correction for anonymous sharing.
         """
-        vad = {
-            "valence": result.valence,
-            "arousal": result.arousal,
-            "dominance": result.dominance,
-        }
-        record_correction(
-            detected=detected,
-            corrected=corrected,
-            vad=vad,
+        record_feedback(
+            user_id=self.user_id,
+            primary_emotion=detected,
             confidence=result.confidence,
+            valence=result.valence,
+            arousal=result.arousal,
+            dominance=result.dominance,
+            corrected_emotion=corrected,
             feedback_enabled=self.feedback_enabled,
         )
 
@@ -112,5 +120,3 @@ class Resonance:
 
 
 __all__ = ["Resonance", "EmotionResult", "__version__"]
-
-
