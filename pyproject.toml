@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "resonance-layer"
-version = "1.0.29"
+version = "1.0.30"
 description = "The emotional memory layer for AI."
 readme = "README.md"
 license = "BUSL-1.1"
@@ -64,5 +64,6 @@ resonance = ["model_loader.py", "model/*"]
 
 [tool.setuptools.package-data]
 resonance = ["templates/*"]
+
 
 
