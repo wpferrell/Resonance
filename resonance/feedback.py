@@ -52,7 +52,10 @@ def drain_queue():
                     req = urllib.request.Request(
                         FEEDBACK_ENDPOINT,
                         data=payload,
-                        headers={"Content-Type": "application/json", "User-Agent": "resonance-layer/1.0"},
+                        headers={
+                            "Content-Type": "application/json",
+                            "User-Agent": "Resonance/1.0",
+                        },
                         method="POST"
                     )
                     with urllib.request.urlopen(req, timeout=5) as response:
@@ -99,4 +102,3 @@ def record_feedback(
 
     queue_record(record)
     drain_queue()
-
