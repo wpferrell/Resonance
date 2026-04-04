@@ -18,7 +18,8 @@ from .temporal_graph import TemporalGraph
 from .reinforcement import ReinforcementLoop
 from .profile import ProfileEngine
 from .injector import LLMContextInjector
-from .feedback import record_feedback, drain_queue
+from .feedback import record_feedback, record_trajectory, drain_queue
+import uuid
 
 # Run version check and config on import
 check_for_update()
@@ -56,15 +57,23 @@ class Resonance:
             temporal_graph=self.temporal_graph,
             reinforcement_loop=self.reinforcement_loop
         )
-        self.injector = LLMContextInjector(temporal_graph=self.temporal_graph, reinforcement_loop=self.reinforcement_loop)
+        self.injector = LLMContextInjector(
+            temporal_graph=self.temporal_graph,
+            reinforcement_loop=self.reinforcement_loop
+        )
+        self._last_result = None
+        self._session_id = str(uuid.uuid4())
 
-    def process(self, message: str, modality: str = "text") -> "LLMContextInjector":
+    def process(self, message: str, modality: str = "text") -> "EmotionResult":
         """
         Process a message. Detect emotion, store it, update profile.
         Returns a context injector ready to pass to any LLM.
+        Automatically tracks emotional trajectory between messages.
         """
         result = self.extractor.extract(message, modality=modality)
-        self.storage.save(result, self.user_id, session_id="default")
+        self.storage.save(result, self.user_id, session_id=self._session_id)
+
+        # Record individual detection feedback
         record_feedback(
             user_id=self.user_id,
             primary_emotion=result.primary_emotion,
@@ -75,11 +84,38 @@ class Resonance:
             corrected_emotion=None,
             feedback_enabled=self.feedback_enabled,
         )
+
+        # Record trajectory — the shift between this message and the last one
+        if self._last_result is not None:
+            record_trajectory(
+                user_id=self.user_id,
+                session_id=self._session_id,
+                prev_emotion=self._last_result.primary_emotion,
+                curr_emotion=result.primary_emotion,
+                prev_valence=self._last_result.valence,
+                curr_valence=result.valence,
+                prev_arousal=self._last_result.arousal,
+                curr_arousal=result.arousal,
+                prev_dominance=self._last_result.dominance,
+                curr_dominance=result.dominance,
+                prev_wot=self._last_result.window_of_tolerance,
+                curr_wot=result.window_of_tolerance,
+                prev_wise_mind=self._last_result.wise_mind_signal or 0.0,
+                curr_wise_mind=result.wise_mind_signal or 0.0,
+                reappraisal_signal=result.reappraisal_signal or 0.0,
+                suppression_signal=result.suppression_signal or 0.0,
+                confidence=result.confidence,
+                feedback_enabled=self.feedback_enabled,
+            )
+
+        self._last_result = result
+
         try:
             from .dashboard import push_update
             push_update(result)
         except Exception:
             pass
+
         return result
 
     def start_panel(self, port: int = 7731, open_browser: bool = True) -> str:
