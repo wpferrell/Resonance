@@ -44,7 +44,3 @@ venv/
 
 # IDE
 .vscode/
-
-resonance/model_loader.py
-
-resonance/model_loader.py
