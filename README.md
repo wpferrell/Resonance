@@ -66,16 +66,16 @@ The panel is a mirror. It does not tell you what to do with what you are feeling
 
 Resonance is not guessing. Every detection is grounded in established psychological research.
 
-Eight frameworks are baked into every layer:
+Six detection frameworks are baked into every layer:
 
-- **Self-Determination Theory** — your autonomy is preserved at every step
-- **DBT emotion detection** — distinguishes between what you feel first and what follows
+- **Self-Determination Theory** — reads your need for autonomy, connection, and competence beneath what you say
+- **DBT secondary emotion** — detects what you feel underneath the surface emotion, independently
 - **Reappraisal vs suppression** — detects how you are relating to your emotion, not just what it is
-- **Validate before problem-solve** — the AI acknowledges you before it tries to help you
 - **Window of Tolerance** — knows whether you are calm, overwhelmed, or shut down
 - **PERMA flourishing** — tracks the full picture of your emotional wellbeing over time
 - **Wise Mind detection** — recognises when you are in emotional mind, reasonable mind, or the balance between them
-- **Non-judgment** — there is no good or bad emotion inside Resonance. Everything is detected with equal respect
+
+Two guiding principles shape how every signal is used: validate before problem-solve, and non-judgment — there is no good or bad emotion inside Resonance.
 
 The science is serious because the people using it are real.
 

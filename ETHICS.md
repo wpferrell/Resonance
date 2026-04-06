@@ -12,7 +12,7 @@ Its purpose is narrow and specific: to detect a person's emotional state from te
 
 Resonance is part of the evolution of AI — the same way AI learned to understand language, it now begins to understand how a person actually feels when they use it. Resonance exists to make that possible. Nothing more.
 
-Resonance is not a novelty layer or a feature. It is infrastructure — the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Every framework inside it — Window of Tolerance, PERMA, Wise Mind, Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, emotional validation, and non-judgment — is grounded in decades of psychological research. That demands rigour.
+Resonance is not a novelty layer or a feature. It is infrastructure — the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Six detection frameworks are built into every layer — Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, Window of Tolerance, PERMA flourishing, and Wise Mind — each grounded in decades of psychological research. That demands rigour.
 
 ---
 
@@ -81,18 +81,21 @@ This is not a feature. It is the foundation.
 
 ---
 
-## The Eight Frameworks
+## The Six Detection Frameworks
 
 Every psychological framework baked into Resonance was chosen for one reason: it reflects how humans actually experience and regulate emotion, validated by research. They are not decoration. They shape every detection, every profile, every word passed to an AI.
 
-1. **Self-Determination Theory** — autonomy, competence, and relatedness are preserved at every layer
-2. **DBT primary and secondary emotion detection** — what is felt first, and what follows
-3. **Reappraisal vs suppression** — how a person is relating to their emotion, not just what it is
-4. **Validate before problem-solve** — the AI responds to the person before it responds to the problem
-5. **Window of Tolerance** — where a person is in their regulatory capacity right now
-6. **PERMA flourishing** — the full spectrum of emotional wellbeing, not just distress
-7. **Wise Mind detection** — emotional mind, reasonable mind, and the integration between them
-8. **Non-judgment as core principle** — woven through every layer, not applied at the end
+1. **Self-Determination Theory** — detects autonomy, competence, and relatedness signals in text — what the person needs beneath what they say
+2. **DBT primary and secondary emotion detection** — what is felt on the surface, and what is underneath it, detected independently
+3. **Reappraisal vs suppression** — how a person is relating to their emotion, not just what it is — scored as a continuous signal
+4. **Window of Tolerance** — where a person is in their regulatory capacity right now, and which direction they are moving across a session
+5. **PERMA flourishing** — the full spectrum of emotional wellbeing across five dimensions: positive emotion, engagement, relationships, meaning, accomplishment
+6. **Wise Mind detection** — the balance between emotional mind and reasonable mind — scored as a continuous signal
+
+Two principles guide how every signal is used — not detection signals themselves, but design commitments woven through every layer:
+
+- **Validate before problem-solve** — the AI responds to the person before it responds to the problem
+- **Non-judgment** — there is no good or bad emotion inside Resonance. Everything is detected with equal respect
 
 ---
 

@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "resonance-layer"
 version = "1.0.33"
-description = "The emotional memory layer for AI."
+description = "Emotional intelligence layer for AI — detects emotion, tracks wellbeing, and gives any LLM the context to respond to how people actually feel."
 readme = "README.md"
 license = "BUSL-1.1"
 authors = [{ name = "William Ferrell" }]
 requires-python = ">=3.10"
-keywords = ["emotion", "ai", "llm", "affective computing", "memory", "nlp"]
+keywords = ["emotion", "ai", "llm", "affective-computing", "memory", "nlp", "psychology", "wellbeing", "perma", "sdt", "dbt", "mental-health", "emotional-intelligence", "empathy", "window-of-tolerance", "wise-mind", "conversation"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
