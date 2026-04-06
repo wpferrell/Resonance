@@ -1,0 +1,4 @@
+name = "resonance-install"
+main = "worker.js"
+compatibility_date = "2026-03-31"
+account_id = "f917988ca792fe57324275a4c444befe"

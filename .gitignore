@@ -12,6 +12,10 @@ data/
 training.csv
 train_model.py
 
+# Proprietary — never push
+Resonance_Dataset_Registry.md
+scripts/prepare_data_v2.py
+
 # Database and runtime data
 resonance_data/
 resonance/resonance_data/

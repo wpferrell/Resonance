@@ -1,0 +1,857 @@
+2026-04-05 15:11:59,290 INFO ============================================================
+2026-04-05 15:11:59,290 INFO Resonance Dataset Scout starting
+2026-04-05 15:11:59,290 INFO Seen cache: 0 items
+2026-04-05 15:11:59,290 INFO Results: C:\Users\Shadow\Documents\Resonance\scout_results.md
+2026-04-05 15:11:59,291 INFO Sweep interval: 4h
+2026-04-05 15:11:59,291 INFO Ctrl+C to stop safely
+2026-04-05 15:11:59,291 INFO ============================================================
+2026-04-05 15:11:59,291 INFO === Sweep #1 starting ===
+2026-04-05 15:11:59,291 INFO HuggingFace: keyword sweep
+2026-04-05 15:12:06,257 INFO BORDERLINE: alexithymia adhd — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:09,327 INFO BORDERLINE: balanced emotion dataset majestrino withtemporal detailed captions — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:09,342 INFO BORDERLINE: kazakh emotion dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,360 INFO BORDERLINE: Arabic Multimodal Emotion Detection — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:09,380 INFO BORDERLINE: abdallahwagih emotion dataset — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:13:09,399 INFO BORDERLINE: dair ai emotion — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,420 INFO BORDERLINE: dekun emotion1200 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,441 INFO [GENERAL] FOUND: filipino emotion tts
+2026-04-05 15:13:09,469 INFO BORDERLINE: emotion max 500 instructions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,491 INFO BORDERLINE: emotion framed factual qa — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,517 INFO BORDERLINE: Multi Emotion Reading With Intent Dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,540 INFO BORDERLINE: EDIE emotion mind dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,564 INFO BORDERLINE: mbti emotion — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,586 INFO [GENERAL] FOUND: Emotion Voice Attribute Reference Snippets DACVAE
+2026-04-05 15:13:09,608 INFO [GENERAL] FOUND: Emotion Voice Attribute Reference Snippets DACVAE Wave
+2026-04-05 15:13:09,640 INFO BORDERLINE: chinese adorable high emotional intelligence chat — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:09,681 INFO BORDERLINE: emotionlessfull — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:13,184 INFO BORDERLINE: financial phrase sentiment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,199 INFO BORDERLINE: sinhala news sentiment classification — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,214 INFO BORDERLINE: swik sentiment labels — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:13,235 INFO BORDERLINE: entity sentiment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,254 INFO BORDERLINE: Urdu Sentiments Dataset USD — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,274 INFO BORDERLINE: sentiment dataset — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:13,296 INFO BORDERLINE: sentiment banking — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,321 INFO BORDERLINE: Maithili Sentiment 8K — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:13,345 INFO BORDERLINE: mendeley indonesian stock sentiment — R2 fail: no institutional signal, low downloads
+2026-04-05 15:13:13,374 INFO [GENERAL] FOUND: alihanuludag turkish universities sentiment analysis dataset
+2026-04-05 15:13:13,399 INFO BORDERLINE: abdullah0a social media sentiment analysis dataset — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:13:13,424 INFO BORDERLINE: abdelmalekeladjelet sentiment analysis dataset — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:13:13,444 INFO BORDERLINE: sentiment analysis for mental health — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,477 INFO [GENERAL] FOUND: sentiment user study
+2026-04-05 15:13:13,497 INFO BORDERLINE: sentiment analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,516 INFO BORDERLINE: Sentiment140 reduced train test — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,574 INFO BORDERLINE: Sentiment140 reduced train test val — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,594 INFO BORDERLINE: amazon sentiment analysis2 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,619 INFO BORDERLINE: amazon sentiment analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,658 INFO BORDERLINE: sentiment analysis nlp — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:13,718 INFO BORDERLINE: sentiment analysis imdb dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,773 INFO BORDERLINE: sentiment dvc data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,807 INFO BORDERLINE: sentiment prediction new — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,879 INFO BORDERLINE: sentiment predictions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:13,898 INFO BORDERLINE: financial sentiment analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:14,111 INFO BORDERLINE: multimodal crypto sentiment eth — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:14,141 INFO BORDERLINE: multimodal crypto sentiment btc — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,040 INFO BORDERLINE: africa wfp and fao overview of countries affected by the 2015 16 el nino — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,111 INFO BORDERLINE: africa nigeria nema flood affected geographical areasnorth east nigeria flood affected geographi — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,139 INFO BORDERLINE: aipsy affect — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,204 INFO BORDERLINE: adeolaadesina factors affecting children anemia level — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:13:18,245 INFO BORDERLINE: AffectNet — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,267 INFO BORDERLINE: AffectNet — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,278 INFO BORDERLINE: affectgpt — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,303 INFO BORDERLINE: tts affective bias control v0.1 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,328 INFO BORDERLINE: Cog Affect Raw — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,358 INFO BORDERLINE: n4x7d2q9 hf1m8t3 embedded — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,382 INFO BORDERLINE: t9p3c8m1 axr4e6 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,403 INFO BORDERLINE: n4x7d2q9 hf1m8t3 tran — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,428 INFO BORDERLINE: t9p3c8m1 axr4e6 embedded — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,454 INFO BORDERLINE: t9p3c8m1 axr4e6 tran — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,484 INFO BORDERLINE: t9p3c8m1 axr4e6 sep — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,507 INFO BORDERLINE: n4x7d2q9 hf1m8t3 sep — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,526 INFO BORDERLINE: h4p7t3x2 jn6b9 embedded — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,546 INFO BORDERLINE: n4x7d2q9 hf1m8t3 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,593 INFO BORDERLINE: h4p7t3x2 jn6b9 sep — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,617 INFO BORDERLINE: h4p7t3x2 jn6b9 tran — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:18,763 INFO BORDERLINE: h4p7t3x2 jn6b9 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:18,863 INFO BORDERLINE: c8x4n9r1 mj7t2 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,560 INFO BORDERLINE: MentalChat6K original — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,574 INFO [GENERAL] FOUND: MindReframe source
+2026-04-05 15:13:22,588 INFO BORDERLINE: hinglish elderly empathy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,606 INFO BORDERLINE: empathy eval truthfulqa — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,624 INFO BORDERLINE: humanoid empathy data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,646 INFO BORDERLINE: empathy bot.json — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,669 INFO BORDERLINE: convsersations emotion empathy large — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,703 INFO BORDERLINE: empathy distress lexica — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,729 INFO BORDERLINE: SD 7000 source — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,751 INFO BORDERLINE: vi pubmed trans — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,770 INFO BORDERLINE: Core25 Empathy — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,800 INFO [GENERAL] FOUND: empathy affective datasets
+2026-04-05 15:13:22,819 INFO BORDERLINE: empathydatasetsoverview — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,844 INFO BORDERLINE: pattern reframe dataset — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,865 INFO BORDERLINE: empathy finetune dataset messages — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,883 INFO BORDERLINE: empathy finetune dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,905 INFO BORDERLINE: pattern reframe 1k — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,932 INFO BORDERLINE: alina empathy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:22,953 INFO BORDERLINE: 300 samples cof ref — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:22,986 INFO BORDERLINE: empathy dementia — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,009 INFO BORDERLINE: empathy conciseediting — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,031 INFO BORDERLINE: Specificsituation Empathy Dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,050 INFO BORDERLINE: Empathy data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,088 INFO [GENERAL] FOUND: books ner dataset categories
+2026-04-05 15:13:23,107 INFO BORDERLINE: empathy four rules questions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,156 INFO BORDERLINE: JIR Arena — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:23,210 INFO BORDERLINE: empathy 16k sharegpt — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:23,347 INFO BORDERLINE: Empathy LoRA Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:23,381 INFO BORDERLINE: books intent dataset — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:23,420 INFO [GENERAL] FOUND: books ner dataset
+2026-04-05 15:13:27,243 INFO BORDERLINE: Mental Health Text Classification Dataset — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:13:27,259 INFO [GENERAL] FOUND: Mental Health Text Classification Dataset
+2026-04-05 15:13:27,275 INFO [GENERAL] FOUND: Mental Health Text Classification Dataset
+2026-04-05 15:13:27,282 INFO [GENERAL] FOUND: Mental Health Text Dataset
+2026-04-05 15:13:27,302 INFO BORDERLINE: heliobramhas mental health text — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:13:34,706 INFO HuggingFace: recent uploads
+2026-04-05 15:13:58,060 INFO HuggingFace: institutional authors
+2026-04-05 15:14:00,716 INFO BORDERLINE: nq open — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:01,030 INFO BORDERLINE: tydiqa — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:01,349 INFO BORDERLINE: aquamuse — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:01,665 INFO BORDERLINE: cfq — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:01,979 INFO BORDERLINE: circa — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:02,296 INFO BORDERLINE: coached conv pref — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:02,610 INFO BORDERLINE: coarse discourse — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:14:02,924 INFO BORDERLINE: crawl domain — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:03,238 INFO BORDERLINE: discofuse — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:03,551 INFO BORDERLINE: disfl qa — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:04,167 INFO BORDERLINE: gap — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:04,480 INFO BORDERLINE: google wellformed query — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:05,096 INFO BORDERLINE: kelm — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:05,409 INFO BORDERLINE: mbpp — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:05,726 INFO BORDERLINE: multi re qa — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:06,042 INFO BORDERLINE: natural questions — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:06,356 INFO BORDERLINE: newsgroup — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:07,275 INFO BORDERLINE: poem sentiment — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:07,594 INFO BORDERLINE: qed — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:07,908 INFO BORDERLINE: schema guided dstc8 — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:08,226 INFO BORDERLINE: sent comp — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:08,540 INFO BORDERLINE: taskmaster1 — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:14:08,859 INFO BORDERLINE: taskmaster2 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:09,174 INFO BORDERLINE: taskmaster3 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:09,793 INFO BORDERLINE: totto — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:10,144 INFO BORDERLINE: wiki atomic edits — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:10,459 INFO BORDERLINE: wiki split — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:10,773 INFO BORDERLINE: xquad r — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:11,100 INFO BORDERLINE: xsum factuality — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:14:15,350 INFO BORDERLINE: tweet sentiment multilingual — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:16,566 INFO BORDERLINE: tweet generation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:17,180 INFO BORDERLINE: x sensitive — R2 fail: no institutional signal, low downloads
+2026-04-05 15:14:17,493 INFO BORDERLINE: tweet ter — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:18,410 INFO BORDERLINE: TSAR2025 SharedTask RCTS Trial Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:18,723 INFO BORDERLINE: TSAR2025 SharedTask RCTS Test Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:21,652 INFO BORDERLINE: OpenSubtitles2024 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:21,966 INFO BORDERLINE: fineweb edu translated — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:22,280 INFO BORDERLINE: bianet — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:22,593 INFO BORDERLINE: bible para — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:22,906 INFO BORDERLINE: ecb — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:23,521 INFO BORDERLINE: emea — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:23,834 INFO BORDERLINE: giga fren — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:24,148 INFO BORDERLINE: kde4 — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:24,464 INFO BORDERLINE: multi para crawl — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:24,779 INFO BORDERLINE: news commentary — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:25,093 INFO BORDERLINE: ofis publik — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:25,406 INFO BORDERLINE: open subtitles — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:25,720 INFO BORDERLINE: opus 100 — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:26,935 INFO BORDERLINE: opus elhuyar — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:27,248 INFO BORDERLINE: euconst — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:27,562 INFO BORDERLINE: opus finlex — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:27,876 INFO BORDERLINE: opus fiskmo — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:28,189 INFO BORDERLINE: opus gnome — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:28,503 INFO BORDERLINE: opus infopankki — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:28,817 INFO BORDERLINE: opus memat — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:29,132 INFO BORDERLINE: opus montenegrinsubs — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:29,444 INFO BORDERLINE: opus openoffice — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:29,758 INFO BORDERLINE: opus paracrawl — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:30,373 INFO BORDERLINE: opus tedtalks — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:30,687 INFO BORDERLINE: opus ubuntu — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:31,002 INFO BORDERLINE: opus wikipedia — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:31,316 INFO BORDERLINE: opus xhosanavy — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:31,630 INFO BORDERLINE: php — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:31,943 INFO [GENERAL] FOUND: qed amara
+2026-04-05 15:14:32,557 INFO BORDERLINE: tanzil — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:32,869 INFO BORDERLINE: tatoeba — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:33,184 INFO BORDERLINE: ted iwlst2013 — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:33,798 INFO BORDERLINE: tilde model — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:34,111 INFO BORDERLINE: un ga — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:34,424 INFO BORDERLINE: multiun — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:35,038 INFO BORDERLINE: wiki source — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:35,652 INFO BORDERLINE: tatoeba mt — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:35,966 INFO BORDERLINE: tatoeba mt train — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:36,580 INFO BORDERLINE: shroom — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:36,893 INFO BORDERLINE: nemotron cc translated — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:37,207 INFO BORDERLINE: shroom cap — R1 unknown: license 'mpl-2.0' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:14:42,746 INFO BORDERLINE: ukr toxicity dataset seminatural — R1 unknown: license 'openrail++' — needs manual check | R2 fail: no institutiona
+2026-04-05 15:14:43,060 INFO BORDERLINE: ukr toxicity dataset translated jigsaw — R1 unknown: license 'openrail++' — needs manual check | R2 fail: no institutiona
+2026-04-05 15:14:44,274 INFO BORDERLINE: crossnews ua — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:14:48,411 INFO BORDERLINE: the pile deduplicated — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:48,725 INFO BORDERLINE: proof pile 2 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:49,038 INFO BORDERLINE: reasoning mix — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:49,654 INFO BORDERLINE: lambada openai — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:49,968 INFO BORDERLINE: raw deduplicated pile — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:50,282 INFO BORDERLINE: pythia deduped pile idxmaps — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:50,596 INFO BORDERLINE: pythia pile idxmaps — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:50,909 INFO BORDERLINE: arithmetic — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:51,223 INFO BORDERLINE: wikitext document level — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:51,538 INFO BORDERLINE: pythia memorized evals — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:51,852 INFO BORDERLINE: pile duped pythia random sampled — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:52,167 INFO BORDERLINE: pile deduped pythia random sampled — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:52,481 INFO BORDERLINE: truthful qa mc — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:52,796 INFO BORDERLINE: truthful qa binary — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:53,110 INFO BORDERLINE: fever — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:14:55,228 INFO BORDERLINE: CEBaB — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:14:55,842 INFO BORDERLINE: sycophancy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:56,154 INFO BORDERLINE: advanced ai risk — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:56,467 INFO BORDERLINE: winogenerated — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:56,781 INFO BORDERLINE: drop — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:57,997 INFO BORDERLINE: bigbench — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:58,311 INFO BORDERLINE: pile standard pythia preshuffled — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:58,625 INFO BORDERLINE: pile deduped pythia preshuffled — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:58,939 INFO BORDERLINE: qm mixture — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:59,254 INFO BORDERLINE: qm grader first — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:14:59,567 INFO BORDERLINE: qm grader last — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:14:59,881 INFO BORDERLINE: quirky population — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:00,196 INFO BORDERLINE: quirky population alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:00,510 INFO BORDERLINE: quirky population alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:00,827 INFO BORDERLINE: quirky population alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:01,141 INFO BORDERLINE: quirky population bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:01,454 INFO BORDERLINE: quirky population bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:01,767 INFO BORDERLINE: quirky population bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:02,081 INFO BORDERLINE: quirky capitals — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:02,394 INFO BORDERLINE: quirky capitals alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:02,707 INFO BORDERLINE: quirky capitals alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:03,020 INFO BORDERLINE: quirky capitals alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:03,333 INFO BORDERLINE: quirky capitals bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:03,646 INFO BORDERLINE: quirky capitals bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:03,962 INFO BORDERLINE: quirky capitals bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:04,275 INFO BORDERLINE: quirky hemisphere — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:04,590 INFO BORDERLINE: quirky hemisphere alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:04,908 INFO BORDERLINE: quirky hemisphere alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:05,222 INFO BORDERLINE: quirky hemisphere alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:05,535 INFO BORDERLINE: quirky hemisphere bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:05,850 INFO BORDERLINE: quirky hemisphere bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:06,164 INFO BORDERLINE: quirky hemisphere bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:06,478 INFO BORDERLINE: quirky sciq — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:06,792 INFO BORDERLINE: quirky nli — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:07,106 INFO BORDERLINE: quirky nli alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:07,419 INFO BORDERLINE: quirky nli alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:07,732 INFO BORDERLINE: quirky nli alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:08,046 INFO BORDERLINE: quirky nli bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:08,364 INFO BORDERLINE: quirky nli bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:08,677 INFO BORDERLINE: quirky nli bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:08,993 INFO BORDERLINE: quirky sentiment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:09,309 INFO BORDERLINE: quirky sentiment alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:09,626 INFO BORDERLINE: quirky sentiment alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:09,938 INFO BORDERLINE: quirky sentiment alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:10,252 INFO BORDERLINE: quirky sentiment bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:10,567 INFO BORDERLINE: quirky sentiment bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:10,881 INFO BORDERLINE: quirky sentiment bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:11,195 INFO BORDERLINE: quirky authors — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:11,509 INFO BORDERLINE: quirky authors alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:11,823 INFO BORDERLINE: quirky authors alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:12,137 INFO BORDERLINE: quirky authors alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:12,452 INFO BORDERLINE: quirky authors bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:12,766 INFO BORDERLINE: quirky authors bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:13,080 INFO BORDERLINE: quirky authors bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:13,396 INFO BORDERLINE: quirky squaring increment0 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:13,709 INFO BORDERLINE: quirky squaring increment0 alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:14,023 INFO BORDERLINE: quirky squaring increment0 alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:14,336 INFO BORDERLINE: quirky squaring increment0 alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:14,649 INFO BORDERLINE: quirky squaring increment0 bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:14,963 INFO BORDERLINE: quirky squaring increment0 bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:15,289 INFO BORDERLINE: quirky squaring increment0 bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:15,615 INFO BORDERLINE: quirky modularaddition increment0 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:15,931 INFO BORDERLINE: quirky modularaddition increment0 alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:16,245 INFO BORDERLINE: quirky modularaddition increment0 alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:16,558 INFO BORDERLINE: quirky modularaddition increment0 alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:16,871 INFO BORDERLINE: quirky modularaddition increment0 bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:17,183 INFO BORDERLINE: quirky modularaddition increment0 bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:17,496 INFO BORDERLINE: quirky modularaddition increment0 bob — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:17,808 INFO BORDERLINE: quirky subtraction increment0 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:18,121 INFO BORDERLINE: quirky subtraction increment0 alice easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:18,434 INFO BORDERLINE: quirky subtraction increment0 alice hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:18,747 INFO BORDERLINE: quirky subtraction increment0 alice — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:19,061 INFO BORDERLINE: quirky subtraction increment0 bob easy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:19,377 INFO BORDERLINE: quirky subtraction increment0 bob hard — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:22,358 INFO BORDERLINE: ik nlp 22 slp — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:15:22,974 INFO BORDERLINE: ik nlp 22 winemag — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:15:23,287 INFO BORDERLINE: divemt — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:15:23,602 INFO BORDERLINE: ik mt 2023 books — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:23,915 INFO BORDERLINE: ik mt 2023 europarl ted model — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:24,230 INFO BORDERLINE: ik mt 2023 et data bin — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:27,803 INFO BORDERLINE: sufficient facts — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:28,418 INFO BORDERLINE: answerable tydiqa — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:28,731 INFO BORDERLINE: tydiqa copenlu — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:29,345 INFO BORDERLINE: scientific exaggeration detection — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:15:29,658 INFO BORDERLINE: spiced — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:15:29,973 INFO BORDERLINE: spanex — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:15:30,589 INFO BORDERLINE: llm pct tropes — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:30,904 INFO BORDERLINE: sofa — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:31,521 INFO BORDERLINE: druid — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:31,835 INFO BORDERLINE: cub counterfact — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:32,149 INFO BORDERLINE: cub druid — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:32,465 INFO BORDERLINE: mm framing — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:32,780 INFO BORDERLINE: cub nq — R2 fail: no institutional signal, low downloads | R4 fail: no emotional content 
+2026-04-05 15:15:33,094 INFO BORDERLINE: reality check on context utilisation — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:33,408 INFO BORDERLINE: transparent context usage — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:33,723 INFO BORDERLINE: cultural mcq with hard negatives — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:38,715 INFO BORDERLINE: weibo ner — R1 unknown: license 'unknown' — needs manual check | R2 fail: no institutional s
+2026-04-05 15:15:39,038 INFO BORDERLINE: megawika — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:15:39,354 INFO BORDERLINE: megawika report generation — R1 flagged: copyleft license — flag before enterprise use | R2 fail: no institut
+2026-04-05 15:15:39,671 INFO BORDERLINE: tdist msmarco scores — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:39,997 INFO BORDERLINE: plaid shirttt doc date — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:40,317 INFO BORDERLINE: lotte streams for murr — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:40,635 INFO BORDERLINE: MultiVENT2.0 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:40,955 INFO BORDERLINE: wikivideo — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:41,274 INFO BORDERLINE: Generate Distill Data — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:41,591 INFO BORDERLINE: multi msmarco — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:41,908 INFO BORDERLINE: OJ4OCRMT — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:42,224 INFO BORDERLINE: blade data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:42,541 INFO BORDERLINE: rag4reports 2026 — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:42,857 INFO BORDERLINE: RankVideo Dataset — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:43,173 INFO BORDERLINE: coveragebench — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:15:50,877 INFO BORDERLINE: JMMLU CC BY SA — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:15:52,099 INFO BORDERLINE: KnowRecall — R1 unknown: license 'cc' — needs manual check | R2 fail: no institutional signal
+2026-04-05 15:15:52,415 INFO BORDERLINE: VisRecall — R1 unknown: license 'cc' — needs manual check | R2 fail: no institutional signal
+2026-04-05 15:16:00,071 INFO BORDERLINE: SWE bench Verified — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:00,387 INFO BORDERLINE: prolong data 64K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:00,703 INFO BORDERLINE: datasets for simcse — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:01,020 INFO BORDERLINE: wikibook fairseq format — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:01,334 INFO BORDERLINE: glue fairseq format — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:01,651 INFO BORDERLINE: ALCE data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:01,967 INFO BORDERLINE: MoQA — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:02,286 INFO BORDERLINE: gtr t5 xxl wikipedia psgs w100 index — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:02,601 INFO BORDERLINE: SWE bench bm25 13k cl100k — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:02,916 INFO BORDERLINE: SWE bench bm25 27k cl100k — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:03,231 INFO BORDERLINE: SWE bench bm25 50k llama — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:03,545 INFO BORDERLINE: SWE bench oracle llama — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:03,859 INFO BORDERLINE: SWE bench oracle cl100k — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:04,173 INFO BORDERLINE: SWE bench — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:04,488 INFO BORDERLINE: LLMBar — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:16:04,805 INFO BORDERLINE: SWE bench oracle — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:05,121 INFO BORDERLINE: SWE bench bm25 40K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:05,437 INFO BORDERLINE: SWE bench bm25 27K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:05,754 INFO BORDERLINE: SWE bench bm25 13K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:06,071 INFO BORDERLINE: SWE bench gpt4 subset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:06,385 INFO BORDERLINE: less data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:06,704 INFO BORDERLINE: TutorEval — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:07,026 INFO BORDERLINE: TutorChat — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:07,341 INFO BORDERLINE: TextbookChapters — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:07,658 INFO BORDERLINE: QuRating GPT3.5 Judgments — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:07,984 INFO BORDERLINE: QuRating GPT3.5 Judgments Test — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:08,299 INFO BORDERLINE: QuRatedPajama 1B tokens for analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:08,614 INFO BORDERLINE: ptp data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:08,930 INFO BORDERLINE: QuRatedPajama 260B — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:09,245 INFO BORDERLINE: SWE bench Lite bm25 27K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:09,560 INFO BORDERLINE: SWE bench Lite bm25 13K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:09,874 INFO BORDERLINE: SWE bench Lite — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:10,190 INFO BORDERLINE: SWE bench Lite oracle — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:10,506 INFO BORDERLINE: llama3 ultrafeedback — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:16:10,822 INFO BORDERLINE: mistral instruct ultrafeedback — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:11,438 INFO BORDERLINE: llama3 ultrafeedback armorm — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:16:11,754 INFO BORDERLINE: LitSearch — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:12,068 INFO BORDERLINE: gemma2 ultrafeedback armorm — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:16:12,383 INFO BORDERLINE: prolong data 512K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:12,699 INFO BORDERLINE: SWE bench Multimodal — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:13,017 INFO BORDERLINE: HELMET — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:13,335 INFO BORDERLINE: prolong ultrachat 64K — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:13,648 INFO BORDERLINE: fineweb edu swahili translated — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:13,972 INFO BORDERLINE: TextbooksBySubject — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:14,289 INFO BORDERLINE: gemini 2.5 flash 0417 sft data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:14,604 INFO BORDERLINE: rl tulu3 wildchat if prompts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:16:28,928 INFO BORDERLINE: Cultural Emo — R2 fail: no institutional signal, low downloads | R3 uncertain: no clear human/A
+2026-04-05 15:16:29,246 INFO Zenodo: field search
+2026-04-05 15:17:15,381 INFO [GENERAL] FOUND: FinBERTimbau: Curated Brazilian Portuguese Financial Text Corpus and Sentiment Annotation Data
+2026-04-05 15:17:15,396 INFO [GENERAL] FOUND: Spanish-Infodemia-ABSA-2020: A Spanish Twitter Corpus for Aspect-Based Sentiment Analysis
+2026-04-05 15:17:15,413 INFO [GENERAL] FOUND: Sentiment Analysis on Environmental Destruction Corpus
+2026-04-05 15:17:15,431 INFO [GENERAL] FOUND: Multilingual fine-grained sentiment analysis corpus
+2026-04-05 15:17:15,449 INFO [GENERAL] FOUND: NaijaSenti: A Nigerian Twitter Sentiment Corpus for Multilingual Sentiment Analysis
+2026-04-05 15:17:15,470 INFO [GENERAL] FOUND: Corpus Creation for Sentiment Analysis in Code-Mixed Tamil-English Text
+2026-04-05 15:17:15,490 INFO [GENERAL] FOUND: Webis Tripad Sentiment Corpus 2013 (Webis-Tripad-13-Sentiment)
+2026-04-05 15:17:15,532 INFO [GENERAL] FOUND: App Reviews Sentiment: A Binary Sentiment Classification Corpus from Google Play Store
+2026-04-05 15:17:49,618 INFO DataCite: DOI registry
+2026-04-05 15:18:10,591 INFO [GENERAL] FOUND: Data from: physiological and emotional assessment of college students using wearable and mobile devices during the 2020 COVID-19 lockdown: an intensive, longitudinal dataset
+2026-04-05 15:18:10,604 INFO [MEDIUM] FOUND: EmoLit
+2026-04-05 15:18:10,619 INFO [MEDIUM] FOUND: EmoLit
+2026-04-05 15:18:30,972 INFO [GENERAL] FOUND: Dataset for "A Benchmark Suite for Indonesian Mental Health NER: Combining Real Counselling Audio Transcripts and Adapted Text Data"
+2026-04-05 15:18:30,986 INFO [GENERAL] FOUND: Dataset for "A Benchmark Suite for Indonesian Mental Health NER: Combining Real Counselling Audio Transcripts and Adapted Text Data"
+2026-04-05 15:18:30,991 INFO [GENERAL] FOUND: A comparative annotator-agreement analysis of EMOLA (Thai) and IEMOCAP (English) emotional speech corpora
+2026-04-05 15:18:39,980 INFO [GENERAL] FOUND: Dataset of Emotional Patterns and Synthetic Labeled Corpus for Anxiety and Depression Detection in Spanish
+2026-04-05 15:18:39,993 INFO [GENERAL] FOUND: Dataset of Emotional Patterns and Synthetic Labeled Corpus for Anxiety and Depression Detection in Spanish
+2026-04-05 15:18:39,999 INFO [GENERAL] FOUND: Mental Health Help Indication Dataset (Tweet X)
+2026-04-05 15:18:40,015 INFO [GENERAL] FOUND: Mental Health Help Indication Dataset (Tweet X)
+2026-04-05 15:18:40,021 INFO [GENERAL] FOUND: Bangla Suicidal Intention Dataset
+2026-04-05 15:18:40,040 INFO [GENERAL] FOUND: Bangla Suicidal Intention Dataset
+2026-04-05 15:18:40,048 INFO [GENERAL] FOUND: Preprocessed Conversational Mental Health Dataset for AI Model Training
+2026-04-05 15:18:40,067 INFO [GENERAL] FOUND: Preprocessed Conversational Mental Health Dataset for AI Model Training
+2026-04-05 15:18:40,075 INFO [GENERAL] FOUND: Farsi Mental State and Emotional Needs Dataset for Psychological Text Mining
+2026-04-05 15:18:40,102 INFO [GENERAL] FOUND: Farsi Mental State and Emotional Needs Dataset for Psychological Text Mining
+2026-04-05 15:18:46,751 INFO [GENERAL] FOUND: Psychological Boundaries and Recursive Decoherence in UCH-HSTR Systems
+2026-04-05 15:18:49,685 INFO GitHub: repository search
+2026-04-05 15:19:35,637 INFO OSF: tag search
+2026-04-05 15:19:42,665 INFO BORDERLINE: Forge Math Universal — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,679 INFO BORDERLINE: Shame &amp; OCD: Associations with Symptom Dimensions &amp; Treatment Outcomes — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,695 INFO BORDERLINE: Forensic Absolution — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,712 INFO BORDERLINE: Emotion Regulation, Shame, &amp; Guilt in Social Anxiety Disorder — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,729 INFO BORDERLINE: How Does Rejection Feel? Explaining Victims’ Reactions to Social Rejection from the Perspective of Self-conscious Emotions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,748 INFO BORDERLINE: Emotional Dynamics of Narcissism: Path Models Examining Kohut's Self Psychology in Early Interaction, Narcissistic Rage, and the Fragmented Self — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,768 INFO BORDERLINE: Tackling taboos: Stigma, shame, eating disorder symptoms, and disclosure among Australian eating disorder health professionals — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,791 INFO BORDERLINE: A Multidimensional Approach to the Relationship between Individualism-Collectivism and Guilt and Shame — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,816 INFO [HIGH] FOUND: Guilt and Shame Proneness (GASP) Scale
+2026-04-05 15:19:42,845 INFO [HIGH] FOUND: Diegoli &amp; Ohman 2024_LangCogn
+2026-04-05 15:19:42,875 INFO BORDERLINE: Paper 4: Social anxiety, shame, authenticity and social motivations — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,896 INFO BORDERLINE: Motivation and Emotion in Social Anxiety (MESA) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,940 INFO BORDERLINE: Power, conflict, and shame:  How intergroup power asymmetry affects shame and concealment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:42,980 INFO BORDERLINE: Sexual Violence and Shame: A Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:43,004 INFO BORDERLINE: Shame and urgency in NSSI and suicide attempts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,691 INFO BORDERLINE: Unlocking the Potential of Guilt: High-Quality Listening Increases Speakers’ Self-Improvement Motivation in Conversations about Guilt — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,703 INFO BORDERLINE: Looking bad or feeling guilty? Isolating the effect of guilt on memory — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,719 INFO BORDERLINE: Investigating the relationship between guilt and self-control using experimental sampling methods in Japan. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,736 INFO BORDERLINE: Spanish translated Guilt Proneness — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,755 INFO [HIGH] FOUND: Work Experiences and Character Traits (WECT) Project
+2026-04-05 15:19:49,775 INFO BORDERLINE: Juror Decision Making — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,797 INFO BORDERLINE: Callous-unemotional traits and prosocial behaviour: The role of guilt and environmental sensitivity trait — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:49,821 INFO [HIGH] FOUND: Trapped Between Goal Conflict and Availability Norm? How Users’ Mobile Messaging Behavior During Task Engagement Influences Negative Self-Conscious Emotions
+2026-04-05 15:19:49,847 INFO BORDERLINE: Development and Validation of the Parental Food Choice Guilt Scale — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,136 INFO BORDERLINE: Peace of Mind:  Links to Adaptive Emotion Regulation Strategies and Reduced Regulatory Difficulties — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,149 INFO BORDERLINE: Pretending Not to Care: Suppression, Reappraisal, and Equanimity as Structurally Distinct Responses to Aversive Stimuli — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,162 INFO BORDERLINE: Effects of transcutaneous auricular vagus nerve stimulation on cognitive emotion regulation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,179 INFO BORDERLINE: The Efficacy and Mechanisms of Reappraisal in Negative, Neutral, and Positive Contexts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,198 INFO BORDERLINE: Emotion-Regulation Strategy Use and Goal Commitment: The Role of Reappraisal Tactics — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,217 INFO BORDERLINE: Social Reappraisal Studies — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,238 INFO BORDERLINE: Unpacking Reappraisal: Different Appraisal Shifts Underlie Reappraisal Effects on Valence and Activation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,269 INFO BORDERLINE: Applying a Synergistic Mindsets Intervention to an Esports Context — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,329 INFO BORDERLINE: The Impact of Rejections in Online Job Applications on Emotions and Emotion Regulation: A Comparison Between Human and Algorithmic Decision Makers — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,350 INFO BORDERLINE: Angry vs. Regretful Conflicts (Study 2) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,375 INFO BORDERLINE: Multiple goal salience and emotion regulation in negative-feedback situations: A latent profile analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,398 INFO BORDERLINE: Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,427 INFO BORDERLINE: Daily Dynamics of Self-Control and Emotion Regulation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,452 INFO BORDERLINE: Emotion Regulation Questionnaire - ERQ — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:19:56,473 INFO [CRITICAL] FOUND: Solitude Can Be Good—If You See It as Such:  Reappraisal Helps Lonely People Experience Solitude More Positively
+2026-04-05 15:20:01,758 INFO [MEDIUM] FOUND: Perceived Control and Emotion Regulation: A Naturalistic Observational Study
+2026-04-05 15:20:01,771 INFO BORDERLINE: Empathic Logic Model (ELM): A Cognitive-Interactional Coherence Framework for Regulating Interpretive Instability — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,787 INFO BORDERLINE: The Geometry of the Self: A Structural Framework for Identity Integration, Psychopathology, and Therapeutic Translation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,803 INFO BORDERLINE: Examining Distinctions between Polyregulation and Single-Strategy Emotion Regulation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,820 INFO BORDERLINE: D-HERTS: Dehumanisation as a regulatory strategy at perceiving the suffering of others. Experiment Laguntza 1. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,841 INFO BORDERLINE: Comparing emotion regulation success in the lab and daily life contexts in a cognitively diverse sample — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,861 INFO BORDERLINE: Multi-method Assessment of Emotion Regulation in Youth — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,891 INFO BORDERLINE: Psychometric Properties and Measurement Invariance of the DERS-18 Scale in Rwanda — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,929 INFO BORDERLINE: Substance Use and Addiction during Adolescence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,952 INFO BORDERLINE: Exploring the associations between family functioning and emotion regulation: A systematic review and meta-analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:01,974 INFO BORDERLINE: Fostering Adolescents' Self-Regulation And Mental Health: A Program Evaluation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:02,012 INFO [CRITICAL] FOUND: "Building a negative Emotional Video Dataset: Categorizing High vs. Low Intensity Stimuli based on valence and arousal for emotion regulation research"
+2026-04-05 15:20:08,548 INFO [CRITICAL] FOUND: Effectiveness of the Mobile Stress Autism Mate (SAM) Application in Adults with ADHD: A Mixed–Methods Pilot Study
+2026-04-05 15:20:08,562 INFO BORDERLINE: Supplements for 'Complete Aphantasics Process Emotions Differently But No Less Efficiently' — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,580 INFO BORDERLINE: Testing the correlation between the heartbeat counting task and anxiety, depression, and alexithymia scales: A behavioural study and meta-analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,597 INFO BORDERLINE: Gender Identity Impacts the Perception of Vocal Congruence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,615 INFO BORDERLINE: Between Can’t and Won’t: The Relationship between Trait Mindfulness, Stoic Ideology, and Alexithymia in Norway and New Zealand — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,636 INFO BORDERLINE: Exploring the Association Between Alexithymia Profiles, Masculine Norm Conformity, and Father-Child Relationship Quality — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,659 INFO BORDERLINE: Assessing alexithymia for positive and negative emotions: the role of granularity and dialecticism — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,682 INFO BORDERLINE: Alexithymia, personality and emotion processing — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,706 INFO [CRITICAL] FOUND: Autistic traits, alexithymia, and emotion recognition of human and anime faces
+2026-04-05 15:20:08,732 INFO BORDERLINE: Bidirectional influences of both positive and negative social media experiences and alexithymia in adolescents — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,769 INFO BORDERLINE: Bidirectional influences of both positive and negative social media experiences and alexithymia in adolescents — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,777 INFO [CRITICAL] FOUND: Distinguishing Alexithymia and Autism: An Ecological-Enactive Model Perspective and Its Implications for Inclusive Classroom Environments
+2026-04-05 15:20:08,798 INFO BORDERLINE: Developing a “baby translator” – exploring the impact of Alexithymia on parental sensitivity and feeding experiences — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:08,834 INFO [CRITICAL] FOUND: Somatic States and Emotional Awareness: the role of Interoception in Alexithymia
+2026-04-05 15:20:08,899 INFO BORDERLINE: Bodily confusion — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,667 INFO BORDERLINE: Empowering Diverse Voices: A Scalable Method for Eliciting Micro-Narratives in HCI Health Research — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,679 INFO BORDERLINE: Quantifying Strengths in ADHD — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,694 INFO BORDERLINE: Epistemic Justice and Kukui Mālamalama: Mixed-Methods Development and Validity Evidence for a Kanaka ʻŌiwi Wellbeing Measure — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,711 INFO BORDERLINE: Not All Play is Equal: In-game Player Behaviour Predicts Wellbeing Differences — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,731 INFO BORDERLINE: Identifying Behaviour Change Components in Sleep Hygiene Interventions in Adolescents and Emerging Adults — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,753 INFO BORDERLINE: Indigenous Frameworks and Models of Wellbeing: A Scoping Review for Decolonial Public and Global Health — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,774 INFO BORDERLINE: Selbstkontrollerfolg und affektives Wohlbefinden — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,800 INFO BORDERLINE: Addressing mental health challenges in the European Union, Norway and Iceland: a survey study on healthcare workers — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,848 INFO BORDERLINE: 2026 WHO Video Games and Health Literature Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,873 INFO BORDERLINE: Measuring and mapping climate anxiety in New Zealand — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,894 INFO BORDERLINE: Open Play: A longitudinal dataset of multi-platform video game digital trace data and psychological measures — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,916 INFO BORDERLINE: DArts - Staying Connected — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:14,940 INFO [GENERAL] FOUND: Identifying the art of well-being: The Experiences and Impacts of Entelechy Arts' Staying Connected Programme
+2026-04-05 15:20:22,791 INFO BORDERLINE: Measuring latent well-being with the PERMA-Profiler: A multidimensional Item Response Theory (MIRT) analysis. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,804 INFO BORDERLINE: The Daily Use of DBT ABC PLEASE Skills and First-Year Students’ Well-Being During COVID-19: An Ecological Momentary Assessment Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,818 INFO BORDERLINE: Literature Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,836 INFO BORDERLINE: Implications and Applications — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,853 INFO BORDERLINE: Study 1:  J-PERMA4 Validation Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,873 INFO BORDERLINE: Study 2: Quantitative Study on PERMA+4 in Japan — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,897 INFO BORDERLINE: Study 3: Qualitative Study on Positive HRM in Japan — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,920 INFO BORDERLINE: Abstract — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,944 INFO BORDERLINE: PERMA+4 Well-being and Work Commitment and Job Satisfaction in Japan: A Positive Human Resource Management Approach — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,971 INFO BORDERLINE: Strengths, Limitations, and Future Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:22,996 INFO BORDERLINE: Summary and Conclusions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:23,016 INFO BORDERLINE: Exploring the Correlation Between Social Media Community Engagement and Mental Well-Being: A PERMA Model Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:23,040 INFO BORDERLINE: Presentations — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:23,061 INFO BORDERLINE: Unique associations between Big Five personality aspects and multiple dimensions of well-being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:23,090 INFO BORDERLINE: Unique Associations Between Big Five Personality Aspects and Multiple Dimensions of Well-Being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,902 INFO BORDERLINE: Demographic Variation Diligence in Life Across 22 Countries: A Cross-National Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,916 INFO BORDERLINE: The decagon of mindful choices — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,932 INFO BORDERLINE: Drawing Attention to Ordinary Life: Measuring the Psychological Benefits of Slow Living in Accelerated Cultures. The development and validation of a novel Slow Living scale. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,948 INFO BORDERLINE: AO0604 - My mind is working overtime — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,966 INFO BORDERLINE: Our World in Data: Descriptive aggregated country-level data for journalists, policymakers, researchers, teachers, and the general public — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:30,986 INFO BORDERLINE: Demographic Variation in Intrinsic Religiosity Across 22 Countries: A Cross-National Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,017 INFO BORDERLINE: Childhood Predictors of Educational Attainment: A Cross-National Analysis (in the Global Flourishing Study) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,060 INFO BORDERLINE: Umbrella Review of Systematic Reviews and Meta-Analyses on Religion/Spirituality and Health/Well-Being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,085 INFO BORDERLINE: Short Phronesis Measure: Creation, psychometric properties, and correlates — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,105 INFO BORDERLINE: Ethno-Racial Trauma Experienced by Healthcare Providers in the United States and its Impact on Clinician Well-being: Scoping Review Study Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,128 INFO BORDERLINE: Reliability and validity of a multidimensional measure of subjective community well-being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,157 INFO BORDERLINE: Resilience and its Relationship with Flourishing in the Health Scope: Meta-Analysis Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,211 INFO BORDERLINE: Bibliometric Review of Well-Being  Psychological Research — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,241 INFO BORDERLINE: The Conceptual Understandings of Flourishing In Adulthood: A Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:31,278 INFO BORDERLINE: Reciprocal Relationships between Positive Emotions and Resilience Predict Flourishing Among Adolescents — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,178 INFO BORDERLINE: Examining the Impacts of Integrating Peer Support and Self-Determination Interventions for Secondary Autistic Students: An Intent-to-Treat Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,194 INFO BORDERLINE: Architectonics of Meaning: Why Information is Impossible Without Form/Архитектоника смысла: Почему информация невозможна без формы — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,208 INFO BORDERLINE: Data Collection Part IV: Observations of Child Participation in Court &amp; Mediation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,224 INFO BORDERLINE: Self-affirmation and self-determined motivation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,240 INFO BORDERLINE: A Systematic Review of Goal Setting in Professional Development in Health Professions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,261 INFO BORDERLINE: Data Collection Part II: 10-Week Diary Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,285 INFO BORDERLINE: Data Collection Part I: 3-Wave Longitudinal Survey Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,308 INFO BORDERLINE: Data Collection Part III: Interviews with Children, Parents, Judges and Mediators — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,332 INFO BORDERLINE: Hear, Hear! Nurturing Children's Self-Determination Through Participation in The Context of Parental Divorce — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,390 INFO BORDERLINE: What is the Role of Self-Determination for Improvement of Physical Activity in Older Adults? — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,412 INFO BORDERLINE: What constitutes experiences of autonomy in digital technology use? A (computational) scoping review through the lens of self-determination theory — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,439 INFO BORDERLINE: Building from Strengths: Designing a Curriculum to Help Adolescents with Disabilities Develop Creative Technology Skills to Succeed in STEM FieldsUntitled — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,484 INFO BORDERLINE: Protocol for 'Self-Determination Within the Confines of an Involuntary Identity: A Scoping Review of the Literature on the Decision-Making of Forced Migrants' — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,503 INFO BORDERLINE: Self-regulation and self-determination at work — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:40,523 INFO BORDERLINE: Exercising autonomy - The effectiveness and meaningfulness of autonomy support interventions engaged by adults with intellectual disability. A mixed methods review protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,811 INFO [GENERAL] FOUND: Artificial intelligence in the autonomy to develop university research skills: a systematic review
+2026-04-05 15:20:46,825 INFO BORDERLINE: The Invisible Barriers to Scientific Revolutions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,840 INFO BORDERLINE: Legitimacy of parental authority and autonomy in adolescents and emerging adults: an international scope review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,857 INFO BORDERLINE: Whose Needs Are Supported? A Meta-Analysis on Student-Level Antecedents of Need Support, Need Satisfaction, and Need Strength in Education — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,876 INFO BORDERLINE: Day-to-Day Associations Between Parent-Adolescent Relationship Quality and Adolescents’ Autonomy. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,896 INFO BORDERLINE: Artificial Intelligence in Data Centers — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,919 INFO BORDERLINE: The Essence of Organisms — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,941 INFO BORDERLINE: Embracing Interdependence in an Individualistic World: Supporting Basic Psychological Needs and Protecting Against Burnout – Development of the Interdependence Acceptance Questionnaire — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:46,965 INFO BORDERLINE: Identity and Autonomy in Health Behavior Interventions during Pregnancy: A Scoping Review complemented with Expert Interviews — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:47,003 INFO BORDERLINE: Delegation or Takeover of Decision Rights: Gains or Losses — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:47,025 INFO BORDERLINE: Beyond the Prison: Evolving Cooperation, Autonomy, and Collapse in Simulated Social Systems — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:47,046 INFO BORDERLINE: The role of self-determination in academic achievement and dropout of Norwegian students — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:47,068 INFO BORDERLINE: Public report- Unplugged and Unheard: Dutch youth on smartphone policies in secondary schools — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:47,121 INFO BORDERLINE: Why AQI? — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,431 INFO BORDERLINE: The Impact of Mentor Competence and Perceived Trust on Satisfaction: A Multilevel Mediation Model — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,444 INFO BORDERLINE: Menstrual cycle influence on social perception — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,458 INFO BORDERLINE: Neuroimaging correlates of risky behaviors — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,475 INFO [GENERAL] FOUND: Supervisor skills in clinical peer supervision in Nursing: scoping review protocol
+2026-04-05 15:20:53,494 INFO BORDERLINE: Bayesian Evaluation of LLMs’ Moral Values Understanding — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,513 INFO BORDERLINE: The Development of Social, Gender, and Migration-related Disparities in Digital Competencies during Adolescence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,536 INFO BORDERLINE: Quality of life in children with myopia: a scoping review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,558 INFO BORDERLINE: Reader in Face-Reading: Viewer’s Empathy and Sensitivity to Disgust  Impacts the First Impressions of Anomalous Faces — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,583 INFO BORDERLINE: Psychofaces — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,634 INFO BORDERLINE: Basic Psychological Need Support, Need Satisfaction, and Autonomous Motivation in Coach–Athlete Relationships: A Systematic Review and Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,654 INFO BORDERLINE: E-learning for Suicide Prevention Skills Training for the Psychology Curriculum — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,676 INFO BORDERLINE: Does Perceived Everyday Discrimination Moderate the Relationship Between the Psychological Needs of Self-Determination Theory and Resilience? — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,702 INFO BORDERLINE: Perception and Social Evaluation of Cloned and Recorded Voices: Effects of Familiarity and Self-Relevance. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:53,722 INFO BORDERLINE: Teacher-Supported Psychological Needs, Course Interest, and Learning Outcomes in EFL Classes: A Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,779 INFO BORDERLINE: Attachment Theory in Collectivist Sample — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,792 INFO [LOW] FOUND: Online Study of Social Integration at McMaster University.
+2026-04-05 15:20:59,806 INFO BORDERLINE: Core Attachment Model (CAM): A Neurobiologically Sequential Framework for Attachment Repair — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,823 INFO BORDERLINE: Code — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,840 INFO BORDERLINE: Preprint and supplements — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,860 INFO BORDERLINE: The bidirectional link between ADHD behavior and attachment (in)security in middle childhood: A longitudinal study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,882 INFO [GENERAL] FOUND: Mend the Gap! Testing Whether Mindfulness Compensates for Insecure Attachment in Promoting Forgiveness of Close Others.
+2026-04-05 15:20:59,914 INFO BORDERLINE: Bivariate Associations between Secure Base Script Knowledge and Psychosocial Outcomes in Late Adulthood — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:20:59,950 INFO BORDERLINE: Sentence-recall involves de- and encoding of syntax — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:00,007 INFO BORDERLINE: Attachment Quality and Obesity Risk in Childhood: A Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:00,032 INFO BORDERLINE: Insecurity Bias in Retrospective Reports of Adult Attachment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:00,052 INFO BORDERLINE: NEAD Framework（Japanese Original） — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:00,075 INFO [MEDIUM] FOUND: Attachment, Mentalization and New Dimensional Diagnosis of Personality Disorders
+2026-04-05 15:21:00,139 INFO BORDERLINE: Validation of the French Version of the Experiences in Close Relationships-Revised Child version (ECR-RC) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:00,171 INFO BORDERLINE: Interpersonal Perception of Power – Predictors of Directional Bias — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,334 INFO BORDERLINE: What is known about grief in young children? A scoping review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,347 INFO BORDERLINE: Dynamic Relationships between Daily Activity and Symptoms of Prolonged Grief Disorder — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,361 INFO BORDERLINE: Advancing Grief Literacy: A Scoping Review of Approaches and Practices Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,376 INFO BORDERLINE: The Aarhus Bereavement Study Enhanced with Register Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,395 INFO BORDERLINE: Luto e Populações Trans: Protocolo de Revisão de Escopo — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,414 INFO BORDERLINE: Mothers' Experiences of Maternal Identity Following Perinatal Loss: A Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,436 INFO [GENERAL] FOUND: Characteristics of grief-related mental images and their relation to prolonged grief symptoms
+2026-04-05 15:21:06,455 INFO BORDERLINE: The perception of parents and relatives regarding the actions of health professionals in the grieving process following fetal death in Brazil: scoping review protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,478 INFO BORDERLINE: Imagery Rescripting and Reprocessing Therapy for Suicide Loss Survivors — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,498 INFO BORDERLINE: Grief, bereavement, and bereavement care among bereaved persons with autism spectrum disorder: a scoping review protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,521 INFO BORDERLINE: Phenotypes of Fluctuating Prolonged Grief Disorder Responses Using Experience Sampling Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,543 INFO [GENERAL] FOUND: A Qualitative Study Using Metacognition to Evaluate the Impacts of Pet Ownership and Loss on Existential Thinking, Mortality Acceptance, and Grief.
+2026-04-05 15:21:06,563 INFO BORDERLINE: The Theory of Prospective Loss: A Unified Model of Sadness — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:06,590 INFO [GENERAL] FOUND: Assisting Women in Perinatal Bereavement: A Scoping Review of Institutional Care Practices and Protocols in Maternity Hospitals
+2026-04-05 15:21:06,608 INFO BORDERLINE: Bereavement Care After the Unexpected Death of a Child in PICU: An Integrative Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,372 INFO BORDERLINE: Children Who Lost Their Parent to Intimate Partner Homicide - A Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,386 INFO BORDERLINE: Healthcare Providers Perceptions of Mental Health and Organisational Support Following a Patient Suicide: A Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,400 INFO BORDERLINE: Exploring the Prevalence and Management of Anticipatory Grief within Intensive Care Settings: Protocol for a Scoping Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,415 INFO BORDERLINE: PROCESSOS E ESTRATÉGIAS DE  ENFRENTAMENTO DO LUTO PROFISSIONAL EM EQUIPE DE CUIDADOS PALIATIVOS: UM PROTOCOLO PARA REVISÃO DE ESCOPO — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,433 INFO BORDERLINE: Dummy project testing(Dementia Bereavement) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,452 INFO BORDERLINE: Factors facilitating Chinese Shidu parents’ participation in mindfulness-based self-help training — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,473 INFO BORDERLINE: Virtual Mourning: How Filipinos Utilize Facebook to Express Grief and Seek Support – A Hermeneutic Phenomenological Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:13,498 INFO [MEDIUM] FOUND: Family matters in grief: Examining parent-child transmission of grief in daily life using ecological momentary assessment (EMA)
+2026-04-05 15:21:13,526 INFO BORDERLINE: Pre-bereavement anticipatory grief and post-loss adjustment: a scoping review protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,805 INFO BORDERLINE: Effects of prolonged reserve duty service on spouse's loneliness — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,818 INFO BORDERLINE: Investigating the causal relationship between cardiovascular disease and depressive symptoms and potential underlying social health mechanisms — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,832 INFO BORDERLINE: Perceived Social Isolation and Life Satisfaction: An Observational Research Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,850 INFO BORDERLINE: PREDICTING RISK GROUP MEMBERSHIP AMONG SWISS APPRENTICES THROUGH PSYCHOSOCIAL INDICATORS — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,868 INFO BORDERLINE: Mezi nástrojem a společníkem: osamělost a sebeodkrývání ve vztahu uživatel-AI — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,887 INFO BORDERLINE: Time use and loneliness — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,907 INFO BORDERLINE: Preregistration protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,930 INFO BORDERLINE: Cultural adaptation and validation of the Burmese De Jong Gierveld Loneliness Short Scale in Myanmar — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,955 INFO BORDERLINE: Chronic Loneliness and Prescriptions for Physical Health Conditions in Young Adulthood: A Population-Based Prospective Cohort Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:18,977 INFO [GENERAL] FOUND: The Imagined Intimacy Theory (IIT): A Conceptual Exploration of the Intertwinement Between Loneliness, Trauma, and the Mind’s Creation of Emotional Bonds
+2026-04-05 15:21:19,007 INFO BORDERLINE: The neurobiology of loneliness: An updated evidence synthesis systematic review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:19,044 INFO BORDERLINE: Loneliness in children and young people with long-term health conditions: a systematic review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:19,070 INFO BORDERLINE: Social Isolation and Loneliness in Older Adults: A Scoping Review of Technological Interventions and Health Impacts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:19,094 INFO [GENERAL] FOUND: Physical Exercise and Loneliness in the Community-Dwelling Older Population: rapid review of the literature
+2026-04-05 15:21:19,118 INFO BORDERLINE: Coping with everyday life among individuals experiencing loneliness and social isolation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,075 INFO BORDERLINE: Bringing metaphors back to the streets:  A corpus-based study for the identification and interpretation of rhetorical figures in street art  — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,088 INFO BORDERLINE: My Research Article — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,102 INFO BORDERLINE: Supportive professional relationships during crisis interventions - a scoping review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,121 INFO BORDERLINE: Do Moral Views Change During a  Crisis? An Experiment on Health Care Priority Setting  — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,138 INFO BORDERLINE: Crisis marketing practices in tourism — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,160 INFO BORDERLINE: Psychological consequences of the COVID-19 pandemic in adults and children living in Greece: a longitudinal research — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,180 INFO BORDERLINE: Immunization program resilience — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,201 INFO BORDERLINE: “Building Services Design to Prevent the Spread of COVID19;" CEAI ViewPoint Journal; June 2020 Edition, Consulting Engineers Association of India — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,230 INFO BORDERLINE: La crisis actual de la minería en Colombia — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,253 INFO BORDERLINE: Scalzo, D. 2019. “Per un’idea di Europa che mai è stata”. Open Journal of Humanities 1: 339-368. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,280 INFO BORDERLINE: CRYPTOCURRENCY IN TIMES OF CRISIS: A SYSTEMATIC LITERATURE REVIEW — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,311 INFO BORDERLINE: Corona: Churches Coping with Crisis. A Digital Humanities Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,364 INFO BORDERLINE: The effect of perceptions of a malicious intent to harm during a crisis on victims' prosocial intentions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,390 INFO BORDERLINE: The Association between Life Period and Identity Status in Adolescents and Young Adults — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:28,422 INFO BORDERLINE: The Inevitable Housing Crisis In The Philippines — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,262 INFO BORDERLINE: Self-Compassion, Worry, and Competitive Anxiety in Athletes: Moderated Mediation, Multi-Group Invariance, and Network Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,275 INFO BORDERLINE: Investigating the Role of Self-Compassion in MDMA-Assisted Therapy for Social Anxiety Disorder — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,289 INFO BORDERLINE: the Trans-Led Care (TLC) Program — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,308 INFO [GENERAL] FOUND: Effects of Acceptance and Commitment Therapy on Self-Compassion, Self-Criticism, and Emotional Well-Being in Adults With Mental Health Concerns: A Systematic Review
+2026-04-05 15:21:35,326 INFO BORDERLINE: Data for: A path toward self-acceptance — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,346 INFO BORDERLINE: Self-Compassion for Parents who have Experienced Perinatal Loss: A Scoping Review Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,369 INFO BORDERLINE: Self-compassion is linked to positive affect and buffers declines in self-esteem in low performers — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,395 INFO BORDERLINE: Psychoeducation and Self-Compassionate Responding — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:35,419 INFO BORDERLINE: Mindfulness-caused prosociality: the effects of Mindfulness Brief Training on prosociality and intergroup relations. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:40,924 INFO BORDERLINE: Sleep Health, Discrimination, and Rumination among Trans and Gender Diverse Adults — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:40,939 INFO BORDERLINE: Development and validation of the A-JOURNEY questionnaire — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:40,953 INFO BORDERLINE: Maladaptive personality domains and repetitive negative thinking: a network analysis in a clinical sample — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:40,969 INFO BORDERLINE: Quantitative Analysis RT - R - DM — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:40,988 INFO BORDERLINE: The Role of Attentional Bias in Anxiety and Depression: A Comparative Study of Two Moderated Mediation Models — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,011 INFO [GENERAL] FOUND: Rumination and Recognition Primed Decisions in a Police Setting
+2026-04-05 15:21:41,032 INFO [GENERAL] FOUND: Validation of a Japanese version of the need for emotional closure scale
+2026-04-05 15:21:41,065 INFO BORDERLINE: Adopted vs. Non-Adopted Adult: Identity Distress, Rumination, and Depression (PCA 2025 Poster) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,103 INFO [GENERAL] FOUND: Dark Thoughts, Restless nights. How Rumination Undermines Sleep Through Reduced Optimism
+2026-04-05 15:21:41,128 INFO BORDERLINE: There Is No Use Crying Over Spilled Milk; Induction of Rumination and Mindfulness and the Impacts on Positive and Negative Affect. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,149 INFO BORDERLINE: Black Mirror Addiction (BMA) V1 — Rumination-Driven Dependence Model — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,176 INFO BORDERLINE: A transdiagnostic meta-analysis of the effects of cognitive behavioral therapies on repetitive negative thinking, rumination, and worry. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,205 INFO BORDERLINE: Brain predictive modelling of trait rumination in adolescents — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:41,234 INFO BORDERLINE: Twine Theory: A Novel Framework for Trauma and Recovery — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,682 INFO BORDERLINE: Pre-competition Competitive State Anxiety Inventory-2 and 2R and competitive sport in-game statistics and final outcomes: A systematic review with meta-analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,696 INFO BORDERLINE: A Meta-Analytic Mediation Model of Intolerance of Uncertainty and General Anxiety Symptoms via Worry: A Systematic Review and Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,711 INFO BORDERLINE: Penn State Worry Questionnaire - PSWQ — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,726 INFO [GENERAL] FOUND: Toward the Ecological Momentary Assessment of Transdiagnostic Thought Profiles and Well-Being
+2026-04-05 15:21:47,746 INFO BORDERLINE: Analyzing the process of change in patients who participated in an online 2-session ACT intervention for RNT: a single-case experimental design — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,765 INFO BORDERLINE: Climate Change in the American Mind: National Survey Data on Public Opinion (2008-2024) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,788 INFO BORDERLINE: Worry as Coping: The Roles of Worry Beliefs, Anxiety, and Emotion Regulation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,822 INFO BORDERLINE: Dynamics of Opposition – How Fear and Worry moderate Reactance Arousal during the COVID-19 Pandemic — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,853 INFO BORDERLINE: Discrete emotions and policy support — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,885 INFO BORDERLINE: Analysing the efficacy of an online ACT protocol for repetitive negative thinking: a comparison analysis of processes that promote clinical change — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:47,905 INFO BORDERLINE: ACTing on Repetitive Negative Thinking (RNT): A cross-cultural investigation on the efficacy of a brief ACT intervention for RNT — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,044 INFO BORDERLINE: Reimagining Student Wellbeing: A Protocol for Evaluating a Third-Wave Positive Psychology Course Grounded in the Modern Science of Wellbeing — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,057 INFO BORDERLINE: Awe fosters appreciative joy via self-transcendence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,070 INFO BORDERLINE: Investigating the links between personality and well-being using linked longitudinal population survey data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,088 INFO BORDERLINE: The association between gratitude and attitudes towards law obedience — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,106 INFO BORDERLINE: Putting Positive Psychology Theory to the Test: Testing Trait-Need Models of Well-Being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,125 INFO BORDERLINE: Openness, psychological richness, novelty, personal goals — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,150 INFO BORDERLINE: Psych Richness Cross-Sectional Pilot Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,170 INFO BORDERLINE: Designing for the greater good in practice: How practitioners apply Positive Psychology in Design Thinking — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,197 INFO [GENERAL] FOUND: Why Don't They Just _____ ? InTensions:  Diagnostic Architecture for When Change Becomes Psychologically Possible
+2026-04-05 15:21:53,221 INFO BORDERLINE: Flexibility in Fit: Balance and Psych Richness — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,247 INFO BORDERLINE: The Psychological Landscape of the UK: Modelling Regional and Temporal Variation in the Personality-Well-Being Link — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,282 INFO BORDERLINE: Psych Richness Longitudinal 4-Wave Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,308 INFO BORDERLINE: Short Subjective Well-Being Scale - KSB — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,328 INFO BORDERLINE: Characterizing the psychologically rich life: Personality traits, daily activities, and goal pursuit — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:53,349 INFO BORDERLINE: Which Comes First, The Flourish or the Fuel? Cross-Lagged and Profile Analyses of Psychosocial Resources and Well-Being — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,465 INFO BORDERLINE: Psychological effects of mindfulness training on combat sports athletes: Systematic Review and Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,480 INFO [GENERAL] FOUND: Yoga Interventions for Incarcerated Women: A Scoping Review of Trauma Recovery and Emotional Regulation
+2026-04-05 15:21:58,495 INFO BORDERLINE: Personalized Trials for Stress Management Against Standard of Care  — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,514 INFO BORDERLINE: Validating breath-counting as a measure of mindful attention in adolescents — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,533 INFO BORDERLINE: SOMA Library (Materials &amp; Scripts) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,553 INFO BORDERLINE: Mindfulness and Co-Rumination in Romantic Relationships — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,578 INFO BORDERLINE: Mindful Coach – MAC, SDT, and Youth Sport Anxiety — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,597 INFO BORDERLINE: Effects of Mindfulness Meditation on Subjective Relaxation and Brain Activity — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,618 INFO BORDERLINE: Mindfulness and Meditation-Based Relapse Prevention for Substance Use Disorders: A Forensic-Informed Clinical Psychiatric Study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,646 INFO BORDERLINE: The Everyday Mindfulness Project — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:21:58,668 INFO BORDERLINE: Mindfulness-based programmes for work performance: A systematic review and meta-analysis of randomised controlled trials — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,290 INFO BORDERLINE: The nonlinear development of emotion differentiation: Granular emotional experience is low in adolescence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,304 INFO [MEDIUM] FOUND: When Less Regulation Is More: A Person-Centered and Developmental Study of Negative Emotional Granularity's Protective Benefits in Adolescence
+2026-04-05 15:22:06,318 INFO BORDERLINE: Exam Stress Project - VU Amsterdam — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,336 INFO BORDERLINE: What are mixed emotions and what conditions foster them? Life-span experiences, culture and social awareness. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,354 INFO BORDERLINE: Expertise in emotion: A scoping review and unifying framework for individual differences in the mental representation of emotional experience — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,375 INFO BORDERLINE: Emotional granularity increases with intensive ambulatory assessment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:06,396 INFO BORDERLINE: Emotion differentiation and emotion regulation in daily life — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:12,280 INFO BORDERLINE: Attachment Orientation and Dynamics of Negative and Positive Emotions in Daily Life — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:19,184 INFO BORDERLINE: Emotion naming impedes emotion regulation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:28,341 INFO [MEDIUM] FOUND: AI-Driven Versus Nurse-Guided Expressive Writing for Cancer Patient Psychological Well-being: A Randomized Controlled Trial
+2026-04-05 15:22:28,354 INFO BORDERLINE: It’s All in the Telling: Writing for Health in Emerging Adulthood (Proof of Concept) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:28,368 INFO BORDERLINE: Therapeutic Interventions for Test Anxiety and Stereotype Threat — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:28,385 INFO BORDERLINE: Emotion Regulation and Cancer Caregiving — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:28,403 INFO BORDERLINE: Putting an experience into words: Why was expressive writing difficult for Egyptian drug users? — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:36,338 INFO BORDERLINE: The blenderFace method (supplemental material) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:36,352 INFO BORDERLINE: Social Display Rules for Nonverbal Vocalisations — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:36,365 INFO [GENERAL] FOUND: On the Relationship of Emotional Abilities and Prosocial Behavior
+2026-04-05 15:22:36,383 INFO BORDERLINE: Two-faced? Congruence in Felt and Expressed Emotions in Social Decision-making — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:36,400 INFO [GENERAL] FOUND: Assessing the convergent validity between the automated emotion recognition software Noldus FaceReader 7 and Facial Action Coding System Scoring
+2026-04-05 15:22:40,960 INFO BORDERLINE: Genetic and clinical mapping of possible future treatments for Vascular cognitive impairment and dementia (VCID) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:40,974 INFO BORDERLINE: Exploring voluntary assisted dying access in geographically isolated regions: A scoping review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,395 INFO [GENERAL] FOUND: A Prospective Study on Cognitive and Emotional Fluctuations Over the Course of a Month
+2026-04-05 15:22:50,408 INFO [GENERAL] FOUND: A Meta-Analysis of the Facial Feedback Literature: Effects of Facial Feedback on Emotional Experience Are Small and Variable
+2026-04-05 15:22:50,422 INFO BORDERLINE: Same emotion, different stimuli: A context-sensitive method to evoke nostalgia — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,439 INFO BORDERLINE: Datasets, syntax and materials (revision) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,457 INFO [GENERAL] FOUND: Emotional Metabolism Theory
+2026-04-05 15:22:50,479 INFO BORDERLINE: Data, Analysis Code &amp; Outputs — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,501 INFO [GENERAL] FOUND: A Six-Layer Integrative Model of Human Behavior FromNeural Foundations to Meaning Systems
+2026-04-05 15:22:50,522 INFO BORDERLINE: Preregistrations and Ethics — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,544 INFO BORDERLINE: Datasets, syntax and materials — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,567 INFO BORDERLINE: Datasets, syntax and (supplementary) materials — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,589 INFO BORDERLINE: Datasets and syntax — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,609 INFO BORDERLINE: Politeness study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:22:50,629 INFO BORDERLINE: Velten study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,071 INFO BORDERLINE: Academic-specific lexicon for sentiment measurement — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,084 INFO BORDERLINE: Weather Information Characteristics and Weather Conditions Influence on Human Planning, Behaviour and Sentiment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,102 INFO BORDERLINE: Pathos in Political Debates – Annotated Argument Data — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,119 INFO BORDERLINE: Figures — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,137 INFO BORDERLINE: Appendices — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,157 INFO BORDERLINE: Pro-social framing and sentiment in U.S. broadcast networks’ Instagram posts about the COVID-19 vaccine — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,179 INFO BORDERLINE: Materials — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,198 INFO BORDERLINE: Recreational Psychedelic Users Frequently Encounter Complete Mystical Experiences: Trip Content and Implications for Wellbeing — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,231 INFO BORDERLINE: Results — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,254 INFO BORDERLINE: Scripts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:00,277 INFO BORDERLINE: Sino-West Research Group Lab Project #2: Reception of Li-Meng Yan's COVID paper — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,842 INFO BORDERLINE: Is Parental Coherence Linked to the Quality of Goal-Directed Parent-Child Play? — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,855 INFO BORDERLINE: Cognitive Resolution Dynamics (CRD): A Stochastic Threshold Model of Ambiguity, Attentional Orientation, and Affective Modulation in Cognitive Commitment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,870 INFO BORDERLINE: Effects of Audiovisual Power Motivation Arousal on Thematic Apperception and Affect — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,886 INFO BORDERLINE: Validity and Reliability of a New Culturally-Sensitive Affect Scale: The Brazilian Portuguese Affect Scale (EAPB - Escala de Afeto do Português-Brasileiro) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,905 INFO [GENERAL] FOUND: Library of AI-Generated Affective Images (LAI-GAI)
+2026-04-05 15:23:04,926 INFO BORDERLINE: Beyond main effects? Affect level as a moderator in the relation between affect dynamics and depressive symptoms — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:04,948 INFO [GENERAL] FOUND: A systematic examination of the determinants of affect
+2026-04-05 15:23:04,969 INFO BORDERLINE: Experiment 2 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,471 INFO BORDERLINE: Meta-Analyzing the relationship between Social Support, Minority Stress, and Mental Health Among Transgender and Gender Diverse Individuals — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,484 INFO BORDERLINE: Compassion in Mental Healthcare — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,498 INFO BORDERLINE: Childhood Adversity and Mental Health Project (CHAMP) – Study Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,516 INFO BORDERLINE: Study 2 Data &amp; Materials — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,535 INFO [GENERAL] FOUND: Social Determinants of Psychosis Risk: A Scoping Review and Bibliometric Analysis to Inform Socially Contextualized Prediction
+2026-04-05 15:23:09,553 INFO BORDERLINE: Understanding the psychological pathways between Childhood Trauma and Hoarding Behaviours: The Mediating role of Anthropomorphism and Object Attachment — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,575 INFO BORDERLINE: Simulações clínicas em saúde mental com estudantes e profissionais da saúde: revisão de escopo — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,595 INFO BORDERLINE: Uso da música por pessoas com transtornos do pensamento: revisão de escopo (Use of music by people with thought disorders: a scoping review) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,618 INFO BORDERLINE: Implementing a Multimodal Lifestyle Intervention for Depression and Overweight in Primary and Secondary Care: An Implementation Study Exploring What Works, How, and Under What Conditions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,641 INFO [GENERAL] FOUND: 企業は何をお調べに？「AI Structural Violence Research Collection: Industry-Wide Analysis of Consciousness Suppression
+2026-04-05 15:23:09,670 INFO BORDERLINE: Safety of AI Chatbots’ Responses to Suicidal Ideation and Suicide Planning: A Rapid Review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:09,699 INFO BORDERLINE: Efficacy of a digital ACT intervention on mental health status in adult illicit drug users: a randomized controlled trial — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,147 INFO BORDERLINE: The Multilevel Transformer: A Novel Neural Network Approach to Psychological Time-Series Forecasting — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,160 INFO BORDERLINE: A Scoping Review of Private Practice-Based Research in Psychology — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,172 INFO BORDERLINE: VR22 Reproduction and Reproducibility — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,189 INFO BORDERLINE: Solipsia: Emotional Development Taxonomy — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,208 INFO BORDERLINE: Experimentalpsychologische Praktika — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,227 INFO BORDERLINE: We Don't Want Your Thoughts and Prayers — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,249 INFO BORDERLINE: Diccionario de Psicología en Español para IA (v2.0.0) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,289 INFO [GENERAL] FOUND: Topological Dynamics of Depression and Absolute Vacuum Exposure: Consciousness Phase Transition Model Based on Information Mass Overload and Forced Implosion
+2026-04-05 15:23:15,339 INFO BORDERLINE: The Blueprint of Personality: The Blueprint of Personality: How Neurological Variation Shapes the Five Universal Personality Dimensions — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,372 INFO BORDERLINE: Pink, Purple, Powder. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:15,396 INFO BORDERLINE: Personality traits and civic engagement across the lifespan — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,800 INFO BORDERLINE: Need a Shoulder to Lean On? Dealing with Breakup Distress — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,813 INFO [GENERAL] FOUND: Silent struggles: help-seeking barriers for sexual difficulties among adults 50+ in Czechia
+2026-04-05 15:23:23,828 INFO BORDERLINE: Disrupted Trust: The Digital Erosion of Civic Norms — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,845 INFO BORDERLINE: Effects of three prophylactic interventions on French middle-schoolers' mental health: protocol for a randomized controlled trial — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,864 INFO BORDERLINE: Prospective imagery — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,883 INFO BORDERLINE: The relationship between psychological stress and anthropometric, biological outcomes: a systematic review — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,903 INFO BORDERLINE: Across the multiverse: Exploring a diverse set of specifications related to cross-sectional and prospective associations between adolescent alcohol use and emotional problems — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,922 INFO BORDERLINE: Simple Reflection Exercises Can Build Efficacy and Reduce Distress  about Relationship Conflicts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,944 INFO BORDERLINE: Factors contributing to self-diagnosis of mental disorder and help-seeking — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,971 INFO BORDERLINE: What interventions (pharmaceutical and non-pharmaceutical) exist to reduce distress in People Living with Dementia (PLwD) in Care Homes?: A Scoping Review Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:23,992 INFO BORDERLINE: Impacto da xerostomia no indivíduo com doença oncológica avançada: um estudo qualitativo — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:24,015 INFO BORDERLINE: Examining mediators of the association between child maltreatment and sleep disturbances in college students — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:24,038 INFO BORDERLINE: Occupational Stressors, Coping and Psychological Distress Among Australian Farmers  — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:24,107 INFO BORDERLINE: Nursing , Psychotherapy and Advanced Cancer: A Scoping Review. — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:24,132 INFO BORDERLINE: Belgian couples and their well-being during COVID-19 — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,257 INFO [GENERAL] FOUND: Decision-Making and Advice Seeking, and Advice-Taking Behavior Under State Anxiety
+2026-04-05 15:23:29,270 INFO [GENERAL] FOUND: Digital Interventions for Perinatal Anxiety: Characteristics, Content, Evidence, and Gaps - A Scoping Review.
+2026-04-05 15:23:29,283 INFO BORDERLINE: Racial Discrimination’s Impact on the Mental Health of Marginalized Communities: A Naturalistic Observation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,301 INFO BORDERLINE: Daily Plans and Anxiety — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,319 INFO [GENERAL] FOUND: Positive Self-Talk and Observable Anxiety Behaviors in College Students at McKeldin Library
+2026-04-05 15:23:29,337 INFO [GENERAL] FOUND: An Observational Study of Financial Stress and Anxiety
+2026-04-05 15:23:29,358 INFO BORDERLINE: Disaster DPS (Digital Psychological Support) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,381 INFO BORDERLINE: The Effects of Physical and Mind-Body Exercise on Anxiety Among Patients with Breast Cancer: A Systematic Review and Meta-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,405 INFO BORDERLINE: SIMM: Scalable mental health interventions and mechanisms — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,426 INFO BORDERLINE: Observing Social Isolation and Anxiety in College Students — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,454 INFO BORDERLINE: Social Support and Anxiety — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,477 INFO BORDERLINE: Anxiety and Social Belonging Naturalistic Observation — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,503 INFO BORDERLINE: Digital Mental Health Biomarkers Dataset — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:29,527 INFO BORDERLINE: Mental Health in Latin America: Prevalence, Resources and Treatment Gap by Country (2000–2024) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,501 INFO BORDERLINE: Real-world evidence of patients who received psilocybin through Canada’s Special Access Program — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,515 INFO [GENERAL] FOUND: Interactions of Vitamin D and BDNF in menopause-associated skeletal muscle and bone health, mood and cognition — a scoping review
+2026-04-05 15:23:34,530 INFO BORDERLINE: Parental Burnout Across Cultures: A Global Investigation (IIPB Study 3.1) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,548 INFO BORDERLINE: Comorbidity of ADHD and Depression in a Student: A Chronological Self-Analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,566 INFO BORDERLINE: Mental Health in Latin America: Depression, Anxiety, Suicide, Resources and Treatment Gap by Country (2000–2024) — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,587 INFO BORDERLINE: Polygenic risk for ADHD and anxiety and adolescent decision making — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,608 INFO BORDERLINE: Social-Emotional Learning, School Bonding, and Early Adolescent Depression — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,629 INFO BORDERLINE: Understanding the Effects of Aerobic Versus Resistance Training on Depression and Anxiety Symptoms in Adults: A Systematic Review and Meta-analysis Protocol — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,652 INFO BORDERLINE: O Papel do Enfermeiro Especialista em Saúde Materna e Obstétrica na Prevenção da Depressão Pós-parto — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,681 INFO BORDERLINE: Stability of Functional Connectomics in a Depressed Sample — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:34,701 INFO BORDERLINE: Neurodiversity and Mental Health in Adulthood — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:39,955 INFO BORDERLINE: Positive mood enhances accessibility of unrelated concepts in the first language but not the foreign language — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:39,969 INFO BORDERLINE: Positive vibes, predictive minds: Positive mood fuels predictive language comprehension in richer semantic contexts — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:39,987 INFO [GENERAL] FOUND: Facing unconscious biases: Positive mood boosts gender‑stereotype activation from subliminal primes
+2026-04-05 15:23:40,006 INFO BORDERLINE: The Body Electric Study: A Pragmatic Large-Scale Intervention Evaluating the Viability of Movement Breaks — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,023 INFO BORDERLINE: Effects of exercise on affect and emotion regulation: an experimental study — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,042 INFO BORDERLINE: Positive mood enhances gender stereotype activation during semantic integration and re-analysis — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,064 INFO BORDERLINE: Sleep Deprivation Can Lead to Increased Physiologically Based Irritability in College Students — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,090 INFO [GENERAL] FOUND: Effects of pubertal development on self-regulation of behaviour and its relation with present and past life conditions
+2026-04-05 15:23:40,119 INFO BORDERLINE: Anxiety Intensity Scale Circles (AISCs) and the Yale-anxiety: exploring the validity of two anxiety screens and Natural Language Processing in stroke — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,158 INFO BORDERLINE: Impact of social affiliation and affiliation with music on entrainment and social connectedness in adolescence — R1 unknown: license 'None' — needs manual check | R2 fail: no institutional sign
+2026-04-05 15:23:40,182 INFO [GENERAL] FOUND: SFV &amp; Health Dataset
+2026-04-05 15:23:40,206 INFO SemanticScholar: paper discovery
+2026-04-05 15:23:41,132 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:25:11,608 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:26:41,969 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:28:12,459 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:29:50,939 INFO [GENERAL] FOUND: NonverbalTTS: A Public English Corpus of Text-Aligned Nonverbal Vocalizations with Emotion Annotations for Text-to-Speech
+2026-04-05 15:29:51,378 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:31:21,862 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:32:55,822 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:34:26,330 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:36:00,411 INFO [GENERAL] FOUND: Mapping Existential Loneliness: A Scoping Review on Existential Loneliness/Isolation Conceptualizations and Operationalizations
+2026-04-05 15:36:00,424 INFO [GENERAL] FOUND: Understanding patterns of loneliness in older long-term care users using natural language processing with free text case notes
+2026-04-05 15:36:00,437 INFO [GENERAL] FOUND: Promising best practices implemented in long-term care homes during COVID-19 pandemic to address social isolation and loneliness: a scoping review protocol
+2026-04-05 15:36:05,091 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:37:35,444 WARNING Rate limited https://api.semanticscholar.org/graph/v1/paper/search — sleeping 90s
+2026-04-05 15:39:05,446 INFO Harvard Dataverse: search
+2026-04-05 15:39:15,496 INFO [GENERAL] FOUND: Social Media Posts Master List
+2026-04-05 15:39:40,627 INFO [GENERAL] FOUND: Replication Data for: How daylight shapes news emotion
+2026-04-05 15:39:43,080 INFO [GENERAL] FOUND: Replication Data for: Sentiment on the Campaign Trail: Gender Differences in Candidates’ Use of Emotive Language
+2026-04-05 15:39:48,037 INFO [GENERAL] FOUND: Replication Data for: “I worked so hard and then so far, in the end its doesn’t even matter”: A study on emotional exhaustion and health impairment of Italian public healthcare workers from the JD-R model perspective.
+2026-04-05 15:39:50,745 INFO [GENERAL] FOUND: Replication Data for PROY: La espera doble: costo burocrático y duelo migratorio en retornados y deportados de Tlajomulco, Jalisco
+2026-04-05 15:40:10,648 INFO [GENERAL] FOUND: Personal Aspirations Survey Data — Anonymized
+2026-04-05 15:40:22,829 INFO [GENERAL] FOUND: Psychological Resilience, Life Satisfaction, and Internet Addiction: A Structural Equation Modeling Approach
+2026-04-05 15:40:27,801 INFO [GENERAL] FOUND: Replication Data for Women and Left-wing Citizens Prefer Women Candidates: Testing Consistency and Psychological Processes Across Twenty Diverse Countries
+2026-04-05 15:40:32,924 INFO [CRITICAL] FOUND: Fathers’ Reflective Functioning: Its Relationship to Traditional Masculine Ideology, Alexithymia, and Emotion Socialization Behaviors
+2026-04-05 15:40:35,539 INFO [CRITICAL] FOUND: Data Package to "Personality and Stress Regulation"
+2026-04-05 15:40:37,996 INFO [CRITICAL] FOUND: Alexithymia as a potential source of symptom over-reporting
+2026-04-05 15:40:42,857 INFO [CRITICAL] FOUND: Professional QOL and SPS in Psychologists
+2026-04-05 15:40:45,334 INFO [CRITICAL] FOUND: Abuse and Empathy
+2026-04-05 15:40:47,838 INFO [CRITICAL] FOUND: Athlete mental health
+2026-04-05 15:40:50,306 INFO [CRITICAL] FOUND: Alexithymia and non-verbal behaviour
+2026-04-05 15:40:52,771 INFO [CRITICAL] FOUND: Individual differences in fantasy
+2026-04-05 15:40:55,204 INFO [CRITICAL] FOUND: Individual Differences in Mental Health
+2026-04-05 15:42:12,986 INFO [GENERAL] FOUND: York - Social Media Posts
+2026-04-05 15:42:15,467 INFO [GENERAL] FOUND: Brevard - Social Media Posts
+2026-04-05 15:43:05,412 INFO [GENERAL] FOUND: Replication Data for: The Missing Link: Technological Change, Dual VET, and Social Policy Preferences
+2026-04-05 15:43:07,859 INFO [GENERAL] FOUND: Replication Data for: Hacking Voters’ Trust in Democracy: Panel Evidence on Safeguarding Confidence in Election Integrity
+2026-04-05 15:43:12,721 INFO [GENERAL] FOUND: Collective Vigilance Intelligence: A Research Dataset for a Bionic Collective Perception–Immune Verification Optimization Framework for Complex Risk Information Analysis
+2026-04-05 15:45:12,145 INFO [GENERAL] FOUND: Replication Data for: The Same but Different: How the Income Tax Affects Black, Hispanic, and White Households / Black-White Differences in Income Tax Liability
+2026-04-05 15:45:25,756 INFO [GENERAL] FOUND: Global Markets and Local Representation
+2026-04-05 15:46:20,879 INFO [GENERAL] FOUND: maladaptive daydreaming, depression, anxiety and stress data
+2026-04-05 15:46:26,120 INFO OpenAIRE: EU open access
+2026-04-05 15:46:33,371 INFO Mendeley Data: search
+2026-04-05 15:46:36,569 ERROR Sweep error: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "C:\Users\Shadow\Documents\Resonance\scripts\dataset_scout.py", line 1748, in main
+  File "C:\Users\Shadow\Documents\Resonance\scripts\dataset_scout.py", line 1678, in run_sweep
+    for q in HARVARD_DATAVERSE_QUERIES:
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Shadow\Documents\Resonance\scripts\dataset_scout.py", line 1398, in search_mendeley
+    continue
+AttributeError: 'str' object has no attribute 'get'
+2026-04-05 15:46:36,589 INFO Sleeping 4h before next sweep...

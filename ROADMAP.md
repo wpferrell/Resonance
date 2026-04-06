@@ -32,7 +32,7 @@ All seven dataset acquisition rules have been reviewed and rewritten to better r
 
 **ISEAR dropped** — R1 fail. University of Geneva explicitly restricts to non-commercial research use only.
 
-**Stack: v7, 30 datasets, ~1,490,000 rows. Legally clean.**
+**Stack: v8, 29 datasets, ~1,482,500 rows. Legally clean.**
 
 **Permanently excluded:** LIWC, EmpatheticDialogues, DailyDialog, RECCON
 
@@ -72,25 +72,21 @@ The frameworks have been revised to reflect only what Resonance actually detects
 - Teacher 2: XLNet-large (specialist in anger, contextual dependencies)
 - Teacher 3: ELECTRA-large (specialist in fear, efficient signal extraction)
 
-Each teacher produces soft probability distributions across all 10 active output types. An ensemble script combines them with confidence weighting and temperature scaling into one final soft label per training example.
+Each teacher produces soft probability distributions across all 18 output types. An ensemble script combines them with confidence weighting and temperature scaling into one final soft label per training example.
 
 **Student: DeBERTa-v3-base**
 - 86M backbone parameters, 12 layers, 768 hidden dimensions
-- 10 active heads trained simultaneously + 3 deferred heads
+- 18 active heads trained simultaneously
 - Trains on soft labels from teacher ensemble + hard labels + focal loss + contrastive loss
 
-**10 Active Student Output Heads:**
+**18 Active Student Output Heads:**
 
 | Category | Heads |
 |----------|-------|
 | Core | Emotion (7 classes), VAD (continuous V/A/D), Confidence calibration, CNN local patterns |
-| Frameworks | Secondary emotion (21 TONE classes), PERMA ×5 (continuous), Reappraisal/suppression, Wise Mind |
+| Frameworks | Secondary emotion (21 TONE classes), PERMA ×5 (continuous), WoT (3-class: hyper/in/hypo), Reappraisal/suppression, Wise Mind |
 | Ethics | Crisis detection, Alexithymia detection |
-
-**3 Deferred Heads (designed but not trained in this phase):**
-- Window of Tolerance — threshold recalibration handles this more accurately than per-message classification
-- Sustained distress — session counter in storage handles this better than a per-message head
-- Wise Mind session-level — session-level phenomenon, not reliably detectable per message
+| SDT | Autonomy signal, Competence signal, Relatedness signal |
 
 **2 Encoder training objectives:**
 - Contrastive loss on shame vs neighbouring emotions (shame separation)
@@ -111,13 +107,13 @@ Parked until the above is fully working and validated. Will be picked up in a la
 
 ### Phase 1 — Design (before any code)
 
-1. Lock 10-head active student architecture — exact specification of what each head outputs, what each teacher generates, what each loss function optimises. Confirm 3 deferred heads and rationale. Confirm 2 encoder objectives.
+1. Lock 18-head active student architecture — exact specification of what each head outputs, what each teacher generates, what each loss function optimises. Confirm 2 encoder objectives.
 2. Lock validation criteria for each subsequent phase — what "working" looks like before moving on
 
 ### Phase 2 — Data Pipeline
 
-3. Add 2 pending datasets to Registry first, then script: Reddit MH MDPI 2024 (800 rows CC-BY), SWMH (AIMH/SWMH, 54,412 rows, R5 flag)
-4. Check scout_results.md for any new scout finds — add any passes to Registry first
+3. ~~Add 2 pending datasets to Registry first, then script: Reddit MH MDPI 2024 (800 rows CC-BY), SWMH (AIMH/SWMH, 54,412 rows, R5 flag)~~ *(done — both in Registry v8 and script v6)*
+4. Check scout_results.md for any new scout finds — review all FOUND/BORDERLINE entries, manually assess R4 (emotional text content) before adding. Note: Harvard Dataverse general research entries in scout_results.md fail R4 and should be skipped.
 5. Build unified `scripts/build_training_data.py` — three steps in one script:
    - Deduplication across all datasets
    - Soft labels derived from VAD scores and NRC affect frequencies
@@ -144,11 +140,11 @@ Build all 6 framework signals into `resonance/extractor.py`. Each must be workin
 15. DAPT — domain-adaptive pretraining on full dataset before teacher training
 16. Teacher model training — 3 teachers, ensemble soft label generation
 17. **Validation checkpoint** — soft label quality verified before student training
-18. Multi-task loss weighting — balanced across all 10 active heads
-19. Student distillation training — DeBERTa-v3-base, 10 active heads, all training objectives
+18. Multi-task loss weighting — balanced across all 18 heads
+19. Student distillation training — DeBERTa-v3-base, 18 heads, all training objectives
 20. Confidence profile update — extended to capture framework signal frequency
 
-**Validation checkpoint** — all 10 active heads tested against real text, shame F1 checked specifically, output verified before Phase 5
+**Validation checkpoint** — all 18 heads tested against real text, shame F1 checked specifically, output verified before Phase 5
 
 ### Phase 5 — Integrate
 
