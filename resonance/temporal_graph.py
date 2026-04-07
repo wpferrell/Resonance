@@ -75,6 +75,20 @@ class TemporalGraph:
             "wot_direction": comparison.wot_direction,
             "valence_delta": comparison.valence_delta,
             "arousal_delta": comparison.arousal_delta,
+            # P3 fields -- stored when present, None otherwise
+            "perma_p": getattr(emotion, "perma_p", None),
+            "perma_e": getattr(emotion, "perma_e", None),
+            "perma_r": getattr(emotion, "perma_r", None),
+            "perma_m": getattr(emotion, "perma_m", None),
+            "perma_a": getattr(emotion, "perma_a", None),
+            "autonomy_signal": getattr(emotion, "autonomy_signal", None),
+            "competence_signal": getattr(emotion, "competence_signal", None),
+            "relatedness_signal": getattr(emotion, "relatedness_signal", None),
+            "wot_trajectory": getattr(emotion, "wot_trajectory", None),
+            "wise_mind_score": getattr(emotion, "wise_mind_score", None),
+            "reappraisal_score": getattr(emotion, "reappraisal_score", None),
+            "suppression_score": getattr(emotion, "suppression_score", None),
+            "session_trajectory": getattr(emotion, "session_trajectory", None),
         }
 
         result = await self._db.create("emotion_node", record)
@@ -149,7 +163,7 @@ class TemporalGraph:
         reappraisal_ratio = sum(1 for n in nodes if n.get("reappraisal_signal")) / total
         suppression_ratio = sum(1 for n in nodes if n.get("suppression_signal")) / total
         spike_count = sum(1 for n in nodes if n.get("spike_detected"))
-        wise_mind_ratio = sum(1 for n in nodes if n.get("wise_mind_signal") == "wise_mind") / total
+        wise_mind_ratio = sum(1 for n in nodes if n.get("wise_mind_signal")) / total
         session_ids = set(n.get("session_id", "default") for n in nodes)
 
         return TemporalPattern(
