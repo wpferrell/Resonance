@@ -63,12 +63,36 @@ class Resonance:
         )
         self._last_result = None
         self._session_id = str(uuid.uuid4())
+        # Connect async components
+        import asyncio
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                loop.create_task(self._connect_async())
+            else:
+                loop.run_until_complete(self._connect_async())
+        except Exception:
+            pass
+
+    async def _connect_async(self):
+        """Connect TemporalGraph and ReinforcementLoop databases."""
+        try:
+            await self.temporal_graph.connect()
+        except Exception:
+            pass
+        try:
+            await self.reinforcement_loop.connect()
+        except Exception:
+            pass
 
     def process(self, message: str, modality: str = "text") -> "EmotionResult":
         """
         Process a message. Detect emotion, store it, update profile.
-        Returns a context injector ready to pass to any LLM.
-        Automatically tracks emotional trajectory between messages.
+        Returns an EmotionResult with to_prompt() ready to pass to any LLM.
+
+        Usage:
+            context = r.process("I've been so anxious about this")
+            llm.chat(system=context.to_prompt(), message=message)
         """
         result = self.extractor.extract(message, modality=modality)
         self.storage.save(result, self.user_id, session_id=self._session_id)

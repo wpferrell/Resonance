@@ -56,3 +56,6 @@ venv/
 
 # IDE
 .vscode/
+
+# Internal Claude tooling — never push
+CLAUDE.md

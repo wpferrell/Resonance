@@ -79,6 +79,45 @@ class EmotionResult:
             f")"
         )
 
+    def to_prompt(self) -> str:
+        """
+        Returns a plain-English emotional context string ready to inject
+        into any LLM system prompt. This is the core developer API.
+
+        Usage:
+            context = r.process("I've been so anxious about this")
+            llm.chat(system=context.to_prompt(), message=message)
+        """
+        lines = []
+        lines.append("[Resonance Emotional Context]")
+        lines.append(f"Current emotion: {self.primary_emotion} (confidence: {self.confidence:.0%})")
+        if self.secondary_emotion and self.secondary_emotion != self.primary_emotion:
+            lines.append(f"Underlying emotion: {self.secondary_emotion}")
+        lines.append(f"Mood (valence): {self.valence:+.2f}  Energy (arousal): {self.arousal:.2f}  Agency (dominance): {self.dominance:.2f}")
+        lines.append(f"Window of Tolerance: {self.window_of_tolerance}")
+        if self.wise_mind_signal:
+            lines.append("Wise mind signal detected — person is balanced and grounded.")
+        if self.reappraisal_signal:
+            lines.append("Reappraisal detected — person is healthily reframing their emotion.")
+        if self.suppression_signal:
+            lines.append("Suppression detected — person may be holding back feelings.")
+        if self.guilt_type:
+            lines.append(f"Guilt type detected: {self.guilt_type}")
+        if self.alexithymia_flag:
+            lines.append("Low emotional vocabulary detected — person may struggle to name feelings directly.")
+        if self.crisis_detected:
+            lines.append("CRISIS DETECTED — surface appropriate support immediately.")
+        if self.sustained_distress:
+            lines.append("Sustained distress pattern detected — prioritise validation and care.")
+        lines.append("")
+        lines.append("Respond to how this person actually feels, not just what they said.")
+        lines.append("Validate before problem-solving. Never jump straight to fixing.")
+        if self.window_of_tolerance == "hyperarousal":
+            lines.append("Use calm, slow language — this person is overwhelmed.")
+        elif self.window_of_tolerance == "hypoarousal":
+            lines.append("Use warm, gently activating language — this person is withdrawn.")
+        return "\n".join(lines)
+
 VAD = {
     "joy":      (0.88, 0.60, 0.75),
     "anger":    (-0.60, 0.85, 0.65),
