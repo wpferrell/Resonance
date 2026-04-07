@@ -81,12 +81,18 @@ Each teacher produces soft probability distributions across all 18 output types.
 
 **18 Active Student Output Heads:**
 
-| Category | Heads |
-|----------|-------|
-| Core | Emotion (7 classes), VAD (continuous V/A/D), Confidence calibration, CNN local patterns |
-| Frameworks | Secondary emotion (21 TONE classes), PERMA ×5 (continuous), WoT (3-class: hyper/in/hypo), Reappraisal/suppression, Wise Mind |
-| Ethics | Crisis detection, Alexithymia detection |
-| SDT | Autonomy signal, Competence signal, Relatedness signal |
+| Category | Heads | Status |
+|----------|-------|--------|
+| Core | Emotion (7 classes), VAD (continuous V/A/D), Confidence calibration, CNN local patterns | Active (4) |
+| Frameworks | Secondary emotion (21 TONE classes), PERMA x5 (continuous), Reappraisal/suppression | Active (7) |
+| Ethics | Crisis detection, Alexithymia detection | Active (2) |
+| SDT | Autonomy signal, Competence signal, Relatedness signal | Active (3) |
+| Deferred (session-level) | WoT trajectory, Wise Mind, Sustained distress | Deferred -- not trained until session data available |
+
+**Active output heads: 13 (trained in Phase 4)**
+**Deferred output heads: 3 (session-level -- added in Phase 5)**
+**Encoder objectives: 2 (contrastive shame separation + domain adversarial)**
+**Total training components: 18**
 
 **2 Encoder training objectives:**
 - Contrastive loss on shame vs neighbouring emotions (shame separation)
@@ -131,7 +137,7 @@ Build all 6 framework signals into `resonance/extractor.py`. Each must be workin
 11. Wise Mind scored float — convert from boolean
 12. Ethics safeguards revision — update sustained distress trigger to factor in suppression float and WoT trajectory
 13. Trajectory layer — direction of travel signal across all 6 frameworks per session
-14. MLE emoji lexicon — replace crude `EMOJI_MAP` in extractor with the Multidimensional Lexicon of Emojis (Godard & Holtzman 2022, Frontiers in Psychology, CC-BY). 359 emojis rated on 8 NRC emotion dimensions. Extends NRC Emotion Lexicon into emoji territory.
+14. MLE emoji lexicon — replace crude `EMOJI_MAP` in extractor with the Multidimensional Lexicon of Emojis (Godard & Holtzman 2022, Frontiers in Psychology, CC-BY). 128 emojis mapped to 7-class emotion taxonomy (built from MLE research, CC-BY). Extends NRC Emotion Lexicon into emoji territory.
 
 **Validation checkpoint** — all 6 frameworks tested on real text, output verified before moving to Phase 4
 
@@ -148,11 +154,11 @@ Build all 6 framework signals into `resonance/extractor.py`. Each must be workin
 
 ### Phase 5 — Integrate
 
-21. Extractor refactor — model output drives EmotionResult directly, VAD lookup table retired, no fallback
-22. Feedback system — full EmotionResult + trajectory context captured, auto-consent verified
-23. Storage update — all new EmotionResult fields captured in Qdrant and SurrealDB
-24. Pi server update — full EmotionResult capture, trajectory endpoint, export pipeline
-25. Attachment inference layer — builds silently from SDT, suppression, and WoT trajectory across 10+ sessions
+20. Extractor refactor — model output drives EmotionResult directly, VAD lookup table retired, no fallback
+21. Feedback system — full EmotionResult + trajectory context captured, auto-consent verified
+22. Storage update — all new EmotionResult fields captured in Qdrant and SurrealDB
+23. Pi server update — full EmotionResult capture, trajectory endpoint, export pipeline
+24. Attachment inference layer — builds silently from SDT, suppression, and WoT trajectory across 10+ sessions
 
 ---
 
