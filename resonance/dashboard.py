@@ -53,7 +53,11 @@ def _get_dashboard_data_sync():
         "volatile":   "Up and down. Hard to find solid ground right now.",
         "stable":     "Holding steady. Whatever this is, it is consistent.",
     }
-    senses_text = senses_map.get("stable", "Here with you in whatever this is.")
+    trajectory = "stable"
+    if _latest_result:
+        # Use session_trajectory (P3+) or fall back to comparison trajectory
+        trajectory = getattr(_latest_result, "session_trajectory", None) or "stable"
+    senses_text = senses_map.get(trajectory, "Here with you in whatever this is.")
 
     chip_map = {
         "happy":    [{"e":"😊","n":"happy","d":True},{"e":"😌","n":"calm"},{"e":"😁","n":"excited"},{"e":"🙂","n":"just okay"}],
@@ -120,7 +124,11 @@ def push_update(result):
             "valence": round(result.valence, 2),
             "arousal": round(result.arousal, 2),
             "wot": result.window_of_tolerance,
-            "wise_mind": result.wise_mind_signal,
+            "wise_mind": getattr(result, "wise_mind_score", result.wise_mind_signal),
+            "wot_trajectory": getattr(result, "wot_trajectory", None),
+            "session_trajectory": getattr(result, "session_trajectory", None),
+            "crisis": result.crisis_detected,
+            "sustained_distress": result.sustained_distress,
         })
     except Exception:
         pass
