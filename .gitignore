@@ -17,6 +17,21 @@ Resonance_Dataset_Registry.md
 scripts/prepare_data_v2.py
 RESONANCE_STATE.md
 
+# Internal build and planning docs — never push
+docs/
+scripts/
+_archive/
+
+# Old fix/debug scripts — never push
+fix_push.ps1
+fix_*.ps1
+fix_*.py
+debug_*.py
+run_*.py
+dashboard_*.py
+dashboard_*.html
+add_panel.py
+
 # Database and runtime data
 resonance_data/
 resonance/resonance_data/
@@ -27,14 +42,6 @@ resonance/resonance_data/
 resonance/model/
 *.safetensors
 *.bin
-
-# Fix and debug scripts
-fix_*.py
-debug_*.py
-run_*.py
-dashboard_*.py
-dashboard_*.html
-add_panel.py
 
 # Test scripts
 test_*.py

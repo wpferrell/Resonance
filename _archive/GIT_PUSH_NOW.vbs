@@ -1,2 +1,0 @@
-Set objShell = CreateObject("WScript.Shell")
-objShell.Run "powershell.exe -NoExit -Command ""cd 'C:\Users\Shadow\Documents\Resonance'; .venv\Scripts\Activate.ps1; git add README.md ETHICS.md ROADMAP.md Resonance_Dataset_Registry.md scripts\prepare_data_v2.py pyproject.toml resonance\version.py; git commit -m 'Fix: 6 frameworks, 10 active heads, v7/30 datasets, SWMH+Reddit MH MDPI added, bump v1.0.34'; git push; git tag v1.0.34; git push origin v1.0.34; Write-Host 'DONE - v1.0.34 tagged and pushed to PyPI' -ForegroundColor Green""", 1, False
