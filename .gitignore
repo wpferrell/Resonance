@@ -60,3 +60,6 @@ venv/
 # Internal Claude tooling — never push
 CLAUDE.md
 *.bat
+backup_to_drive.py
+backup_to_drive.ps1
+backup.log
