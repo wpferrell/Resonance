@@ -97,7 +97,7 @@ class Resonance:
         result = self.extractor.extract(message, modality=modality)
         self.storage.save(result, self.user_id, session_id=self._session_id)
 
-        # Record individual detection feedback
+        # Record individual detection feedback -- includes P3 fields if present
         record_feedback(
             user_id=self.user_id,
             primary_emotion=result.primary_emotion,
@@ -107,10 +107,38 @@ class Resonance:
             dominance=result.dominance,
             corrected_emotion=None,
             feedback_enabled=self.feedback_enabled,
+            perma_p=getattr(result, "perma_p", None),
+            perma_e=getattr(result, "perma_e", None),
+            perma_r=getattr(result, "perma_r", None),
+            perma_m=getattr(result, "perma_m", None),
+            perma_a=getattr(result, "perma_a", None),
+            autonomy_signal=getattr(result, "autonomy_signal", None),
+            competence_signal=getattr(result, "competence_signal", None),
+            relatedness_signal=getattr(result, "relatedness_signal", None),
+            wise_mind_score=getattr(result, "wise_mind_score", None),
+            reappraisal_score=getattr(result, "reappraisal_score", None),
+            suppression_score=getattr(result, "suppression_score", None),
+            wot_trajectory=getattr(result, "wot_trajectory", None),
+            crisis_detected=result.crisis_detected,
+            sustained_distress=result.sustained_distress,
         )
 
         # Record trajectory — the shift between this message and the last one
         if self._last_result is not None:
+            # Use scored floats if available (P3+), fall back to boolean cast for current model
+            _prev_wm = getattr(self._last_result, "wise_mind_score", None)
+            if _prev_wm is None:
+                _prev_wm = float(self._last_result.wise_mind_signal) if self._last_result.wise_mind_signal else 0.0
+            _curr_wm = getattr(result, "wise_mind_score", None)
+            if _curr_wm is None:
+                _curr_wm = float(result.wise_mind_signal) if result.wise_mind_signal else 0.0
+            _curr_reap = getattr(result, "reappraisal_score", None)
+            if _curr_reap is None:
+                _curr_reap = float(result.reappraisal_signal) if result.reappraisal_signal else 0.0
+            _curr_supp = getattr(result, "suppression_score", None)
+            if _curr_supp is None:
+                _curr_supp = float(result.suppression_signal) if result.suppression_signal else 0.0
+
             record_trajectory(
                 user_id=self.user_id,
                 session_id=self._session_id,
@@ -124,12 +152,22 @@ class Resonance:
                 curr_dominance=result.dominance,
                 prev_wot=self._last_result.window_of_tolerance,
                 curr_wot=result.window_of_tolerance,
-                prev_wise_mind=self._last_result.wise_mind_signal or 0.0,
-                curr_wise_mind=result.wise_mind_signal or 0.0,
-                reappraisal_signal=result.reappraisal_signal or 0.0,
-                suppression_signal=result.suppression_signal or 0.0,
+                prev_wise_mind=_prev_wm,
+                curr_wise_mind=_curr_wm,
+                reappraisal_signal=_curr_reap,
+                suppression_signal=_curr_supp,
                 confidence=result.confidence,
                 feedback_enabled=self.feedback_enabled,
+                wot_trajectory=getattr(result, "wot_trajectory", None),
+                suppression_score=getattr(result, "suppression_score", None),
+                reappraisal_score=getattr(result, "reappraisal_score", None),
+                wise_mind_score=getattr(result, "wise_mind_score", None),
+                session_trajectory=getattr(result, "session_trajectory", None),
+                perma_p=getattr(result, "perma_p", None),
+                perma_e=getattr(result, "perma_e", None),
+                perma_r=getattr(result, "perma_r", None),
+                perma_m=getattr(result, "perma_m", None),
+                perma_a=getattr(result, "perma_a", None),
             )
 
         self._last_result = result
