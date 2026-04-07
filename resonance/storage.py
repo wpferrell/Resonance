@@ -3,13 +3,17 @@
 """
 resonance/storage.py
 
-The storage layer — saves every EmotionResult to both databases.
+The storage layer -- saves every EmotionResult to both databases.
 
-Qdrant    — stores the emotion as a vector for similarity search.
-SurrealDB — stores full records, current state snapshot, and graph.
+Qdrant    -- stores the emotion as a vector for similarity search.
+SurrealDB -- stores full records, current state snapshot, and graph.
 
-Both embedded — no server, no Docker, no external process.
+Both embedded -- no server, no Docker, no external process.
 Data lives in resonance_data/ inside your project folder.
+
+v2: P3 fields added -- PERMA, SDT, wot_trajectory, scored floats for
+    wise_mind/reappraisal/suppression. All new fields are optional with
+    defaults so existing stored records are not broken.
 """
 
 import asyncio
@@ -43,11 +47,14 @@ def _build_vector(result: EmotionResult) -> list:
 
 
 def _result_to_payload(result, user_id, session_id, topic, timestamp):
-    return {
+    """Build full payload from EmotionResult. Handles both current and P3 fields."""
+    payload = {
+        # Core identity
         "user_id": user_id,
         "session_id": session_id,
         "topic": topic,
         "timestamp": timestamp,
+        # Original 19 EmotionResult fields
         "valence": result.valence,
         "arousal": result.arousal,
         "dominance": result.dominance,
@@ -62,7 +69,31 @@ def _result_to_payload(result, user_id, session_id, topic, timestamp):
         "confidence": result.confidence,
         "alexithymia_flag": result.alexithymia_flag,
         "modality": result.modality,
+        "crisis_detected": result.crisis_detected,
+        "sustained_distress": result.sustained_distress,
+        "outward_reflection": result.outward_reflection,
+        # P3 fields -- added as optional, default None/0.0
+        # PERMA wellbeing (5 dimensions, scored floats [-1, 1])
+        "perma_p": getattr(result, "perma_p", None),
+        "perma_e": getattr(result, "perma_e", None),
+        "perma_r": getattr(result, "perma_r", None),
+        "perma_m": getattr(result, "perma_m", None),
+        "perma_a": getattr(result, "perma_a", None),
+        # SDT (3 dimensions, scored floats [0, 1])
+        "autonomy_signal": getattr(result, "autonomy_signal", None),
+        "competence_signal": getattr(result, "competence_signal", None),
+        "relatedness_signal": getattr(result, "relatedness_signal", None),
+        # WoT session trajectory
+        "wot_trajectory": getattr(result, "wot_trajectory", None),
+        # Scored floats (P3 converts these from booleans)
+        "wise_mind_score": getattr(result, "wise_mind_score", None),
+        "reappraisal_score": getattr(result, "reappraisal_score", None),
+        "suppression_score": getattr(result, "suppression_score", None),
+        # Session-level trajectory
+        "session_trajectory": getattr(result, "session_trajectory", None),
     }
+    # Remove None values to keep records clean (SurrealDB handles missing fields)
+    return {k: v for k, v in payload.items() if v is not None}
 
 
 class Storage:
@@ -70,7 +101,6 @@ class Storage:
     def __init__(self):
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         self._qdrant = QdrantClient(path=QDRANT_PATH)
-
         self._ensure_collection()
         self._loop = asyncio.new_event_loop()
         self._db = None
@@ -108,36 +138,21 @@ class Storage:
     async def _save_async(self, result, user_id, session_id, topic, timestamp):
         vector = _build_vector(result)
         payload = _result_to_payload(result, user_id, session_id, topic, timestamp)
+
         point_id = int(datetime.now(timezone.utc).timestamp() * 1_000_000) % (2**53)
         self._qdrant.upsert(
             collection_name="resonance_emotions",
             points=[PointStruct(id=point_id, vector=vector, payload=payload)],
         )
 
-        record = await self._db.create("emotion", {
-            "user_id": user_id,
-            "session_id": session_id,
-            "topic": topic,
-            "timestamp": timestamp,
-            "valence": result.valence,
-            "arousal": result.arousal,
-            "dominance": result.dominance,
-            "primary_emotion": result.primary_emotion,
-            "secondary_emotion": result.secondary_emotion,
-            "window_of_tolerance": result.window_of_tolerance,
-            "wot_triggered_by": result.wot_triggered_by,
-            "wise_mind_signal": result.wise_mind_signal,
-            "reappraisal_signal": result.reappraisal_signal,
-            "suppression_signal": result.suppression_signal,
-            "guilt_type": result.guilt_type,
-            "confidence": result.confidence,
-            "alexithymia_flag": result.alexithymia_flag,
-            "modality": result.modality,
-            "qdrant_id": point_id,
-        })
+        db_record = dict(payload)
+        db_record["qdrant_id"] = point_id
+
+        record = await self._db.create("emotion", db_record)
         record_id = record[0]["id"] if isinstance(record, list) else record["id"]
 
-        await self._db.upsert(f"current_state:{user_id}", {
+        # Current state snapshot -- always has latest values per user
+        current_state = {
             "user_id": user_id,
             "last_updated": timestamp,
             "valence": result.valence,
@@ -153,7 +168,27 @@ class Storage:
             "alexithymia_flag": result.alexithymia_flag,
             "modality": result.modality,
             "confidence": result.confidence,
-        })
+            "crisis_detected": result.crisis_detected,
+            "sustained_distress": result.sustained_distress,
+            # P3 fields in current state snapshot
+            "perma_p": getattr(result, "perma_p", None),
+            "perma_e": getattr(result, "perma_e", None),
+            "perma_r": getattr(result, "perma_r", None),
+            "perma_m": getattr(result, "perma_m", None),
+            "perma_a": getattr(result, "perma_a", None),
+            "autonomy_signal": getattr(result, "autonomy_signal", None),
+            "competence_signal": getattr(result, "competence_signal", None),
+            "relatedness_signal": getattr(result, "relatedness_signal", None),
+            "wot_trajectory": getattr(result, "wot_trajectory", None),
+            "wise_mind_score": getattr(result, "wise_mind_score", None),
+            "reappraisal_score": getattr(result, "reappraisal_score", None),
+            "suppression_score": getattr(result, "suppression_score", None),
+            "session_trajectory": getattr(result, "session_trajectory", None),
+        }
+        # Remove Nones
+        current_state = {k: v for k, v in current_state.items() if v is not None}
+
+        await self._db.upsert(f"current_state:{user_id}", current_state)
 
         return str(record_id)
 

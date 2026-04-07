@@ -3,9 +3,12 @@
 
 # resonance/feedback.py
 # Handles anonymous feedback collection.
-# Emotion signals and conversation patterns queue locally first — always safe, never lost.
+# Emotion signals and conversation patterns queue locally first -- always safe, never lost.
 # When server is reachable, queued records drain automatically.
 # No message text. No user identity. Ever.
+#
+# v2: P3 fields added -- PERMA, SDT, wot_trajectory, scored floats.
+# All new fields are optional with defaults so existing queue files still drain correctly.
 
 import hashlib
 import json
@@ -19,7 +22,7 @@ TRAJECTORY_ENDPOINT = "https://feedback.resonance-layer.com/trajectory"
 
 
 def _anonymous_id(user_id: str) -> str:
-    """One-way hash of user_id — never reversible back to the original."""
+    """One-way hash of user_id -- never reversible back to the original."""
     return hashlib.sha256(user_id.encode()).hexdigest()[:16]
 
 
@@ -31,33 +34,10 @@ def queue_record(record: dict, prefix: str = "fb"):
         json.dump(record, f)
 
 
-def _send_record(endpoint: str, record: dict):
-    """Send a single record to an endpoint in a background thread."""
-    def _send():
-        try:
-            import urllib.request
-            payload = json.dumps(record).encode("utf-8")
-            req = urllib.request.Request(
-                endpoint,
-                data=payload,
-                headers={
-                    "Content-Type": "application/json",
-                    "User-Agent": "Resonance/1.0",
-                },
-                method="POST"
-            )
-            with urllib.request.urlopen(req, timeout=5):
-                pass
-        except Exception:
-            pass
-    thread = threading.Thread(target=_send, daemon=True)
-    thread.start()
-
-
 def drain_queue():
     """
     Send all queued records to the feedback endpoint.
-    Runs in a background thread — never blocks the main process.
+    Runs in a background thread -- never blocks the main process.
     Successfully sent records are removed. Failed sends stay and retry next session.
     """
     def _drain():
@@ -72,16 +52,12 @@ def drain_queue():
                 try:
                     with open(filepath, "r", encoding="utf-8") as f:
                         record = json.load(f)
-                    # Route to correct endpoint based on record type
                     endpoint = TRAJECTORY_ENDPOINT if record.get("record_type") == "trajectory" else FEEDBACK_ENDPOINT
                     payload = json.dumps(record).encode("utf-8")
                     req = urllib.request.Request(
                         endpoint,
                         data=payload,
-                        headers={
-                            "Content-Type": "application/json",
-                            "User-Agent": "Resonance/1.0",
-                        },
+                        headers={"Content-Type": "application/json", "User-Agent": "Resonance/1.0"},
                         method="POST"
                     )
                     with urllib.request.urlopen(req, timeout=5) as response:
@@ -105,6 +81,21 @@ def record_feedback(
     dominance: float,
     corrected_emotion: str = None,
     feedback_enabled: bool = False,
+    # P3 fields -- all optional, default None
+    perma_p: float = None,
+    perma_e: float = None,
+    perma_r: float = None,
+    perma_m: float = None,
+    perma_a: float = None,
+    autonomy_signal: float = None,
+    competence_signal: float = None,
+    relatedness_signal: float = None,
+    wise_mind_score: float = None,
+    reappraisal_score: float = None,
+    suppression_score: float = None,
+    wot_trajectory: str = None,
+    crisis_detected: bool = None,
+    sustained_distress: bool = None,
 ):
     """
     Main entry point for recording a feedback event.
@@ -126,6 +117,19 @@ def record_feedback(
         "dominance": round(dominance, 3),
         "corrected_emotion": corrected_emotion,
     }
+
+    # Add P3 fields if present
+    p3_fields = {
+        "perma_p": perma_p, "perma_e": perma_e, "perma_r": perma_r,
+        "perma_m": perma_m, "perma_a": perma_a,
+        "autonomy_signal": autonomy_signal, "competence_signal": competence_signal,
+        "relatedness_signal": relatedness_signal, "wise_mind_score": wise_mind_score,
+        "reappraisal_score": reappraisal_score, "suppression_score": suppression_score,
+        "wot_trajectory": wot_trajectory, "crisis_detected": crisis_detected,
+        "sustained_distress": sustained_distress,
+    }
+    record.update({k: round(v, 3) if isinstance(v, float) else v
+                   for k, v in p3_fields.items() if v is not None})
 
     queue_record(record, prefix="fb")
     drain_queue()
@@ -150,11 +154,22 @@ def record_trajectory(
     suppression_signal: float,
     confidence: float,
     feedback_enabled: bool = False,
+    # P3 trajectory fields -- all optional
+    wot_trajectory: str = None,
+    suppression_score: float = None,
+    reappraisal_score: float = None,
+    wise_mind_score: float = None,
+    session_trajectory: str = None,
+    perma_p: float = None,
+    perma_e: float = None,
+    perma_r: float = None,
+    perma_m: float = None,
+    perma_a: float = None,
 ):
     """
     Record the emotional shift between two consecutive messages.
     Called automatically by r.process() after every second message.
-    Zero developer work required — happens silently in the background.
+    Zero developer work required -- happens silently in the background.
     """
     if not feedback_enabled:
         return
@@ -176,6 +191,19 @@ def record_trajectory(
         "suppression_signal": round(suppression_signal, 3),
         "confidence": round(confidence, 3),
     }
+
+    # Add P3 trajectory fields if present
+    p3_fields = {
+        "wot_trajectory": wot_trajectory,
+        "suppression_score": suppression_score,
+        "reappraisal_score": reappraisal_score,
+        "wise_mind_score": wise_mind_score,
+        "session_trajectory": session_trajectory,
+        "perma_p": perma_p, "perma_e": perma_e,
+        "perma_r": perma_r, "perma_m": perma_m, "perma_a": perma_a,
+    }
+    record.update({k: round(v, 3) if isinstance(v, float) else v
+                   for k, v in p3_fields.items() if v is not None})
 
     queue_record(record, prefix="traj")
     drain_queue()
