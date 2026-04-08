@@ -16,6 +16,7 @@ from nrclex import NRCLex
 from textblob import TextBlob
 from empath import Empath
 from resonance.perma_lexicon import score_perma
+from resonance.emoji_lexicon import get_emoji_emotion
 from resonance.sdt_lexicon import score_sdt
 
 MODEL_PATH = Path.home() / ".resonance" / "model_cache"
@@ -281,16 +282,6 @@ WISE_MIND_WORDS = [
     "reasonable", "rational", "emotional", "both",
 ]
 
-EMOJI_MAP = {
-    "😊": "joy", "😂": "joy", "❤️": "joy", "😍": "joy", "🥰": "joy",
-    "😢": "sadness", "😭": "sadness", "💔": "sadness",
-    "😡": "anger", "🤬": "anger", "😤": "anger",
-    "😨": "fear", "😰": "fear", "😱": "fear",
-    "😮": "surprise", "😲": "surprise",
-    "😳": "shame", "🫣": "shame",
-    "😐": "neutral", "🙂": "neutral",
-}
-
 class Extractor:
     def __init__(self):
         self.empath = Empath()
@@ -379,9 +370,14 @@ class Extractor:
             return nrc_emotion, round(nrc_conf * nrc_weight, 4)
 
     def _detect_emoji_emotion(self, text: str):
-        for emoji, emotion in EMOJI_MAP.items():
-            if emoji in text:
-                return emotion
+        """
+        Detect emoji emotion using the MLE-based emoji_lexicon.
+        Returns the highest-confidence emotion found, or None.
+        Uses confidence scores from Godard & Holtzman (2022) MLE research.
+        """
+        result = get_emoji_emotion(text)
+        if result:
+            return result  # returns (emotion, confidence) tuple
         return None
 
     def _get_secondary(self, primary: str, text: str):
@@ -758,10 +754,9 @@ class Extractor:
         nrc    = nrc_obj.affect_frequencies
         empath = self.empath.analyze(text, normalize=True) or {}
 
-        emoji_emotion = self._detect_emoji_emotion(text)
-        if emoji_emotion:
-            primary    = emoji_emotion
-            confidence = 0.90
+        emoji_result = self._detect_emoji_emotion(text)
+        if emoji_result:
+            primary, confidence = emoji_result
         else:
             primary, confidence = self._predict_ensemble(text, nrc)
 
