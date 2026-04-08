@@ -76,6 +76,7 @@ class EmotionResult:
     wot_trajectory: str = "stable"
     reappraisal_score: float = 0.0
     suppression_score: float = 0.0
+    wise_mind_score: float = 0.0
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
@@ -86,7 +87,7 @@ class EmotionResult:
             f"  primary={self.primary_emotion} / secondary={self.secondary_emotion}{crisis_flag}{distress_flag}\n"
             f"  VAD: valence={self.valence:+.2f}  arousal={self.arousal:.2f}  dominance={self.dominance:.2f}\n"
             f"  WoT={wot_flag} [{self.wot_triggered_by}]\n"
-            f"  wise_mind={self.wise_mind_signal}  reappraisal={self.reappraisal_signal}({self.reappraisal_score:.2f})  suppression={self.suppression_signal}({self.suppression_score:.2f})\n"
+            f"  wise_mind={self.wise_mind_signal}({self.wise_mind_score:.2f})  reappraisal={self.reappraisal_signal}({self.reappraisal_score:.2f})  suppression={self.suppression_signal}({self.suppression_score:.2f})\n"
             f"  confidence={self.confidence:.2f}  alexithymia={self.alexithymia_flag}  modality={self.modality}\n"
             f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
             f"  PERMA: P={self.perma_p:+.2f}  E={self.perma_e:+.2f}  R={self.perma_r:+.2f}  M={self.perma_m:+.2f}  A={self.perma_a:+.2f}\n"
@@ -111,8 +112,12 @@ class EmotionResult:
             lines.append(f"Underlying emotion: {self.secondary_emotion}")
         lines.append(f"Mood (valence): {self.valence:+.2f}  Energy (arousal): {self.arousal:.2f}  Agency (dominance): {self.dominance:.2f}")
         lines.append(f"Window of Tolerance: {self.window_of_tolerance}")
-        if self.wise_mind_signal:
-            lines.append("Wise mind signal detected — person is balanced and grounded.")
+        if self.wise_mind_score > 0.5:
+            lines.append(f"Strong wise mind signal ({self.wise_mind_score:.2f}) - person is emotionally integrated and grounded. Match their balanced tone.")
+        elif self.wise_mind_score > 0.2:
+            lines.append(f"Wise mind signal detected ({self.wise_mind_score:.2f}) - person is moving toward balance.")
+        elif self.wise_mind_signal:
+            lines.append("Mild wise mind signal - person may be beginning to integrate their emotional and rational experience.")
         if self.reappraisal_score > 0.3:
             lines.append(f"Reappraisal detected ({self.reappraisal_score:.2f}) - person is actively reframing. Support the healthy processing.")
         elif self.reappraisal_signal:
@@ -244,7 +249,32 @@ SUPPRESSION_WORDS = [
     "bottle", "push down", "bury", "swallow",
 ]
 
-WISE_MIND_PHRASES = ["i understand", "i see both", "on one hand", "on the other hand", "makes sense", "i accept", "even though", "and yet", "both"]
+# Wise Mind detection -- tiered scoring
+# Strong phrases: clear balanced/integrated thinking (0.30 each)
+WISE_MIND_PHRASES_STRONG = [
+    "i see both", "on one hand", "on the other hand",
+    "both are true", "i can hold", "i understand and",
+    "even though i feel", "and yet i know", "i accept that",
+    "i can acknowledge", "it makes sense that", "i can see why",
+    "validating my feelings", "i am allowed to feel",
+    "my emotions make sense", "i can feel this and still",
+]
+
+# Moderate phrases: moving toward integration (0.20 each)
+WISE_MIND_PHRASES_MODERATE = [
+    "makes sense", "i understand", "i accept", "even though",
+    "and yet", "both", "i can see", "at the same time",
+    "part of me", "i know that", "in a way", "i recognise",
+    "i notice", "i am aware", "stepping back", "taking a breath",
+]
+
+# Word signals: grounded, integrated language (0.10 each)
+WISE_MIND_WORDS = [
+    "balance", "balanced", "grounded", "centred", "centered",
+    "integrated", "clarity", "clear", "calm", "aware",
+    "mindful", "present", "considered", "thoughtful",
+    "reasonable", "rational", "emotional", "both",
+]
 
 EMOJI_MAP = {
     "😊": "joy", "😂": "joy", "❤️": "joy", "😍": "joy", "🥰": "joy",
@@ -497,9 +527,32 @@ class Extractor:
             return "hypoarousal", "hypoarousal_words"
         return "in", "none"
 
-    def _detect_wise_mind(self, text: str):
+    def _detect_wise_mind(self, text: str) -> float:
+        """
+        Score Wise Mind signal [0, 1].
+        Wise Mind = balanced, integrated thinking that acknowledges both
+        emotional experience and rational perspective simultaneously.
+        Higher score = stronger wise mind signal.
+        """
         lower = text.lower()
-        return any(phrase in lower for phrase in WISE_MIND_PHRASES)
+        score = 0.0
+
+        # Strong phrases -- clear integrated thinking
+        for phrase in WISE_MIND_PHRASES_STRONG:
+            if phrase in lower:
+                score += 0.30
+
+        # Moderate phrases -- moving toward integration
+        for phrase in WISE_MIND_PHRASES_MODERATE:
+            if phrase in lower:
+                score += 0.20
+
+        # Word signals -- grounded language
+        for word in WISE_MIND_WORDS:
+            if word in lower:
+                score += 0.10
+
+        return round(min(1.0, score), 4)
 
     def _detect_alexithymia(self, nrc: dict, text: str):
         emotion_word_count = sum(1 for v in nrc.values() if v > 0)
@@ -660,4 +713,5 @@ class Extractor:
             wot_trajectory=wot_trajectory,
             reappraisal_score=reappraisal,
             suppression_score=suppression,
+            wise_mind_score=wise_mind,
         )
