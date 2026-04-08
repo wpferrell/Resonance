@@ -150,6 +150,31 @@ The emotional profile Resonance builds over time is a trust surface. A determine
 
 Resonance mitigates this through confidence scoring, correction pattern analysis, and anomaly detection in the reinforcement loop. Unusual correction patterns are flagged. Profiles that diverge sharply from established baselines are marked as low-confidence until consistency is restored.
 
+### Sustained Distress Detection — Trigger Conditions
+
+Resonance tracks emotional distress across a session and sets a `sustained_distress` flag when distress appears persistent rather than momentary. The trigger logic accounts for three factors:
+
+**Baseline trigger:** Three or more consecutive messages with negative valence (below -0.40) and elevated arousal (above 0.55). This catches overt, expressed distress.
+
+**Suppression adjustment:** When suppression score is 0.5 or above, the valence threshold is raised by 0.15 and the arousal threshold is lowered by 0.15. This catches distress that is being held back — a person saying "I am fine" while in genuine distress scores lower on arousal precisely because they are suppressing the signal. The suppression score reveals what the words are hiding.
+
+**Escalating WoT trajectory adjustment:** When the session WoT trajectory is escalating (the person is moving toward dysregulation across the session), the valence threshold is raised by a further 0.10 and the arousal threshold lowered by a further 0.10. The direction of travel matters as much as the current state.
+
+Both adjustments are cumulative. A person showing high suppression and an escalating session trajectory triggers `sustained_distress` at a substantially lower apparent distress level than baseline — because the signal is being obscured, not because the distress is less real.
+
+When `sustained_distress` is set, the LLM context instructs the AI to prioritise validation and care. It does not trigger a crisis resource — that is reserved for `crisis_detected`. It does signal that the conversation requires sustained attentiveness, not just a momentary acknowledgement.
+
+### Crisis Detection
+
+The `crisis_detected` flag triggers on specific language patterns that signal acute risk — suicidal ideation, self-harm, and related expressions. When set:
+
+- The LLM context instructs the AI to surface appropriate support immediately
+- Normal conversation flow should be paused
+- A relevant crisis helpline or resource for the user's region should be displayed
+- The developer is responsible for implementing this response in their application
+
+This flag is never suppressed, never adjusted by threshold logic, and always takes priority over all other signals.
+
 ### Vulnerable Populations
 
 Resonance detects emotional distress with clinical-grade frameworks. That capability must be handled with care when the person on the other end is in a vulnerable state.

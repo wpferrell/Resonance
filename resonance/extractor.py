@@ -564,22 +564,47 @@ class Extractor:
         lower = text.lower()
         return any(phrase in lower for phrase in CRISIS_PHRASES)
 
-    def _detect_sustained_distress(self, history: List["EmotionResult"], suppression_score: float = 0.0) -> bool:
+    def _detect_sustained_distress(
+        self,
+        history: List["EmotionResult"],
+        suppression_score: float = 0.0,
+        wot_trajectory: str = "stable",
+    ) -> bool:
         """
         Detect sustained distress across recent messages.
-        High suppression score lowers the threshold -- suppressed distress
-        is harder to see but no less real.
+
+        Two factors lower the trigger threshold beyond raw VAD scores:
+
+        1. High suppression score -- suppressed distress is harder to see
+           but no less real. A person saying 'I am fine' while distressed
+           scores lower on arousal but the suppression signal reveals what
+           the words are hiding.
+
+        2. Escalating WoT trajectory -- if the session is moving toward
+           dysregulation, trigger sustained distress sooner. The direction
+           of travel matters as much as the current state.
+
+        Threshold adjustments (cumulative):
+          suppression >= 0.5:   valence +0.15, arousal -0.15
+          wot_trajectory == escalating: valence +0.10, arousal -0.10
+          Both active:          valence +0.25, arousal -0.25 (combined)
         """
         if len(history) < SUSTAINED_DISTRESS_COUNT:
             return False
         recent = history[-SUSTAINED_DISTRESS_COUNT:]
 
-        # High suppression = lower the valence threshold (trust the signal even if muted)
         valence_threshold = DISTRESS_VALENCE_THRESHOLD
         arousal_threshold = DISTRESS_AROUSAL_THRESHOLD
+
+        # Factor 1: high suppression -- trust the signal even if muted
         if suppression_score >= 0.5:
-            valence_threshold = DISTRESS_VALENCE_THRESHOLD + 0.15  # easier to trigger
-            arousal_threshold = DISTRESS_AROUSAL_THRESHOLD - 0.15  # easier to trigger
+            valence_threshold += 0.15
+            arousal_threshold -= 0.15
+
+        # Factor 2: escalating WoT trajectory -- session moving toward dysregulation
+        if wot_trajectory == "escalating":
+            valence_threshold += 0.10
+            arousal_threshold -= 0.10
 
         return all(
             r.valence <= valence_threshold and
@@ -677,7 +702,7 @@ class Extractor:
         crisis           = self._detect_crisis(text)
         suppression      = self._detect_suppression(text)
         reappraisal      = self._detect_reappraisal(text)
-        sustained        = self._detect_sustained_distress(history, suppression_score=suppression)
+        sustained        = self._detect_sustained_distress(history, suppression_score=suppression, wot_trajectory=wot_trajectory)
         outward          = self._detect_outward_reflection(history)
         perma            = score_perma(text)
         sdt              = score_sdt(text)
