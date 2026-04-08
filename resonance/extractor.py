@@ -74,6 +74,8 @@ class EmotionResult:
     competence_signal: float = 0.0
     relatedness_signal: float = 0.0
     wot_trajectory: str = "stable"
+    reappraisal_score: float = 0.0
+    suppression_score: float = 0.0
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
@@ -84,7 +86,7 @@ class EmotionResult:
             f"  primary={self.primary_emotion} / secondary={self.secondary_emotion}{crisis_flag}{distress_flag}\n"
             f"  VAD: valence={self.valence:+.2f}  arousal={self.arousal:.2f}  dominance={self.dominance:.2f}\n"
             f"  WoT={wot_flag} [{self.wot_triggered_by}]\n"
-            f"  wise_mind={self.wise_mind_signal}  reappraisal={self.reappraisal_signal}  suppression={self.suppression_signal}\n"
+            f"  wise_mind={self.wise_mind_signal}  reappraisal={self.reappraisal_signal}({self.reappraisal_score:.2f})  suppression={self.suppression_signal}({self.suppression_score:.2f})\n"
             f"  confidence={self.confidence:.2f}  alexithymia={self.alexithymia_flag}  modality={self.modality}\n"
             f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
             f"  PERMA: P={self.perma_p:+.2f}  E={self.perma_e:+.2f}  R={self.perma_r:+.2f}  M={self.perma_m:+.2f}  A={self.perma_a:+.2f}\n"
@@ -111,10 +113,16 @@ class EmotionResult:
         lines.append(f"Window of Tolerance: {self.window_of_tolerance}")
         if self.wise_mind_signal:
             lines.append("Wise mind signal detected — person is balanced and grounded.")
-        if self.reappraisal_signal:
-            lines.append("Reappraisal detected — person is healthily reframing their emotion.")
-        if self.suppression_signal:
-            lines.append("Suppression detected — person may be holding back feelings.")
+        if self.reappraisal_score > 0.3:
+            lines.append(f"Reappraisal detected ({self.reappraisal_score:.2f}) - person is actively reframing. Support the healthy processing.")
+        elif self.reappraisal_signal:
+            lines.append("Mild reappraisal signal - person may be beginning to reframe.")
+        if self.suppression_score > 0.4:
+            lines.append(f"Strong suppression signal ({self.suppression_score:.2f}) - person is holding back feelings. Create space gently.")
+        elif self.suppression_score > 0.15:
+            lines.append(f"Mild suppression signal ({self.suppression_score:.2f}) - person may be minimising their emotion.")
+        elif self.suppression_signal:
+            lines.append("Suppression detected - person may be holding back feelings.")
         if self.guilt_type:
             lines.append(f"Guilt type detected: {self.guilt_type}")
         if self.alexithymia_flag:
@@ -204,6 +212,37 @@ NEGATIVE_AFFECT  = ["hate", "angry", "sad", "depressed", "anxious", "scared", "h
 
 HYPER_WORDS = ["furious", "terrified", "panicking", "overwhelmed", "exploding", "screaming", "raging", "frantic", "desperate"]
 HYPO_WORDS  = ["numb", "empty", "shutdown", "frozen", "disconnected", "blank", "nothing", "void", "dissociated"]
+
+REAPPRAISAL_PHRASES = [
+    "looking at it", "thinking about it differently", "on the bright side",
+    "silver lining", "trying to see", "putting it in perspective",
+    "reframing", "it helped me realise", "i can see now", "makes sense now",
+    "i understand now", "looking back", "in a way", "in some ways",
+    "it is what it is", "could be worse", "at least", "the good news",
+    "grateful for", "learning from", "growing from", "moving forward",
+    "letting go", "accepting", "i accept",
+]
+
+REAPPRAISAL_WORDS = [
+    "perspective", "reframe", "accept", "acceptance", "understand",
+    "gratitude", "grateful", "growth", "learning", "lesson",
+    "silver", "bright", "positive", "opportunity", "forward",
+]
+
+SUPPRESSION_PHRASES = [
+    "i am fine", "i am okay", "it is fine", "no big deal",
+    "does not matter", "whatever", "i do not care", "not a big deal",
+    "i should not feel", "i should not be", "stop feeling",
+    "i need to get over", "i need to move on", "push through",
+    "keep going", "just ignore", "trying not to think",
+    "do not want to talk", "rather not say", "never mind",
+]
+
+SUPPRESSION_WORDS = [
+    "fine", "okay", "whatever", "regardless", "anyway",
+    "ignore", "suppress", "hide", "pretend", "mask",
+    "bottle", "push down", "bury", "swallow",
+]
 
 WISE_MIND_PHRASES = ["i understand", "i see both", "on one hand", "on the other hand", "makes sense", "i accept", "even though", "and yet", "both"]
 
@@ -385,17 +424,68 @@ class Extractor:
                 return guilt_type
         return None
 
-    def _detect_reappraisal(self, text: str):
-        words = text.lower().split()
+    def _detect_reappraisal(self, text: str) -> float:
+        """
+        Score reappraisal signal [0, 1].
+        Reappraisal = actively reframing or finding meaning in a situation.
+        Higher score = stronger reappraisal signal.
+        """
+        lower = text.lower()
+        words = lower.split()
+        n = max(len(words), 1)
+
+        score = 0.0
+
+        # Phrase matches (stronger signal)
+        for phrase in REAPPRAISAL_PHRASES:
+            if phrase in lower:
+                score += 0.25
+
+        # Word matches (weaker signal)
+        for word in REAPPRAISAL_WORDS:
+            if word in lower:
+                score += 0.12
+
+        # Linguistic distancing -- using "one" / "people" / "you" instead of "I"
+        # when talking about negative affect = cognitive distancing = reappraisal
         fp   = sum(1 for w in words if w in FIRST_PERSON)
         dist = sum(1 for w in words if w in DISTANCING_WORDS)
-        return dist > fp and len(words) > 5
+        neg  = sum(1 for w in words if w in NEGATIVE_AFFECT)
+        if dist > fp and neg > 0 and len(words) > 5:
+            score += 0.20
 
-    def _detect_suppression(self, text: str):
-        words = text.lower().split()
+        return round(min(1.0, score), 4)
+
+    def _detect_suppression(self, text: str) -> float:
+        """
+        Score suppression signal [0, 1].
+        Suppression = holding back, minimising, or pushing away emotion.
+        Higher score = stronger suppression signal.
+        """
+        lower = text.lower()
+        words = lower.split()
+        n = max(len(words), 1)
+
+        score = 0.0
+
+        # Phrase matches (strong signal)
+        for phrase in SUPPRESSION_PHRASES:
+            if phrase in lower:
+                score += 0.30
+
+        # Word matches (weaker signal)
+        for word in SUPPRESSION_WORDS:
+            if word in lower:
+                score += 0.12
+
+        # First person + negative affect without emotional elaboration
+        # = emotional experience present but not being processed
         fp  = sum(1 for w in words if w in FIRST_PERSON)
         neg = sum(1 for w in words if w in NEGATIVE_AFFECT)
-        return fp >= 2 and neg >= 1
+        if fp >= 2 and neg >= 1:
+            score += 0.15
+
+        return round(min(1.0, score), 4)
 
     def _detect_wot(self, valence: float, arousal: float, text: str):
         lower = text.lower()
@@ -421,13 +511,26 @@ class Extractor:
         lower = text.lower()
         return any(phrase in lower for phrase in CRISIS_PHRASES)
 
-    def _detect_sustained_distress(self, history: List["EmotionResult"]) -> bool:
+    def _detect_sustained_distress(self, history: List["EmotionResult"], suppression_score: float = 0.0) -> bool:
+        """
+        Detect sustained distress across recent messages.
+        High suppression score lowers the threshold -- suppressed distress
+        is harder to see but no less real.
+        """
         if len(history) < SUSTAINED_DISTRESS_COUNT:
             return False
         recent = history[-SUSTAINED_DISTRESS_COUNT:]
+
+        # High suppression = lower the valence threshold (trust the signal even if muted)
+        valence_threshold = DISTRESS_VALENCE_THRESHOLD
+        arousal_threshold = DISTRESS_AROUSAL_THRESHOLD
+        if suppression_score >= 0.5:
+            valence_threshold = DISTRESS_VALENCE_THRESHOLD + 0.15  # easier to trigger
+            arousal_threshold = DISTRESS_AROUSAL_THRESHOLD - 0.15  # easier to trigger
+
         return all(
-            r.valence <= DISTRESS_VALENCE_THRESHOLD and
-            r.arousal >= DISTRESS_AROUSAL_THRESHOLD
+            r.valence <= valence_threshold and
+            r.arousal >= arousal_threshold
             for r in recent
         )
 
@@ -516,12 +619,12 @@ class Extractor:
         wot, wot_trigger = self._detect_wot(valence, arousal, text)
         wot_trajectory    = self._detect_wot_trajectory(history, wot)
         wise_mind        = self._detect_wise_mind(text)
-        reappraisal      = self._detect_reappraisal(text)
-        suppression      = self._detect_suppression(text)
         guilt_type       = self._detect_guilt(text)
         alexithymia      = self._detect_alexithymia(nrc, text)
         crisis           = self._detect_crisis(text)
-        sustained        = self._detect_sustained_distress(history)
+        suppression      = self._detect_suppression(text)
+        reappraisal      = self._detect_reappraisal(text)
+        sustained        = self._detect_sustained_distress(history, suppression_score=suppression)
         outward          = self._detect_outward_reflection(history)
         perma            = score_perma(text)
         sdt              = score_sdt(text)
@@ -555,4 +658,6 @@ class Extractor:
             competence_signal=round(sdt["competence"], 4),
             relatedness_signal=round(sdt["relatedness"], 4),
             wot_trajectory=wot_trajectory,
+            reappraisal_score=reappraisal,
+            suppression_score=suppression,
         )

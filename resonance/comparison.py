@@ -127,8 +127,9 @@ def compare(
     # --- Reappraisal trending (last N messages) ---
     recent_window = history[-REAPPRAISAL_WINDOW:]
     if len(recent_window) >= 3:
+        # Use scored floats if available (Phase 3+), fall back to bool for older records
         reappraisal_scores = [
-            1 if e.reappraisal_signal else 0
+            getattr(e, "reappraisal_score", None) or (1.0 if e.reappraisal_signal else 0.0)
             for e in recent_window
         ]
         mid = len(reappraisal_scores) // 2
@@ -138,8 +139,9 @@ def compare(
     # --- Suppression building (last N messages) ---
     recent_window = history[-SUPPRESSION_WINDOW:]
     if len(recent_window) >= 3:
+        # Use scored floats if available (Phase 3+), fall back to bool for older records
         suppression_scores = [
-            1 if e.suppression_signal else 0
+            getattr(e, "suppression_score", None) or (1.0 if e.suppression_signal else 0.0)
             for e in recent_window
         ]
         mid = len(suppression_scores) // 2
