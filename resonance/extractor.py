@@ -77,6 +77,7 @@ class EmotionResult:
     reappraisal_score: float = 0.0
     suppression_score: float = 0.0
     wise_mind_score: float = 0.0
+    session_trajectory: str = "stable"
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
@@ -92,7 +93,7 @@ class EmotionResult:
             f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
             f"  PERMA: P={self.perma_p:+.2f}  E={self.perma_e:+.2f}  R={self.perma_r:+.2f}  M={self.perma_m:+.2f}  A={self.perma_a:+.2f}\n"
             f"  SDT: autonomy={self.autonomy_signal:.2f}  competence={self.competence_signal:.2f}  relatedness={self.relatedness_signal:.2f}\n"
-            f"  WoT trajectory={self.wot_trajectory}\n"
+            f"  WoT trajectory={self.wot_trajectory}  session trajectory={self.session_trajectory}\n"
             f")"
         )
 
@@ -160,6 +161,10 @@ class EmotionResult:
             lines.append(f"WoT trajectory is escalating - person is moving toward dysregulation. Use calm, grounding language.")
         elif self.wot_trajectory == "deescalating":
             lines.append(f"WoT trajectory is deescalating - person is returning to regulation. Gently affirm their stability.")
+        if self.session_trajectory == "improving":
+            lines.append(f"Overall session trajectory: improving - person is moving in a positive direction. Match and affirm their progress.")
+        elif self.session_trajectory == "declining":
+            lines.append(f"Overall session trajectory: declining - multiple signals moving in a negative direction. Prioritise care and stability.")
         if self.autonomy_signal > 0.4:
             lines.append(f"High agency and self-direction detected (autonomy={self.autonomy_signal:.2f}).")
         if self.competence_signal > 0.4:
@@ -665,6 +670,77 @@ class Extractor:
                 return "deescalating"
             return "stable"
 
+    def _detect_session_trajectory(
+        self,
+        history: list,
+        current_valence: float,
+        current_perma_p: float,
+        wot_trajectory: str,
+        suppression_score: float,
+    ) -> str:
+        """
+        Detect overall session trajectory -- direction of travel across all signals.
+        Combines: valence trend + WoT trajectory + suppression trend + PERMA-P trend.
+        Returns: "improving" | "stable" | "declining"
+
+        Improving = multiple signals moving in a positive direction
+        Declining = multiple signals moving in a negative direction
+        Stable    = no meaningful change or signals mixed
+        """
+        if len(history) < 3:
+            return "stable"
+
+        # --- Valence trend ---
+        valences = [r.valence for r in history[-5:]] + [current_valence]
+        mid = len(valences) // 2
+        valence_early = sum(valences[:mid]) / max(len(valences[:mid]), 1)
+        valence_late  = sum(valences[mid:]) / max(len(valences[mid:]), 1)
+        valence_delta = valence_late - valence_early
+
+        # --- PERMA-P trend ---
+        perma_values = [getattr(r, "perma_p", 0.0) for r in history[-5:]] + [current_perma_p]
+        perma_early = sum(perma_values[:mid]) / max(len(perma_values[:mid]), 1)
+        perma_late  = sum(perma_values[mid:]) / max(len(perma_values[mid:]), 1)
+        perma_delta = perma_late - perma_early
+
+        # --- Suppression trend ---
+        supp_values = [getattr(r, "suppression_score", 0.0) for r in history[-5:]]
+        supp_trend = "rising" if len(supp_values) >= 2 and supp_values[-1] > supp_values[0] + 0.2 else "stable"
+
+        # --- Score positive and negative signals ---
+        positive = 0
+        negative = 0
+
+        # Valence trend
+        if valence_delta > 0.10:
+            positive += 2
+        elif valence_delta < -0.10:
+            negative += 2
+
+        # PERMA-P trend
+        if perma_delta > 0.15:
+            positive += 1
+        elif perma_delta < -0.15:
+            negative += 1
+
+        # WoT trajectory
+        if wot_trajectory == "deescalating":
+            positive += 2
+        elif wot_trajectory == "escalating":
+            negative += 2
+
+        # Suppression trend
+        if supp_trend == "rising":
+            negative += 1
+
+        # Verdict
+        if positive >= 3 and positive > negative:
+            return "improving"
+        elif negative >= 3 and negative > positive:
+            return "declining"
+        else:
+            return "stable"
+
     def extract(
         self,
         text: str,
@@ -695,17 +771,24 @@ class Extractor:
 
         secondary        = self._detect_secondary_independent(text, primary, nrc)
         wot, wot_trigger = self._detect_wot(valence, arousal, text)
-        wot_trajectory    = self._detect_wot_trajectory(history, wot)
+        wot_trajectory       = self._detect_wot_trajectory(history, wot)
+        suppression          = self._detect_suppression(text)
+        reappraisal          = self._detect_reappraisal(text)
         wise_mind        = self._detect_wise_mind(text)
         guilt_type       = self._detect_guilt(text)
         alexithymia      = self._detect_alexithymia(nrc, text)
         crisis           = self._detect_crisis(text)
-        suppression      = self._detect_suppression(text)
-        reappraisal      = self._detect_reappraisal(text)
         sustained        = self._detect_sustained_distress(history, suppression_score=suppression, wot_trajectory=wot_trajectory)
-        outward          = self._detect_outward_reflection(history)
-        perma            = score_perma(text)
-        sdt              = score_sdt(text)
+        outward             = self._detect_outward_reflection(history)
+        perma               = score_perma(text)
+        sdt                 = score_sdt(text)
+        session_trajectory  = self._detect_session_trajectory(
+            history,
+            current_valence=valence,
+            current_perma_p=perma["P"],
+            wot_trajectory=wot_trajectory,
+            suppression_score=suppression,
+        )
 
         return EmotionResult(
             valence=round(valence, 4),
@@ -739,4 +822,5 @@ class Extractor:
             reappraisal_score=reappraisal,
             suppression_score=suppression,
             wise_mind_score=wise_mind,
+            session_trajectory=session_trajectory,
         )
