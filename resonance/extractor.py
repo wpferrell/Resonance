@@ -318,6 +318,66 @@ class Extractor:
                 return candidate
         return candidates[0]
 
+    def _detect_secondary_independent(self, text: str, primary: str, nrc: dict) -> str:
+        """
+        Detect secondary emotion independently from primary.
+        Uses NRC scores and keyword matching to find the strongest
+        secondary emotion signal in the text, regardless of primary.
+        Primary and secondary can now differ simultaneously.
+        """
+        lower = text.lower()
+        words = lower.split()
+
+        # Score all 7 emotion classes independently from text signals
+        scores = {
+            "joy":      0.0,
+            "anger":    0.0,
+            "fear":     0.0,
+            "sadness":  0.0,
+            "surprise": 0.0,
+            "shame":    0.0,
+            "neutral":  0.0,
+        }
+
+        # Layer 1 -- NRC affect frequencies
+        nrc_map = {
+            "joy": ["joy", "trust"],
+            "anger": ["anger", "disgust"],
+            "fear": ["fear"],
+            "sadness": ["sadness"],
+            "surprise": ["surprise", "anticipation"],
+            "shame": [],
+            "neutral": [],
+        }
+        for emotion, nrc_keys in nrc_map.items():
+            for key in nrc_keys:
+                scores[emotion] += nrc.get(key, 0.0)
+
+        # Layer 2 -- keyword signals per class
+        SECONDARY_KEYWORDS = {
+            "joy": ["happy", "glad", "pleased", "grateful", "excited", "love", "proud", "relieved", "hopeful"],
+            "anger": ["angry", "furious", "annoyed", "frustrated", "rage", "mad", "bitter", "resentful"],
+            "fear": ["afraid", "scared", "terrified", "anxious", "worried", "nervous", "dread", "panic"],
+            "sadness": ["sad", "grief", "heartbroken", "lonely", "hopeless", "depressed", "devastated", "disappointed"],
+            "surprise": ["surprised", "shocked", "amazed", "stunned", "astonished", "unexpected"],
+            "shame": ["ashamed", "humiliated", "embarrassed", "guilty", "regret", "remorse", "self-blame"],
+        }
+        for emotion, keywords in SECONDARY_KEYWORDS.items():
+            for kw in keywords:
+                if kw in lower:
+                    scores[emotion] += 0.3
+
+        # Zero out primary so secondary is always different
+        scores[primary] = -1.0
+
+        # Return the highest scoring secondary
+        best = max(scores, key=scores.get)
+        if scores[best] <= 0.0:
+            # No clear secondary signal -- fall back to SECONDARY_MAP defaults
+            fallback = SECONDARY_MAP.get(primary, ["neutral"])
+            return fallback[0]
+        return best
+
     def _detect_guilt(self, text: str):
         lower = text.lower()
         for guilt_type, keywords in GUILT_KEYWORDS.items():
@@ -452,7 +512,7 @@ class Extractor:
         blob_polarity = TextBlob(text).sentiment.polarity
         valence = (valence + blob_polarity) / 2
 
-        secondary        = self._get_secondary(primary, text)
+        secondary        = self._detect_secondary_independent(text, primary, nrc)
         wot, wot_trigger = self._detect_wot(valence, arousal, text)
         wot_trajectory    = self._detect_wot_trajectory(history, wot)
         wise_mind        = self._detect_wise_mind(text)
