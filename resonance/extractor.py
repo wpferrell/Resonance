@@ -15,6 +15,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from nrclex import NRCLex
 from textblob import TextBlob
 from empath import Empath
+from resonance.perma_lexicon import score_perma
 
 MODEL_PATH = Path.home() / ".resonance" / "model_cache"
 if not MODEL_PATH.exists():
@@ -63,6 +64,11 @@ class EmotionResult:
     crisis_detected: bool = False
     sustained_distress: bool = False
     outward_reflection: bool = False
+    perma_p: float = 0.0
+    perma_e: float = 0.0
+    perma_r: float = 0.0
+    perma_m: float = 0.0
+    perma_a: float = 0.0
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
@@ -76,6 +82,7 @@ class EmotionResult:
             f"  wise_mind={self.wise_mind_signal}  reappraisal={self.reappraisal_signal}  suppression={self.suppression_signal}\n"
             f"  confidence={self.confidence:.2f}  alexithymia={self.alexithymia_flag}  modality={self.modality}\n"
             f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
+            f"  PERMA: P={self.perma_p:+.2f}  E={self.perma_e:+.2f}  R={self.perma_r:+.2f}  M={self.perma_m:+.2f}  A={self.perma_a:+.2f}\n"
             f")"
         )
 
@@ -109,6 +116,22 @@ class EmotionResult:
             lines.append("CRISIS DETECTED — surface appropriate support immediately.")
         if self.sustained_distress:
             lines.append("Sustained distress pattern detected — prioritise validation and care.")
+        if self.perma_p < -0.3:
+            lines.append(f"Positive emotion low (P={self.perma_p:+.2f}) - person may be struggling emotionally.")
+        if self.perma_r < -0.3:
+            lines.append(f"Loneliness or disconnection detected (R={self.perma_r:+.2f}) - prioritise warmth and connection.")
+        if self.perma_m < -0.3:
+            lines.append(f"Low sense of meaning or purpose (M={self.perma_m:+.2f}) - avoid hollow reassurance.")
+        if self.perma_p > 0.3:
+            lines.append(f"Positive emotion high (P={self.perma_p:+.2f}) - person is in a good place emotionally.")
+        if self.perma_e > 0.3:
+            lines.append(f"High engagement or flow detected (E={self.perma_e:+.2f}) - person is absorbed and motivated.")
+        if self.perma_r > 0.3:
+            lines.append(f"Strong connection or belonging signal (R={self.perma_r:+.2f}).")
+        if self.perma_m > 0.3:
+            lines.append(f"Strong sense of meaning or purpose (M={self.perma_m:+.2f}).")
+        if self.perma_a > 0.3:
+            lines.append(f"Accomplishment signal detected (A={self.perma_a:+.2f}) - acknowledge their effort or success.")
         lines.append("")
         lines.append("Respond to how this person actually feels, not just what they said.")
         lines.append("Validate before problem-solving. Never jump straight to fixing.")
@@ -373,6 +396,7 @@ class Extractor:
         crisis           = self._detect_crisis(text)
         sustained        = self._detect_sustained_distress(history)
         outward          = self._detect_outward_reflection(history)
+        perma            = score_perma(text)
 
         return EmotionResult(
             valence=round(valence, 4),
@@ -394,4 +418,9 @@ class Extractor:
             crisis_detected=crisis,
             sustained_distress=sustained,
             outward_reflection=outward,
+            perma_p=round(perma["P"], 4),
+            perma_e=round(perma["E"], 4),
+            perma_r=round(perma["R"], 4),
+            perma_m=round(perma["M"], 4),
+            perma_a=round(perma["A"], 4),
         )
