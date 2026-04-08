@@ -73,6 +73,7 @@ class EmotionResult:
     autonomy_signal: float = 0.0
     competence_signal: float = 0.0
     relatedness_signal: float = 0.0
+    wot_trajectory: str = "stable"
 
     def __str__(self):
         wot_flag = "✓in" if self.window_of_tolerance == "in" else "⚠OUT"
@@ -88,6 +89,7 @@ class EmotionResult:
             f"  crisis={self.crisis_detected}  sustained_distress={self.sustained_distress}  outward_reflection={self.outward_reflection}\n"
             f"  PERMA: P={self.perma_p:+.2f}  E={self.perma_e:+.2f}  R={self.perma_r:+.2f}  M={self.perma_m:+.2f}  A={self.perma_a:+.2f}\n"
             f"  SDT: autonomy={self.autonomy_signal:.2f}  competence={self.competence_signal:.2f}  relatedness={self.relatedness_signal:.2f}\n"
+            f"  WoT trajectory={self.wot_trajectory}\n"
             f")"
         )
 
@@ -141,13 +143,14 @@ class EmotionResult:
             lines.append(f"Loneliness or isolation signal detected (relatedness={self.relatedness_signal:.2f}) - this person may feel deeply alone.")
         elif self.relatedness_signal > 0.4:
             lines.append(f"Strong social connection signal (relatedness={self.relatedness_signal:.2f}).")
-        if self.autonomy_signal < 0.1 and self.competence_signal < 0.1:
-            pass
-        else:
-            if self.autonomy_signal > 0.4:
-                lines.append(f"High agency and self-direction detected (autonomy={self.autonomy_signal:.2f}).")
-            if self.competence_signal > 0.4:
-                lines.append(f"Strong mastery or competence signal (competence={self.competence_signal:.2f}) - acknowledge their capability.")
+        if self.wot_trajectory == "escalating":
+            lines.append(f"WoT trajectory is escalating - person is moving toward dysregulation. Use calm, grounding language.")
+        elif self.wot_trajectory == "deescalating":
+            lines.append(f"WoT trajectory is deescalating - person is returning to regulation. Gently affirm their stability.")
+        if self.autonomy_signal > 0.4:
+            lines.append(f"High agency and self-direction detected (autonomy={self.autonomy_signal:.2f}).")
+        if self.competence_signal > 0.4:
+            lines.append(f"Strong mastery or competence signal (competence={self.competence_signal:.2f}) - acknowledge their capability.")
         lines.append("")
         lines.append("Respond to how this person actually feels, not just what they said.")
         lines.append("Validate before problem-solving. Never jump straight to fixing.")
@@ -374,6 +377,53 @@ class Extractor:
         recent = history[-OUTWARD_SESSION_COUNT:]
         return all(r.valence <= OUTWARD_VALENCE_THRESHOLD for r in recent)
 
+    def _detect_wot_trajectory(self, history: list, current_wot: str) -> str:
+        """
+        Detect session-level WoT trajectory across recent messages.
+        Returns: "escalating" | "stable" | "deescalating"
+
+        Escalating   = moving toward or deeper into dysregulation (hyper or hypo)
+        Deescalating = moving back toward the window of tolerance
+        Stable       = no meaningful change
+        """
+        WOT_SCORE = {"in": 0, "hyperarousal": 1, "hypoarousal": -1}
+
+        if len(history) < 2:
+            return "stable"
+
+        # Use last 5 messages for trajectory
+        window = history[-5:]
+        scores = [WOT_SCORE.get(r.window_of_tolerance, 0) for r in window]
+        scores.append(WOT_SCORE.get(current_wot, 0))
+
+        # Count dysregulated vs regulated states
+        dysregulated = [s for s in scores if s != 0]
+        in_window = [s for s in scores if s == 0]
+
+        if len(scores) < 3:
+            return "stable"
+
+        # Look at first half vs second half
+        mid = len(scores) // 2
+        early = scores[:mid]
+        late = scores[mid:]
+
+        early_dysreg = sum(1 for s in early if s != 0)
+        late_dysreg = sum(1 for s in late if s != 0)
+
+        if late_dysreg > early_dysreg:
+            return "escalating"
+        elif early_dysreg > late_dysreg:
+            return "deescalating"
+        else:
+            # Check if current state is dysregulated vs history average
+            history_avg_dysreg = sum(1 for s in scores[:-1] if s != 0) / max(len(scores) - 1, 1)
+            if scores[-1] != 0 and history_avg_dysreg < 0.3:
+                return "escalating"
+            elif scores[-1] == 0 and history_avg_dysreg > 0.5:
+                return "deescalating"
+            return "stable"
+
     def extract(
         self,
         text: str,
@@ -404,6 +454,7 @@ class Extractor:
 
         secondary        = self._get_secondary(primary, text)
         wot, wot_trigger = self._detect_wot(valence, arousal, text)
+        wot_trajectory    = self._detect_wot_trajectory(history, wot)
         wise_mind        = self._detect_wise_mind(text)
         reappraisal      = self._detect_reappraisal(text)
         suppression      = self._detect_suppression(text)
@@ -443,4 +494,5 @@ class Extractor:
             autonomy_signal=round(sdt["autonomy"], 4),
             competence_signal=round(sdt["competence"], 4),
             relatedness_signal=round(sdt["relatedness"], 4),
+            wot_trajectory=wot_trajectory,
         )
