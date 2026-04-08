@@ -270,19 +270,54 @@ STRUCTURAL_SIGNALS = {
 # Returns dict with scores per dimension: -1.0 to +1.0
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+NEGATION_WINDOW = 3
+NEGATION_WORDS = {"no", "not", "never", "nothing", "none", "nobody", "nowhere", "nor", "neither", "without", "hardly", "barely", "scarcely"}
+
+def _count_negated(word_list, words):
+    """
+    Count how many words from word_list appear in the text but are
+    preceded by a negation word within NEGATION_WINDOW tokens.
+    Returns (positive_hits, negated_hits) where negated hits should
+    be counted as negative rather than positive.
+    """
+    pos_hits = 0
+    neg_hits = 0
+    for i, w in enumerate(words):
+        for target in word_list:
+            target_words = target.split()
+            # Check if target phrase starts at position i
+            if words[i:i+len(target_words)] == target_words:
+                # Look back NEGATION_WINDOW tokens for a negation word
+                window_start = max(0, i - NEGATION_WINDOW)
+                preceding = words[window_start:i]
+                if any(neg in preceding for neg in NEGATION_WORDS):
+                    neg_hits += 1
+                else:
+                    pos_hits += 1
+                break
+    return pos_hits, neg_hits
+
+
 def score_perma(text: str) -> dict:
     """
     Score a text on all 5 PERMA dimensions.
     Returns: {"P": float, "E": float, "R": float, "M": float, "A": float}
     Each score is -1.0 (strongly negative) to +1.0 (strongly positive).
+    Negation-aware: positive words preceded by negation (no, not, nothing...)
+    are counted as negative hits rather than positive.
     """
     lower = text.lower()
     words = lower.split()
     n = max(len(words), 1)
 
     def _word_score(positives, negatives, phrases=None, structural=None):
-        pos = sum(1 for w in positives if w in lower) / n * 10
+        # Negation-aware positive counting
+        pos_hits, negated_hits = _count_negated(positives, words)
+        pos = (pos_hits / n) * 10
+        # Negated positives flip to negative signal
+        neg_from_negation = (negated_hits / n) * 10
         neg = sum(1 for w in negatives if w in lower) / n * 10
+        neg += neg_from_negation
         phrase_bonus = 0.0
         if phrases:
             phrase_bonus = sum(0.15 for p in phrases if p in lower)
