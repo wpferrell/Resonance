@@ -120,7 +120,7 @@ It reflects emotion — it does not diagnose, treat, or replace professional sup
 
 It is a mirror, not a therapist. It detects emotion. It never tells you what that emotion means for your life.
 
-If you are in crisis, Resonance will flag it — and any application built on Resonance is required to surface appropriate support immediately.
+If you are in crisis, Resonance will flag it â€” `crisis_detected` is set to True in the EmotionResult — and any application built on Resonance is required to surface appropriate support immediately.
 
 ---
 
