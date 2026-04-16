@@ -13,7 +13,6 @@ CACHE_DIR = Path.home() / ".resonance" / "model_cache"
 
 FILES = [
     "model.safetensors",
-    "training_args.bin",
     "config.json",
     "tokenizer_config.json",
     "tokenizer.json",
