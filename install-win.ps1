@@ -59,7 +59,7 @@ while ($job.State -eq 'Running') {
     $pct = [int](($filled / $width) * 100)
     if ($pct -ne $lastPct) {
         $bar = ("#" * $filled) + ("-" * ($width - $filled))
-        Write-Host -NoNewline "  [$bar] $pct%  "
+        Write-Host -NoNewline "`r  [$bar] $pct%  "
         $lastPct = $pct
     }
     Start-Sleep -Milliseconds 500
@@ -68,24 +68,37 @@ while ($job.State -eq 'Running') {
 Receive-Job $job | Out-Null
 Remove-Job $job
 $bar = "#" * $width
-Write-Host "  [$bar] 100%  "
+Write-Host "`r  [$bar] 100%  "
 Write-Host ""
 Write-Host "OK: Resonance installed"
 Write-Host ""
-Write-Host "Setting up Resonance (first run only)..."
+Write-Host "Downloading model weights (first run only, ~700MB)..."
+Write-Host "This may take a few minutes depending on your connection."
 Write-Host ""
-& "$venvDir\Scripts\python" -c "from resonance import Resonance; Resonance(user_id='_setup')"
+
+& "$venvDir\Scripts\python" -c @"
+import os, json
+config_dir = os.path.expanduser('~/.resonance')
+os.makedirs(config_dir, exist_ok=True)
+config_path = os.path.join(config_dir, 'config.json')
+if not os.path.exists(config_path):
+    with open(config_path, 'w') as f:
+        json.dump({'first_run_complete': True, 'feedback_enabled': False}, f)
+from resonance.model_loader import ensure_model_downloaded
+ensure_model_downloaded()
+"@
+
 Write-Host ""
 Write-Host "+----------------------------------------------------------+"
 Write-Host "|                   Resonance is ready.                    |"
 Write-Host "+----------------------------------------------------------+"
 Write-Host ""
-Write-Host "Resonance is installed and ready to use."
-Write-Host ""
 Write-Host "Add it to any Python project:"
 Write-Host "  from resonance import Resonance"
 Write-Host "  r = Resonance(user_id='your-user-id')"
 Write-Host ""
+Write-Host "To enable anonymous feedback to help improve Resonance:"
+Write-Host "  r.set_feedback(True)"
+Write-Host ""
 Write-Host "Developer guide: https://resonance-layer.com/guide"
-Write-Host "User guide:      https://resonance-layer.com/user-guide"
 Write-Host ""
