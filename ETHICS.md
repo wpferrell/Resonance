@@ -12,7 +12,7 @@ Its purpose is narrow and specific: to detect a person's emotional state from te
 
 Resonance is part of the evolution of AI — the same way AI learned to understand language, it now begins to understand how a person actually feels when they use it. Resonance exists to make that possible. Nothing more.
 
-Resonance is not a novelty layer or a feature. It is infrastructure — the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Six detection frameworks are built into every layer — Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, Window of Tolerance, PERMA flourishing, and Wise Mind — each grounded in decades of psychological research. That demands rigour.
+Resonance is not a novelty layer or a feature. It is infrastructure — the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Seven detection frameworks are built into every layer — Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, Window of Tolerance, PERMA flourishing, Wise Mind, and PoliGuilt guilt typing — each grounded in decades of psychological research. That demands rigour.
 
 ---
 
@@ -42,15 +42,15 @@ Developers integrating Resonance must honour this principle. Do not collect, tra
 
 ## Crisis Detection — Developer Responsibility
 
-Resonance detects severe emotional distress. When the Window of Tolerance collapses, when high-arousal negative affect patterns are detected, when language signals acute crisis — Resonance sets a `crisis_flag` in the emotional context it passes to the AI.
+Resonance detects severe emotional distress. A dedicated crisis detection head runs on every message independently of other signals — it does not rely on Window of Tolerance collapse alone. When acute distress language is detected, Resonance sets `crisis_detected` to True in the EmotionResult.
 
 That flag means: stop normal conversation. Prioritise safety.
 
 What happens next is the responsibility of the developer who built the application using Resonance. Resonance is a layer — it cannot control the interface above it. But the expected behaviour is explicit:
 
-**If `crisis_flag` is set to `True`, the application must surface a crisis resource immediately.** This is not optional. It is the expected standard for any application built on Resonance.
+**If `crisis_detected` is set to `True`, the application must surface a crisis resource immediately.** This is not optional. It is the expected standard for any application built on Resonance.
 
-Suggested minimum response when `crisis_flag` is `True`:
+Suggested minimum response when `crisis_detected` is `True`:
 - Pause standard AI conversation flow
 - Surface a relevant crisis helpline or resource for the user's region
 - Do not attempt to resolve the crisis through AI conversation
@@ -81,7 +81,7 @@ This is not a feature. It is the foundation.
 
 ---
 
-## The Six Detection Frameworks
+## The Seven Detection Frameworks
 
 Every psychological framework baked into Resonance was chosen for one reason: it reflects how humans actually experience and regulate emotion, validated by research. They are not decoration. They shape every detection, every profile, every word passed to an AI.
 
@@ -198,6 +198,8 @@ Developers deploying Resonance in multilingual or multicultural contexts should 
 ## Model Limitations
 
 Resonance detects patterns. It can be wrong.
+
+Resonance v2 has specific known weak spots: shame detection has the lowest F1 score of any emotion class, sadness detection is weaker than anger, fear, and joy, and some high-arousal distress language is occasionally misclassified as surprise. These are documented honestly and will be improved in v3.
 
 Sarcasm, irony, understatement, culturally specific idiom, neurodivergent communication styles, and highly individual ways of expressing emotion can all produce incorrect detections. A person who expresses anger quietly, or grief through humour, or joy through self-deprecation, may not be detected accurately — especially early in their interaction with the system before personalisation has had time to work.
 
