@@ -14,9 +14,10 @@ Every decision in this roadmap traces back to that vision.
 
 ## What Is Live Now
 
-- **resonance-layer v1.x** â€” installable via `pip install resonance-layer`
+- **resonance-layer v2.0.0** — installable via `pip install resonance-layer`
+- Custom-trained student model replacing the v1 rule-based system — detection is learned, not rule-based
 - Emotion detection across 7 classes with VAD scoring
-- Six psychology framework signals: PERMA, SDT, Window of Tolerance, reappraisal/suppression, Wise Mind, secondary emotion
+- Seven psychology framework signals: PERMA, SDT, Window of Tolerance, reappraisal/suppression, Wise Mind, secondary emotion, PoliGuilt guilt typing
 - Per-user emotional profile that builds over time
 - LLM context injection via `to_prompt()`
 - Anonymous feedback collection to Pi server
@@ -24,19 +25,20 @@ Every decision in this roadmap traces back to that vision.
 
 ---
 
-## What Is Being Built â€” v2.0.0
+## What Changed in v2.0.0
 
 A ground-up rebuild of the emotion model at the core of Resonance.
 
-The current model gets the broad strokes right but struggles with nuanced emotions â€” particularly shame, which sits close to guilt and embarrassment in emotional space. v2.0.0 fixes this with a new teacher-student architecture trained on a carefully curated dataset of real human emotional expression.
+v1 got the broad strokes right but struggled with nuanced emotions — particularly shame, which sits close to guilt and embarrassment in emotional space. v2.0.0 addresses this with a new teacher-student architecture trained on a carefully curated dataset of real human emotional expression.
 
-**What changes in v2.0.0:**
-- New student model replacing the current one â€” more accurate, especially on subtle and hard-to-detect emotions
-- All six psychology framework signals upgraded from rule-based to model-driven scored outputs
-- Richer LLM context â€” more signal, more nuance, more useful to the LLM
-- Same install, same API â€” developers get the upgrade automatically
+**What changed:**
+- New custom-trained student model — more accurate, especially on subtle and hard-to-detect emotions
+- Primary emotion, shame/guilt separation, and crisis detection now model-driven
+- Framework signals produce richer scored outputs
+- Richer LLM context — more signal, more nuance, more useful to the LLM
+- Same install, same API — developers get the upgrade automatically
 
-**What stays the same:**
+**What stayed the same:**
 - `pip install resonance-layer` â€” no change
 - `r.process()` and `to_prompt()` â€” no change
 - Fully local, no external server required â€” no change
@@ -46,7 +48,7 @@ The current model gets the broad strokes right but struggles with nuanced emotio
 
 ## Timeline
 
-v2.0.0 is in active development. No release date is promised. It ships when it is right.
+v2.0.0 is live. Further out work is listed below.
 
 ---
 
