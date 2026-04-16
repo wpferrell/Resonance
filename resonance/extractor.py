@@ -6,6 +6,7 @@
 import os
 import json
 import re
+import contextlib
 from dataclasses import dataclass, field
 from typing import Optional, List
 from pathlib import Path
@@ -288,6 +289,7 @@ class Extractor:
         self._confidence_profile = {}
         self._load_confidence_profile()
         self._load_model()
+        self._load_student_model()
 
     def _load_confidence_profile(self):
         profile_path = MODEL_PATH / "confidence_profile.json"
@@ -326,6 +328,65 @@ class Extractor:
         except Exception:
             self._model = None
 
+    def _load_student_model(self):
+        """Load the v2 student model (DeBERTa-v3-base) for primary emotion detection."""
+        self._student_model = None
+        self._student_tokenizer = None
+        try:
+            from resonance.student_model import StudentModel
+            from transformers import DebertaV2Model
+
+            # Find model path
+            _student_path = Path.home() / ".resonance" / "student_model.pt"
+            if not _student_path.exists():
+                _student_path = Path(__file__).parent.parent / "models" / "student_deberta_base" / "model_state_averaged.pt"
+            if not _student_path.exists():
+                import logging
+                logging.getLogger("resonance").warning(
+                    "[Resonance] Student model not found â€” running in v1 compatibility mode. "
+                    "Run `resonance-download-model` or reinstall to get the full model."
+                )
+                return
+
+            _hf_name = "microsoft/deberta-v3-base"
+            self._student_tokenizer = AutoTokenizer.from_pretrained(_hf_name)
+            import io
+            from contextlib import redirect_stderr
+            with redirect_stderr(io.StringIO()):
+                _backbone = DebertaV2Model.from_pretrained(_hf_name)
+            self._student_model = StudentModel(_backbone)
+            _state = torch.load(_student_path, map_location="cpu")
+            self._student_model.load_state_dict(_state)
+            self._student_model.eval()
+            if torch.cuda.is_available():
+                self._student_model = self._student_model.cuda()
+        except Exception as e:
+            import logging
+            logging.getLogger("resonance").warning(
+                f"[Resonance] Student model failed to load ({e}) â€” running in v1 compatibility mode."
+            )
+            self._student_model = None
+            self._student_tokenizer = None
+
+    def _predict_student(self, text: str):
+        """Run student model inference. Returns (emotion, confidence, outputs_dict)."""
+        EMOTIONS = ["joy", "anger", "fear", "sadness", "surprise", "shame", "neutral"]
+        try:
+            enc = self._student_tokenizer(
+                text, return_tensors="pt", max_length=256,
+                truncation=True, padding="max_length"
+            )
+            device = next(self._student_model.parameters()).device
+            enc = {k: v.to(device) for k, v in enc.items()}
+            with torch.no_grad():
+                with torch.amp.autocast("cuda", dtype=torch.bfloat16) if torch.cuda.is_available() else contextlib.nullcontext():
+                    out = self._student_model(enc["input_ids"], enc["attention_mask"])
+            probs = torch.softmax(out["primary"].float(), dim=-1).cpu()[0]
+            idx   = probs.argmax().item()
+            return EMOTIONS[idx], float(probs[idx]), out
+        except Exception:
+            return None, 0.0, None
+
     def _predict_model(self, text: str):
         inputs = self._tokenizer(
             text, return_tensors="pt", truncation=True,
@@ -352,6 +413,12 @@ class Extractor:
         return best, min(0.60, best_score / 5.0)
 
     def _predict_ensemble(self, text: str, nrc: dict):
+        # Student model is the primary predictor in v2
+        if self._student_model is not None:
+            emotion, conf, _ = self._predict_student(text)
+            if emotion is not None and conf >= 0.40:
+                return emotion, conf
+        # Fall back to existing ensemble if student unavailable or low confidence
         if self._model is None:
             return self._predict_nrc(nrc)
         model_emotion, model_conf = self._predict_model(text)
@@ -379,14 +446,6 @@ class Extractor:
         if result:
             return result  # returns (emotion, confidence) tuple
         return None
-
-    def _get_secondary(self, primary: str, text: str):
-        candidates = SECONDARY_MAP.get(primary, ["neutral"])
-        lower = text.lower()
-        for candidate in candidates:
-            if candidate.replace("_", " ") in lower:
-                return candidate
-        return candidates[0]
 
     def _detect_secondary_independent(self, text: str, primary: str, nrc: dict) -> str:
         """
@@ -522,7 +581,7 @@ class Extractor:
         lower = text.lower()
         has_hyper_word = any(w in lower for w in HYPER_WORDS)
         has_hypo_word  = any(w in lower for w in HYPO_WORDS)
-        if has_hyper_word and arousal > 0.82:
+        if has_hyper_word and arousal > 0.60:
             return "hyperarousal", "hyperarousal_words"
         if has_hypo_word or (valence < -0.60 and arousal < 0.25):
             return "hypoarousal", "hypoarousal_words"
@@ -757,22 +816,65 @@ class Extractor:
         emoji_result = self._detect_emoji_emotion(text)
         if emoji_result:
             primary, confidence = emoji_result
+            _student_out = None
         else:
-            primary, confidence = self._predict_ensemble(text, nrc)
+            # Try student model first
+            if self._student_model is not None:
+                _s_emotion, _s_conf, _student_out = self._predict_student(text)
+                if _s_emotion is not None and _s_conf >= 0.40:
+                    primary, confidence = _s_emotion, _s_conf
+                else:
+                    primary, confidence = self._predict_ensemble(text, nrc)
+                    _student_out = None
+            else:
+                primary, confidence = self._predict_ensemble(text, nrc)
+                _student_out = None
 
-        valence, arousal, dominance = VAD.get(primary, (0.0, 0.2, 0.5))
-        blob_polarity = TextBlob(text).sentiment.polarity
-        valence = (valence + blob_polarity) / 2
+        # Wire student secondary heads if available
+        GUILT_TYPES = ["shame_guilt", "self_blame", "moral_guilt", "social_guilt"]
+        if _student_out is not None:
+            try:
+                import torch.nn.functional as F
+                # VAD from student
+                _vad = _student_out["vad"].float().cpu()[0]
+                _s_valence    = float(torch.tanh(_vad[0]))
+                _s_arousal    = float(torch.sigmoid(_vad[1]))
+                _s_dominance  = float(torch.sigmoid(_vad[2]))
+                # Guilt from student
+                _guilt_logits = _student_out["guilt"].float().cpu()[0]
+                _guilt_probs  = torch.sigmoid(_guilt_logits)
+                _guilt_idx    = _guilt_probs.argmax().item()
+                _s_guilt_type = GUILT_TYPES[_guilt_idx] if float(_guilt_probs[_guilt_idx]) > 0.3 else None
+                # Crisis from student
+                _s_crisis     = float(torch.sigmoid(_student_out["crisis"].float().cpu()[0])) > 0.5
+                # Reappraisal from student
+                _s_reap       = float(torch.sigmoid(_student_out["reappraisal"].float().cpu()[0]))
+                # Suppression from student
+                _s_supp       = float(torch.sigmoid(_student_out["suppression"].float().cpu()[0]))
+                # Alexithymia from student
+                _s_alex       = float(torch.sigmoid(_student_out["alexithymia"].float().cpu()[0])) > 0.5
+                _use_student_heads = True
+            except Exception:
+                _use_student_heads = False
+        else:
+            _use_student_heads = False
+
+        if _use_student_heads:
+            valence, arousal, dominance = _s_valence, _s_arousal, _s_dominance
+        else:
+            valence, arousal, dominance = VAD.get(primary, (0.0, 0.2, 0.5))
+            blob_polarity = TextBlob(text).sentiment.polarity
+            valence = (valence + blob_polarity) / 2
 
         secondary        = self._detect_secondary_independent(text, primary, nrc)
         wot, wot_trigger = self._detect_wot(valence, arousal, text)
         wot_trajectory       = self._detect_wot_trajectory(history, wot)
-        suppression          = self._detect_suppression(text)
-        reappraisal          = self._detect_reappraisal(text)
+        suppression          = _s_supp if _use_student_heads else self._detect_suppression(text)
+        reappraisal          = _s_reap if _use_student_heads else self._detect_reappraisal(text)
         wise_mind        = self._detect_wise_mind(text)
-        guilt_type       = self._detect_guilt(text)
-        alexithymia      = self._detect_alexithymia(nrc, text)
-        crisis           = self._detect_crisis(text)
+        guilt_type       = _s_guilt_type if _use_student_heads else self._detect_guilt(text)
+        alexithymia      = _s_alex if _use_student_heads else self._detect_alexithymia(nrc, text)
+        crisis           = (_s_crisis or self._detect_crisis(text)) if _use_student_heads else self._detect_crisis(text)
         sustained        = self._detect_sustained_distress(history, suppression_score=suppression, wot_trajectory=wot_trajectory)
         outward             = self._detect_outward_reflection(history)
         perma               = score_perma(text)
@@ -793,9 +895,9 @@ class Extractor:
             secondary_emotion=secondary,
             window_of_tolerance=wot,
             wot_triggered_by=wot_trigger,
-            wise_mind_signal=wise_mind,
-            reappraisal_signal=reappraisal,
-            suppression_signal=suppression,
+            wise_mind_signal=bool(wise_mind),
+            reappraisal_signal=bool(reappraisal),
+            suppression_signal=bool(suppression),
             guilt_type=guilt_type,
             confidence=round(confidence, 4),
             alexithymia_flag=alexithymia,
