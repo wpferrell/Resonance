@@ -30,6 +30,8 @@ The install script handles everything automatically — virtual environment, dep
 
 **Requirements:** Python 3.10+, runs fully embedded, no external server required.
 
+**First run:** model weights (~700MB) download automatically from HuggingFace on first use and are cached locally. After that, everything runs fully offline.
+
 ---
 
 ## How Resonance Works in Practice
@@ -37,6 +39,8 @@ The install script handles everything automatically — virtual environment, dep
 Resonance sits between the user's message and the LLM. Every time a user sends a message, Resonance processes it first. It detects the emotional state, updates the user's profile, checks for flags, and then prepends an emotional context block to the conversation before the LLM ever sees it.
 
 The user sees none of this. The LLM receives it silently. The conversation feels more human because the LLM knows who it is talking to — not just what they said.
+
+**v2.0.0 — trained model:** Detection in v2 is powered by a custom-trained student model distilled from specialist teachers across real human expressions. Primary emotion, shame and guilt separation, crisis detection, and all framework signals are produced by the model directly. Detection is learned, not rule-based.
 
 ---
 
@@ -146,7 +150,7 @@ Behavioural instructions:
 User: I don't see the point in any of this anymore
 ```
 
-**When crisis_flag is True, normal conversation stops. A crisis resource must be surfaced immediately.** This is the developer's responsibility. See the Ethics document for the full crisis handling requirement.
+**When `crisis_detected` is True, normal conversation stops. A crisis resource must be surfaced immediately.** This is the developer's responsibility. See the Ethics document for the full crisis handling requirement.
 
 ---
 
@@ -245,21 +249,28 @@ Resonance handles detection, profiling, injection, and flagging. Developers are 
 
 ---
 
+## Known Limitations
+
+Resonance v2 is a trained model — it is more accurate than the rule-based v1 system, but it has known weak spots. Shame detection has the lowest F1 score of any class. Sadness detection is also weaker than anger, fear, and joy. Some high-arousal distress language is occasionally misclassified as surprise.
+
+These limitations are documented honestly because developers building on Resonance should know where the model is less reliable. Improvements are planned for v3.
+
+---
+
 ## Flags Reference
 
 | Flag | Type | Meaning |
 |------|------|---------|
-| `crisis_flag` | Boolean | Acute distress detected — surface crisis resource immediately |
-| `injection_flag` | Boolean | Prompt injection attempt detected and stripped |
-| `wot_state` | String | WITHIN / ABOVE / BELOW — Window of Tolerance state |
-| `wise_mind_signal` | String | WISE_MIND / EMOTION_MIND / REASONABLE_MIND |
+| `crisis_detected` | Boolean | Acute distress detected — surface crisis resource immediately |
+| `window_of_tolerance` | String | hyperarousal / in / hypoarousal — Window of Tolerance state |
+| `wise_mind_signal` | String | True/False — Wise Mind state detected |
 | `alexithymia_flag` | Boolean | Low emotion word density — use sensation language not feeling labels |
+| `guilt_type` | String | PoliGuilt guilt type — one of: survivor, moral, anticipatory, shame-adjacent |
 | `confidence` | Float | 0.0–1.0 — detection confidence for this message |
-| `profile_confidence` | String | low / medium / high — based on sessions and correction history |
 
 ---
 
-*If something in this guide is unclear, incomplete, or wrong — raise it at [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues). This document will be updated as Resonance evolves.*
+---
 
 ## Visual Dashboard Panel
 
@@ -274,3 +285,7 @@ r.start_panel()
 This opens a local server at `http://localhost:7731` and launches the panel in your browser. The panel shows the detected emotion, energy and mood bars, a tonal reflection of what Resonance senses, and a `does this feel right?` feedback row so users can confirm or correct the reading.
 
 The panel is optional — Resonance works fully without it. It is useful during development to verify that detections look right, and can be offered to end users as an ambient emotional awareness layer alongside your interface.
+
+---
+
+*If something in this guide is unclear, incomplete, or wrong — raise it at [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues). This document will be updated as Resonance evolves.*
