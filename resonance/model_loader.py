@@ -1,9 +1,9 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
-# Licensed under the Business Source License 1.1 — see LICENSE for details.
+# Licensed under the Business Source License 1.1  -  see LICENSE for details.
 
 # resonance/model_loader.py
 # Downloads model weights from HuggingFace on first run.
-# Weights are cached locally after first download — never downloaded again.
+# Weights are cached locally after first download  -  never downloaded again.
 
 from pathlib import Path
 from huggingface_hub import hf_hub_download
