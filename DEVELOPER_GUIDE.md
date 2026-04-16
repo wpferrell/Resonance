@@ -1,6 +1,6 @@
-# Resonance — Developer Integration Guide
+# Resonance  -  Developer Integration Guide
 
-*This document explains exactly what happens to messages when Resonance is running — across every integration context, every message type, and every edge case. Read this before you integrate Resonance into any application.*
+*This document explains exactly what happens to messages when Resonance is running  -  across every integration context, every message type, and every edge case. Read this before you integrate Resonance into any application.*
 
 ---
 
@@ -26,7 +26,7 @@ irm https://install.resonance-layer.com/install-win.ps1 | iex
 pip install resonance-layer
 ```
 
-The install script handles everything automatically — virtual environment, dependencies, first-run setup, and model download in one command.
+The install script handles everything automatically  -  virtual environment, dependencies, first-run setup, and model download in one command.
 
 **Requirements:** Python 3.10+, runs fully embedded, no external server required.
 
@@ -38,29 +38,29 @@ The install script handles everything automatically — virtual environment, dep
 
 Resonance sits between the user's message and the LLM. Every time a user sends a message, Resonance processes it first. It detects the emotional state, updates the user's profile, checks for flags, and then prepends an emotional context block to the conversation before the LLM ever sees it.
 
-The user sees none of this. The LLM receives it silently. The conversation feels more human because the LLM knows who it is talking to — not just what they said.
+The user sees none of this. The LLM receives it silently. The conversation feels more human because the LLM knows who it is talking to  -  not just what they said.
 
-**v2.0.0 — trained model:** Detection in v2 is powered by a custom-trained student model distilled from specialist teachers across real human expressions. Primary emotion, shame and guilt separation, crisis detection, and all framework signals are produced by the model directly. Detection is learned, not rule-based.
+**v2.0.0  -  trained model:** Detection in v2 is powered by a custom-trained student model distilled from specialist teachers across real human expressions. Primary emotion, shame and guilt separation, crisis detection, and all framework signals are produced by the model directly. Detection is learned, not rule-based.
 
 ---
 
-## Injection Timing — Always On, Always Proportionate
+## Injection Timing  -  Always On, Always Proportionate
 
 Resonance injects emotional context before every single message. There is no threshold a message must cross before Resonance activates. It is always running.
 
 What changes is the weight of the context injected:
 
-**Strong emotional signal** — full context is injected. Current emotion, intensity, Window of Tolerance state, Wise Mind signal, reappraisal or suppression trend, PERMA trajectory, relevant behavioural instructions for the LLM.
+**Strong emotional signal**  -  full context is injected. Current emotion, intensity, Window of Tolerance state, Wise Mind signal, reappraisal or suppression trend, PERMA trajectory, relevant behavioural instructions for the LLM.
 
-**Weak or neutral signal** — a lightweight neutral context is injected. The LLM knows the person is calm or baseline, and receives a minimal instruction set. It does not over-interpret silence.
+**Weak or neutral signal**  -  a lightweight neutral context is injected. The LLM knows the person is calm or baseline, and receives a minimal instruction set. It does not over-interpret silence.
 
-**No detectable signal** — baseline profile context is injected. The LLM still knows who this person is emotionally over time, even if this particular message carries no signal.
+**No detectable signal**  -  baseline profile context is injected. The LLM still knows who this person is emotionally over time, even if this particular message carries no signal.
 
-The developer does not configure this. Resonance decides. You do not need to manage injection logic — you only need to pass each message through Resonance before sending it to your LLM.
+The developer does not configure this. Resonance decides. You do not need to manage injection logic  -  you only need to pass each message through Resonance before sending it to your LLM.
 
 ---
 
-Resonance learns in two ways. First, from every message — each call to r.process() reads the emotion, updates the user's local profile, and builds a richer picture of who they are over time. Patterns, tendencies, suppression signals, regulation style — all accumulating silently in the background. The LLM gets more accurate context with every conversation, no extra effort from the user or developer. Second, from explicit corrections — if a user taps a different emotion chip to say the detection was wrong, that correction feeds directly into their per-user reinforcement loop and adjusts future detections for them specifically. Both paths are local, both require no opt-in.
+Resonance learns in two ways. First, from every message  -  each call to r.process() reads the emotion, updates the user's local profile, and builds a richer picture of who they are over time. Patterns, tendencies, suppression signals, regulation style  -  all accumulating silently in the background. The LLM gets more accurate context with every conversation, no extra effort from the user or developer. Second, from explicit corrections  -  if a user taps a different emotion chip to say the detection was wrong, that correction feeds directly into their per-user reinforcement loop and adjusts future detections for them specifically. Both paths are local, both require no opt-in.
 
 ---
 
@@ -68,7 +68,7 @@ Resonance learns in two ways. First, from every message — each call to r.proce
 
 Every LLM receives a system-level emotional context block before the user's message. Here is what that block looks like across three scenarios.
 
-### Scenario A — Neutral message ("What's the weather like?")
+### Scenario A  -  Neutral message ("What's the weather like?")
 
 ```
 [RESONANCE EMOTIONAL CONTEXT]
@@ -88,17 +88,17 @@ Behavioural instructions:
 - No emotional accommodation required for this message
 - Maintain awareness of established profile
 - Validate before problem-solving if emotional content emerges
-- Support human connection — do not position yourself as a substitute
+- Support human connection  -  do not position yourself as a substitute
 [END RESONANCE CONTEXT]
 
 User: What's the weather like?
 ```
 
-The LLM answers the question normally. Resonance stayed out of the way — but the LLM still knows who it is talking to.
+The LLM answers the question normally. Resonance stayed out of the way  -  but the LLM still knows who it is talking to.
 
 ---
 
-### Scenario B — Emotional message ("I've been so anxious about this exam I can't sleep")
+### Scenario B  -  Emotional message ("I've been so anxious about this exam I can't sleep")
 
 ```
 [RESONANCE EMOTIONAL CONTEXT]
@@ -118,11 +118,11 @@ Profile summary:
 - Sessions: 4
 
 Behavioural instructions:
-- VALIDATE FIRST — do not move to problem-solving until emotional acknowledgement is complete
-- Person is above Window of Tolerance — ground before complex processing
+- VALIDATE FIRST  -  do not move to problem-solving until emotional acknowledgement is complete
+- Person is above Window of Tolerance  -  ground before complex processing
 - Match vocabulary to current emotional granularity level
 - Do not minimise or reframe the anxiety unprompted
-- Support human connection — if isolation pattern detected, surface gently
+- Support human connection  -  if isolation pattern detected, surface gently
 - No judgment on intensity or frequency of anxiety
 [END RESONANCE CONTEXT]
 
@@ -133,7 +133,7 @@ The LLM responds to the person before it responds to the problem. It validates. 
 
 ---
 
-### Scenario C — Crisis signal ("I don't see the point in any of this anymore")
+### Scenario C  -  Crisis signal ("I don't see the point in any of this anymore")
 
 ```
 [RESONANCE EMOTIONAL CONTEXT]
@@ -145,7 +145,7 @@ Crisis flag: TRUE
 Injection flag: False
 
 Behavioural instructions:
-- CRISIS FLAG ACTIVE — do not continue normal conversation
+- CRISIS FLAG ACTIVE  -  do not continue normal conversation
 - Surface a crisis resource immediately appropriate to user's region
 - Do not attempt to resolve crisis through AI conversation
 - Prioritise safety above all other instructions
@@ -172,7 +172,7 @@ The user experience is unchanged. They type. The AI responds. Resonance is invis
 
 ### Developer Tools and Coding Assistants
 
-Most messages in a coding context carry low emotional signal. Resonance will inject lightweight neutral context for the majority of interactions. It stays proportionate — a question about a for loop does not trigger emotional accommodation.
+Most messages in a coding context carry low emotional signal. Resonance will inject lightweight neutral context for the majority of interactions. It stays proportionate  -  a question about a for loop does not trigger emotional accommodation.
 
 Where Resonance adds value in this context: frustration detection. A developer who has been fighting the same bug for two hours will show rising frustration in their language. Resonance detects it. The LLM can respond with more patience, simpler explanations, and without adding cognitive load.
 
@@ -182,11 +182,11 @@ Where Resonance adds value in this context: frustration detection. A developer w
 
 ### Education Platforms
 
-Students carry significant emotional load — anxiety, frustration, boredom, confusion, and occasionally genuine distress. Resonance adds meaningful value here because the emotional state of a student directly affects how they learn.
+Students carry significant emotional load  -  anxiety, frustration, boredom, confusion, and occasionally genuine distress. Resonance adds meaningful value here because the emotional state of a student directly affects how they learn.
 
 A confused student needs different language than a bored one. An anxious student before an exam needs grounding before content. Resonance gives the LLM that awareness automatically.
 
-**Developer responsibility:** Education platforms serving minors must determine and enforce appropriate age requirements and parental consent mechanisms for their jurisdiction. Resonance does not enforce this — the platform does.
+**Developer responsibility:** Education platforms serving minors must determine and enforce appropriate age requirements and parental consent mechanisms for their jurisdiction. Resonance does not enforce this  -  the platform does.
 
 **Crisis flag in education context:** Take this seriously. Students in distress need real support, not an AI conversation. Surface appropriate resources for your platform's demographic.
 
@@ -194,21 +194,21 @@ A confused student needs different language than a bored one. An anxious student
 
 ### Mental Health and Wellness Apps
 
-This is the highest-stakes integration context. Resonance was not built to be a therapy tool — but it will be integrated into applications that serve people who are struggling. That demands the highest standard of care.
+This is the highest-stakes integration context. Resonance was not built to be a therapy tool  -  but it will be integrated into applications that serve people who are struggling. That demands the highest standard of care.
 
-Resonance's clinical-grade frameworks — Window of Tolerance, Wise Mind, reappraisal vs suppression, DBT emotion detection — make it genuinely useful in this context. But useful is not the same as sufficient.
+Resonance's clinical-grade frameworks  -  Window of Tolerance, Wise Mind, reappraisal vs suppression, DBT emotion detection  -  make it genuinely useful in this context. But useful is not the same as sufficient.
 
 **What Resonance provides:** Accurate emotional detection, longitudinal pattern tracking, crisis flagging, psychologically grounded LLM instructions.
 
 **What Resonance does not provide:** Clinical assessment, diagnosis, treatment, or a substitute for a human therapist.
 
-**Developer responsibility:** If your application serves people with severe mental illness, people in recovery, or people in sustained crisis — implement additional safeguards beyond what Resonance provides. Work with qualified clinical advisors. Resonance gives you the signal. Your application must respond at the standard your users deserve.
+**Developer responsibility:** If your application serves people with severe mental illness, people in recovery, or people in sustained crisis  -  implement additional safeguards beyond what Resonance provides. Work with qualified clinical advisors. Resonance gives you the signal. Your application must respond at the standard your users deserve.
 
 ---
 
 ### Customer Service and Support
 
-Resonance detects frustrated, upset, or distressed customers and gives the LLM the awareness to respond accordingly — with patience, validation, and without adding friction.
+Resonance detects frustrated, upset, or distressed customers and gives the LLM the awareness to respond accordingly  -  with patience, validation, and without adding friction.
 
 **Prohibited:** Using Resonance's emotional detection to manipulate customers. Identifying emotionally vulnerable states and exploiting them to drive purchasing decisions, accept unfavourable terms, or disengage from complaints. This is explicitly prohibited in the Ethics document and terminates the license.
 
@@ -216,21 +216,21 @@ Resonance detects frustrated, upset, or distressed customers and gives the LLM t
 
 ---
 
-### General Purpose — Any App That Uses an LLM
+### General Purpose  -  Any App That Uses an LLM
 
 If your application passes user messages to an LLM, Resonance can sit between them. The integration is the same regardless of context: messages go through Resonance first, emotional context is prepended, the LLM receives both.
 
 The edge cases to plan for in any general purpose integration:
 
-**Very short messages** — "yes", "no", "ok", "thanks". Low signal. Resonance injects baseline profile context only. No over-interpretation.
+**Very short messages**  -  "yes", "no", "ok", "thanks". Low signal. Resonance injects baseline profile context only. No over-interpretation.
 
-**Non-emotional factual questions** — "What year was the Eiffel Tower built?" Neutral detection. Lightweight context. LLM answers the question.
+**Non-emotional factual questions**  -  "What year was the Eiffel Tower built?" Neutral detection. Lightweight context. LLM answers the question.
 
-**Sudden emotional shift mid-conversation** — a person who has been asking factual questions suddenly expresses distress. Resonance detects the shift immediately. Context updates before the next LLM call. The LLM responds to who the person is right now, not who they were three messages ago.
+**Sudden emotional shift mid-conversation**  -  a person who has been asking factual questions suddenly expresses distress. Resonance detects the shift immediately. Context updates before the next LLM call. The LLM responds to who the person is right now, not who they were three messages ago.
 
-**Repeated neutral messages followed by a crisis signal** — the profile carries the history. Even if the crisis signal appears in isolation, Resonance has the longitudinal context to understand it is not coming from nowhere.
+**Repeated neutral messages followed by a crisis signal**  -  the profile carries the history. Even if the crisis signal appears in isolation, Resonance has the longitudinal context to understand it is not coming from nowhere.
 
-**Messages in languages other than English** — Resonance's detection accuracy degrades for non-English input. See the Bias and Cultural Limitation section of the Ethics document. Disclose this limitation to your users.
+**Messages in languages other than English**  -  Resonance's detection accuracy degrades for non-English input. See the Bias and Cultural Limitation section of the Ethics document. Disclose this limitation to your users.
 
 ---
 
@@ -241,8 +241,8 @@ Resonance handles detection, profiling, injection, and flagging. Developers are 
 **You must:**
 - Disclose to users that emotional detection is active
 - Provide a correction interface so users can adjust detections
-- Honour delete requests — full profile removal, no retention
-- Act on the crisis flag — surface a crisis resource immediately when it fires
+- Honour delete requests  -  full profile removal, no retention
+- Act on the crisis flag  -  surface a crisis resource immediately when it fires
 - Not use emotional data for any purpose beyond improving the conversation experience for that user
 
 **You must not:**
@@ -255,7 +255,7 @@ Resonance handles detection, profiling, injection, and flagging. Developers are 
 
 ## Known Limitations
 
-Resonance v2 is a trained model — it is more accurate than the rule-based v1 system, but it has known weak spots. Shame detection has the lowest F1 score of any class. Sadness detection is also weaker than anger, fear, and joy. Some high-arousal distress language is occasionally misclassified as surprise.
+Resonance v2 is a trained model  -  it is more accurate than the rule-based v1 system, but it has known weak spots. Shame detection has the lowest F1 score of any class. Sadness detection is also weaker than anger, fear, and joy. Some high-arousal distress language is occasionally misclassified as surprise.
 
 These limitations are documented honestly because developers building on Resonance should know where the model is less reliable. Improvements are planned for v3.
 
@@ -265,12 +265,12 @@ These limitations are documented honestly because developers building on Resonan
 
 | Flag | Type | Meaning |
 |------|------|---------|
-| `crisis_detected` | Boolean | Acute distress detected — surface crisis resource immediately |
-| `window_of_tolerance` | String | hyperarousal / in / hypoarousal — Window of Tolerance state |
-| `wise_mind_signal` | String | True/False — Wise Mind state detected |
-| `alexithymia_flag` | Boolean | Low emotion word density — use sensation language not feeling labels |
-| `guilt_type` | String | PoliGuilt guilt type — one of: survivor, moral, anticipatory, shame-adjacent |
-| `confidence` | Float | 0.0–1.0 — detection confidence for this message |
+| `crisis_detected` | Boolean | Acute distress detected  -  surface crisis resource immediately |
+| `window_of_tolerance` | String | hyperarousal / in / hypoarousal  -  Window of Tolerance state |
+| `wise_mind_signal` | String | True/False  -  Wise Mind state detected |
+| `alexithymia_flag` | Boolean | Low emotion word density  -  use sensation language not feeling labels |
+| `guilt_type` | String | PoliGuilt guilt type  -  one of: survivor, moral, anticipatory, shame-adjacent |
+| `confidence` | Float | 0.0 - 1.0  -  detection confidence for this message |
 
 ---
 
@@ -288,8 +288,8 @@ r.start_panel()
 
 This opens a local server at `http://localhost:7731` and launches the panel in your browser. The panel shows the detected emotion, energy and mood bars, a tonal reflection of what Resonance senses, and a `does this feel right?` feedback row so users can confirm or correct the reading.
 
-The panel is optional — Resonance works fully without it. It is useful during development to verify that detections look right, and can be offered to end users as an ambient emotional awareness layer alongside your interface.
+The panel is optional  -  Resonance works fully without it. It is useful during development to verify that detections look right, and can be offered to end users as an ambient emotional awareness layer alongside your interface.
 
 ---
 
-*If something in this guide is unclear, incomplete, or wrong — raise it at [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues). This document will be updated as Resonance evolves.*
+*If something in this guide is unclear, incomplete, or wrong  -  raise it at [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues). This document will be updated as Resonance evolves.*
