@@ -5,7 +5,7 @@
 # Checks PyPI for newer versions of resonance-layer on startup.
 # Notifies the user once per session if an update is available.
 
-__version__ = "2.0.1"
+__version__ = "2.0.2"
 
 def check_for_update():
     """Check PyPI for a newer version. Notify once per session if found."""
