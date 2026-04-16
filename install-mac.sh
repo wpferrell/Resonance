@@ -52,19 +52,33 @@ while kill -0 $PIP_PID 2>/dev/null; do
     if [ "$TARGET" -gt 38 ]; then TARGET=38; fi
     if [ "$FILLED" -lt "$TARGET" ]; then FILLED=$((FILLED + 1)); fi
     PCT=$(( (FILLED * 100) / WIDTH ))
-    BAR=$(python3 -c "print('#'*$FILLED + '-'*$((WIDTH-FILLED)), end='')")
+    EMPTY=$((WIDTH - FILLED))
+    BAR=$(printf '%*s' "$FILLED" | tr ' ' '#')$(printf '%*s' "$EMPTY" | tr ' ' '-')
     printf "\r  [%s] %d%%  " "$BAR" "$PCT"
     sleep 0.3
 done
 
 wait $PIP_PID
-BAR=$(python3 -c "print('#'*$WIDTH, end='')")
+BAR=$(printf '%*s' "$WIDTH" | tr ' ' '#')
 printf "\r  [%s] 100%%\n" "$BAR"
 echo ""
 echo "OK: Resonance installed"
 echo ""
+echo "Downloading model weights (first run only, ~700MB)..."
+echo "This may take a few minutes depending on your connection."
+echo ""
 
-"$VENV_DIR/bin/python3" -c "from resonance import Resonance; Resonance(user_id='_setup')"
+"$VENV_DIR/bin/python3" -c "
+import os
+os.makedirs(os.path.expanduser('~/.resonance'), exist_ok=True)
+import json
+config_path = os.path.expanduser('~/.resonance/config.json')
+if not os.path.exists(config_path):
+    with open(config_path, 'w') as f:
+        json.dump({'first_run_complete': True, 'feedback_enabled': False}, f)
+from resonance.model_loader import ensure_model_downloaded
+ensure_model_downloaded()
+"
 
 echo ""
 echo "+----------------------------------------------------------+"
@@ -79,6 +93,8 @@ echo "  from resonance import Resonance"
 echo "  r = Resonance(user_id='your-user-id')"
 echo "  result = r.process('your message here')"
 echo ""
+echo "To enable anonymous feedback to help improve Resonance:"
+echo "  r.set_feedback(True)"
+echo ""
 echo "Developer guide: https://resonance-layer.com/guide"
-echo "User guide:      https://resonance-layer.com/user-guide"
 echo ""
