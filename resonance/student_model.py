@@ -1,9 +1,9 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
-# Licensed under the Business Source License 1.1 â€” see LICENSE for details.
+# Licensed under the Business Source License 1.1 â€" see LICENSE for details.
 
 # resonance/student_model.py
 # Lightweight standalone module containing only the model architecture.
-# No training dependencies â€” safe to import in production without pandas, sklearn, etc.
+# No training dependencies â€" safe to import in production without pandas, sklearn, etc.
 
 import torch
 import torch.nn as nn
