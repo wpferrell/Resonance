@@ -106,10 +106,12 @@ def record_feedback(
     if not feedback_enabled:
         return
 
+    from resonance.version import __version__
     record = {
         "record_type": "feedback",
         "user_id": _anonymous_id(user_id),
         "timestamp": datetime.now(timezone.utc).isoformat(),
+        "resonance_version": __version__,
         "primary_emotion": primary_emotion,
         "confidence": round(confidence, 3),
         "valence": round(valence, 3),
@@ -174,11 +176,13 @@ def record_trajectory(
     if not feedback_enabled:
         return
 
+    from resonance.version import __version__
     record = {
         "record_type": "trajectory",
         "user_id": _anonymous_id(user_id),
         "session_id": session_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
+        "resonance_version": __version__,
         "prev_emotion": prev_emotion,
         "curr_emotion": curr_emotion,
         "valence_shift": round(curr_valence - prev_valence, 3),
