@@ -1,4 +1,4 @@
-# Resonance — Ethics & Principles
+# Resonance  -  Ethics & Principles
 
 *This document defines what Resonance is, what it is not, and the non-negotiable principles that govern how it operates. Every developer who integrates Resonance is expected to understand and honour these principles.*
 
@@ -6,13 +6,13 @@
 
 ## What Resonance Is
 
-Resonance is an affective memory layer for AI. It is a layer — not a product, not a therapy tool, not an end in itself.
+Resonance is an affective memory layer for AI. It is a layer  -  not a product, not a therapy tool, not an end in itself.
 
 Its purpose is narrow and specific: to detect a person's emotional state from text, emoji, and voice, and to pass that emotional context to any AI before a conversation begins. That context makes AI conversations feel like genuine connection. It solves one problem: text alone does not carry emotion.
 
-Resonance is part of the evolution of AI — the same way AI learned to understand language, it now begins to understand how a person actually feels when they use it. Resonance exists to make that possible. Nothing more.
+Resonance is part of the evolution of AI  -  the same way AI learned to understand language, it now begins to understand how a person actually feels when they use it. Resonance exists to make that possible. Nothing more.
 
-Resonance is not a novelty layer or a feature. It is infrastructure — the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Seven detection frameworks are built into every layer — Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, Window of Tolerance, PERMA flourishing, Wise Mind, and PoliGuilt guilt typing — each grounded in decades of psychological research. That demands rigour.
+Resonance is not a novelty layer or a feature. It is infrastructure  -  the emotional foundation that any AI conversation can be built on. The science inside it is serious because the people using it are real, and their emotional lives deserve that. Seven detection frameworks are built into every layer  -  Self-Determination Theory, DBT primary and secondary emotion detection, reappraisal vs suppression pattern recognition, Window of Tolerance, PERMA flourishing, Wise Mind, and PoliGuilt guilt typing  -  each grounded in decades of psychological research. That demands rigour.
 
 ---
 
@@ -20,9 +20,9 @@ Resonance is not a novelty layer or a feature. It is infrastructure — the emot
 
 **Resonance is not a mental health tool and makes no clinical claims.**
 
-**Resonance reflects emotion — it does not diagnose, treat, or replace professional support.**
+**Resonance reflects emotion  -  it does not diagnose, treat, or replace professional support.**
 
-**Resonance is a mirror, not a therapist — it detects emotion, it never interprets what that emotion means for your life.**
+**Resonance is a mirror, not a therapist  -  it detects emotion, it never interprets what that emotion means for your life.**
 
 These three statements are not disclaimers. They are design decisions. Resonance was built with clear boundaries from the first line of code. It will not drift from them.
 
@@ -34,19 +34,19 @@ Emotional data belongs to the person it comes from. Always.
 
 By default, Resonance stores all data locally on the user's own machine. Nothing leaves their device without their explicit consent. No emotional data is transmitted, aggregated, or used without a clear, informed opt-in.
 
-In a future cloud version, users may choose to contribute anonymised emotional patterns — not their words, not their identity — to help improve the model for everyone. That contribution will always be optional, always transparent, and always revocable.
+In a future cloud version, users may choose to contribute anonymised emotional patterns  -  not their words, not their identity  -  to help improve the model for everyone. That contribution will always be optional, always transparent, and always revocable.
 
 Developers integrating Resonance must honour this principle. Do not collect, transmit, or store emotional data without explicit user consent. Do not use emotional data for purposes beyond the stated function of your application.
 
 ---
 
-## Crisis Detection — Developer Responsibility
+## Crisis Detection  -  Developer Responsibility
 
-Resonance detects severe emotional distress. A dedicated crisis detection head runs on every message independently of other signals — it does not rely on Window of Tolerance collapse alone. When acute distress language is detected, Resonance sets `crisis_detected` to True in the EmotionResult.
+Resonance detects severe emotional distress. A dedicated crisis detection head runs on every message independently of other signals  -  it does not rely on Window of Tolerance collapse alone. When acute distress language is detected, Resonance sets `crisis_detected` to True in the EmotionResult.
 
 That flag means: stop normal conversation. Prioritise safety.
 
-What happens next is the responsibility of the developer who built the application using Resonance. Resonance is a layer — it cannot control the interface above it. But the expected behaviour is explicit:
+What happens next is the responsibility of the developer who built the application using Resonance. Resonance is a layer  -  it cannot control the interface above it. But the expected behaviour is explicit:
 
 **If `crisis_detected` is set to `True`, the application must surface a crisis resource immediately.** This is not optional. It is the expected standard for any application built on Resonance.
 
@@ -65,7 +65,7 @@ Resonance exists to make AI feel more human. That creates a responsibility.
 
 Any tool that deepens a person's relationship with AI must actively protect their relationship with other people. Resonance is not a substitute for human connection. The AI it informs is not a substitute for human connection. No feature, no interface, no LLM prompt generated by Resonance should ever position itself as a replacement for another person.
 
-The LLM context Resonance generates explicitly instructs the AI to support human connection — not to compete with it.
+The LLM context Resonance generates explicitly instructs the AI to support human connection  -  not to compete with it.
 
 If usage patterns ever suggest that a person is withdrawing from human relationships in favour of AI interaction, that is a signal to be surfaced carefully, not quietly ignored.
 
@@ -75,7 +75,7 @@ If usage patterns ever suggest that a person is withdrawing from human relations
 
 Resonance detects. It does not evaluate.
 
-There is no good emotion or bad emotion inside Resonance's architecture. Anger, grief, fear, joy, numbness — all are detected with equal precision and equal respect. No emotional state triggers a response of concern or correction. No person is told, directly or indirectly, that what they are feeling is wrong.
+There is no good emotion or bad emotion inside Resonance's architecture. Anger, grief, fear, joy, numbness  -  all are detected with equal precision and equal respect. No emotional state triggers a response of concern or correction. No person is told, directly or indirectly, that what they are feeling is wrong.
 
 This is not a feature. It is the foundation.
 
@@ -85,17 +85,17 @@ This is not a feature. It is the foundation.
 
 Every psychological framework baked into Resonance was chosen for one reason: it reflects how humans actually experience and regulate emotion, validated by research. They are not decoration. They shape every detection, every profile, every word passed to an AI.
 
-1. **Self-Determination Theory** — detects autonomy, competence, and relatedness signals in text — what the person needs beneath what they say
-2. **DBT primary and secondary emotion detection** — what is felt on the surface, and what is underneath it, detected independently
-3. **Reappraisal vs suppression** — how a person is relating to their emotion, not just what it is — scored as a continuous signal
-4. **Window of Tolerance** — where a person is in their regulatory capacity right now, and which direction they are moving across a session
-5. **PERMA flourishing** — the full spectrum of emotional wellbeing across five dimensions: positive emotion, engagement, relationships, meaning, accomplishment
-6. **Wise Mind detection** — the balance between emotional mind and reasonable mind — scored as a continuous signal
+1. **Self-Determination Theory**  -  detects autonomy, competence, and relatedness signals in text  -  what the person needs beneath what they say
+2. **DBT primary and secondary emotion detection**  -  what is felt on the surface, and what is underneath it, detected independently
+3. **Reappraisal vs suppression**  -  how a person is relating to their emotion, not just what it is  -  scored as a continuous signal
+4. **Window of Tolerance**  -  where a person is in their regulatory capacity right now, and which direction they are moving across a session
+5. **PERMA flourishing**  -  the full spectrum of emotional wellbeing across five dimensions: positive emotion, engagement, relationships, meaning, accomplishment
+6. **Wise Mind detection**  -  the balance between emotional mind and reasonable mind  -  scored as a continuous signal
 
-Two principles guide how every signal is used — not detection signals themselves, but design commitments woven through every layer:
+Two principles guide how every signal is used  -  not detection signals themselves, but design commitments woven through every layer:
 
-- **Validate before problem-solve** — the AI responds to the person before it responds to the problem
-- **Non-judgment** — there is no good or bad emotion inside Resonance. Everything is detected with equal respect
+- **Validate before problem-solve**  -  the AI responds to the person before it responds to the problem
+- **Non-judgment**  -  there is no good or bad emotion inside Resonance. Everything is detected with equal respect
 
 ---
 
@@ -103,15 +103,15 @@ Two principles guide how every signal is used — not detection signals themselv
 
 Every person whose emotional state is being detected by Resonance has the right to know that detection is happening.
 
-Any application built on Resonance must disclose to the user — clearly, not buried in terms of service — that emotional detection is active. This is not negotiable.
+Any application built on Resonance must disclose to the user  -  clearly, not buried in terms of service  -  that emotional detection is active. This is not negotiable.
 
 Beyond disclosure, the user has three rights that developers must honour:
 
-**The right to see.** A user can request a view of their emotional profile at any time — what has been detected, what patterns have been identified, what is being passed to the AI before each conversation.
+**The right to see.** A user can request a view of their emotional profile at any time  -  what has been detected, what patterns have been identified, what is being passed to the AI before each conversation.
 
 **The right to correct.** A user can correct any detected emotion they believe is wrong. That correction feeds back into the system and improves accuracy over time. The correction interface is not optional. It is a core part of what Resonance is.
 
-**The right to delete.** A user can delete their emotional profile entirely at any time. All stored data — vectors, temporal patterns, profile summaries — must be permanently removed on request. No retention, no archive, no exceptions.
+**The right to delete.** A user can delete their emotional profile entirely at any time. All stored data  -  vectors, temporal patterns, profile summaries  -  must be permanently removed on request. No retention, no archive, no exceptions.
 
 Resonance was built to serve the person using it. Any application that obscures what Resonance is doing, or denies a user access to their own emotional data, is in direct violation of these principles.
 
@@ -134,13 +134,13 @@ These prohibitions are written into the license. Violation terminates the right 
 
 ### Prompt Injection
 
-Resonance processes raw text before injecting emotional context into an LLM. That creates a security surface. A malicious user can attempt to embed instructions inside their message designed to corrupt the emotional context — changing how the AI behaves in ways it should not.
+Resonance processes raw text before injecting emotional context into an LLM. That creates a security surface. A malicious user can attempt to embed instructions inside their message designed to corrupt the emotional context  -  changing how the AI behaves in ways it should not.
 
 Resonance handles this at the input layer:
 
-1. **Detect** — incoming text is scanned for known injection patterns before emotional analysis begins
-2. **Strip** — any detected injection attempt is removed; only the legitimate emotional content is processed
-3. **Log** — a `injection_flag` is set and passed to the developer so they know the attempt occurred
+1. **Detect**  -  incoming text is scanned for known injection patterns before emotional analysis begins
+2. **Strip**  -  any detected injection attempt is removed; only the legitimate emotional content is processed
+3. **Log**  -  a `injection_flag` is set and passed to the developer so they know the attempt occurred
 
 This is not optional and is not configurable. Resonance will never knowingly pass poisoned context to an LLM.
 
@@ -150,23 +150,23 @@ The emotional profile Resonance builds over time is a trust surface. A determine
 
 Resonance mitigates this through confidence scoring, correction pattern analysis, and anomaly detection in the reinforcement loop. Unusual correction patterns are flagged. Profiles that diverge sharply from established baselines are marked as low-confidence until consistency is restored.
 
-### Sustained Distress Detection — Trigger Conditions
+### Sustained Distress Detection  -  Trigger Conditions
 
 Resonance tracks emotional distress across a session and sets a `sustained_distress` flag when distress appears persistent rather than momentary. The trigger logic accounts for three factors:
 
 **Baseline trigger:** Three or more consecutive messages with negative valence (below -0.40) and elevated arousal (above 0.55). This catches overt, expressed distress.
 
-**Suppression adjustment:** When suppression score is 0.5 or above, the valence threshold is raised by 0.15 and the arousal threshold is lowered by 0.15. This catches distress that is being held back — a person saying "I am fine" while in genuine distress scores lower on arousal precisely because they are suppressing the signal. The suppression score reveals what the words are hiding.
+**Suppression adjustment:** When suppression score is 0.5 or above, the valence threshold is raised by 0.15 and the arousal threshold is lowered by 0.15. This catches distress that is being held back  -  a person saying "I am fine" while in genuine distress scores lower on arousal precisely because they are suppressing the signal. The suppression score reveals what the words are hiding.
 
 **Escalating WoT trajectory adjustment:** When the session WoT trajectory is escalating (the person is moving toward dysregulation across the session), the valence threshold is raised by a further 0.10 and the arousal threshold lowered by a further 0.10. The direction of travel matters as much as the current state.
 
-Both adjustments are cumulative. A person showing high suppression and an escalating session trajectory triggers `sustained_distress` at a substantially lower apparent distress level than baseline — because the signal is being obscured, not because the distress is less real.
+Both adjustments are cumulative. A person showing high suppression and an escalating session trajectory triggers `sustained_distress` at a substantially lower apparent distress level than baseline  -  because the signal is being obscured, not because the distress is less real.
 
-When `sustained_distress` is set, the LLM context instructs the AI to prioritise validation and care. It does not trigger a crisis resource — that is reserved for `crisis_detected`. It does signal that the conversation requires sustained attentiveness, not just a momentary acknowledgement.
+When `sustained_distress` is set, the LLM context instructs the AI to prioritise validation and care. It does not trigger a crisis resource  -  that is reserved for `crisis_detected`. It does signal that the conversation requires sustained attentiveness, not just a momentary acknowledgement.
 
 ### Crisis Detection
 
-The `crisis_detected` flag triggers on specific language patterns that signal acute risk — suicidal ideation, self-harm, and related expressions. When set:
+The `crisis_detected` flag triggers on specific language patterns that signal acute risk  -  suicidal ideation, self-harm, and related expressions. When set:
 
 - The LLM context instructs the AI to surface appropriate support immediately
 - Normal conversation flow should be paused
@@ -187,7 +187,7 @@ The minimum age requirement for any given application is the developer's respons
 
 ## Bias and Cultural Limitation
 
-Resonance was trained on datasets that reflect human emotional language as it exists in the world — which means they carry the biases of that world. The training data is English-dominant and skewed toward Western cultural expression of emotion. A person whose first language is not English, or whose cultural background shapes how they express emotion differently, may be detected less accurately.
+Resonance was trained on datasets that reflect human emotional language as it exists in the world  -  which means they carry the biases of that world. The training data is English-dominant and skewed toward Western cultural expression of emotion. A person whose first language is not English, or whose cultural background shapes how they express emotion differently, may be detected less accurately.
 
 This is not acceptable as a permanent state. It is an honest acknowledgement of where Resonance is today and a commitment to improving coverage over time.
 
@@ -201,7 +201,7 @@ Resonance detects patterns. It can be wrong.
 
 Resonance v2 has specific known weak spots: shame detection has the lowest F1 score of any emotion class, sadness detection is weaker than anger, fear, and joy, and some high-arousal distress language is occasionally misclassified as surprise. These are documented honestly and will be improved in v3.
 
-Sarcasm, irony, understatement, culturally specific idiom, neurodivergent communication styles, and highly individual ways of expressing emotion can all produce incorrect detections. A person who expresses anger quietly, or grief through humour, or joy through self-deprecation, may not be detected accurately — especially early in their interaction with the system before personalisation has had time to work.
+Sarcasm, irony, understatement, culturally specific idiom, neurodivergent communication styles, and highly individual ways of expressing emotion can all produce incorrect detections. A person who expresses anger quietly, or grief through humour, or joy through self-deprecation, may not be detected accurately  -  especially early in their interaction with the system before personalisation has had time to work.
 
 Resonance is a mirror. But a mirror can distort. The correction interface exists precisely because no detection system is perfect. Users should always be able to say the system got it wrong, and that correction should always be taken seriously.
 
@@ -211,7 +211,7 @@ No output from Resonance should ever be treated as a definitive or clinical dete
 
 ## Accountability
 
-If you believe Resonance is being misused — by an application built on it, by a developer violating these principles, or by a flaw in the system itself — there is a place to report it.
+If you believe Resonance is being misused  -  by an application built on it, by a developer violating these principles, or by a flaw in the system itself  -  there is a place to report it.
 
 Report misuse or raise concerns via GitHub: [https://github.com/wpferrell/Resonance/issues](https://github.com/wpferrell/Resonance/issues)
 
@@ -225,7 +225,7 @@ Resonance is open to scrutiny. That is part of what it means to build something 
 
 Resonance is released under the Business Source License (BUSL). Individual and non-commercial use is free. Commercial use requires a license. The full terms are in `LICENSE`.
 
-This license exists because Resonance is built on serious psychological research and years of careful work. It deserves to be used carefully. Commercial applications that integrate emotional detection into products that touch real people's lives should do so with accountability — and with a relationship to the people who built and maintain this system.
+This license exists because Resonance is built on serious psychological research and years of careful work. It deserves to be used carefully. Commercial applications that integrate emotional detection into products that touch real people's lives should do so with accountability  -  and with a relationship to the people who built and maintain this system.
 
 ---
 
