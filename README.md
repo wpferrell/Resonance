@@ -29,6 +29,8 @@ Everything happens invisibly. You write. Resonance reads — not just the words,
 
 You do nothing differently. The conversation just feels different — because for the first time, the AI knows who it is talking to.
 
+Resonance v2 runs a custom-trained model built on real human expressions. Detection is no longer rule-based — it is learned. Every signal is produced by a model trained specifically to understand emotion the way people actually express it.
+
 ---
 
 ## How It Learns
@@ -66,16 +68,17 @@ The panel is a mirror. It does not tell you what to do with what you are feeling
 
 Resonance is not guessing. Every detection is grounded in established psychological research.
 
-Six detection frameworks are baked into every layer:
+Seven detection frameworks are baked into every layer:
 
 - **Self-Determination Theory** — reads your need for autonomy, connection, and competence beneath what you say
 - **DBT secondary emotion** — detects what you feel underneath the surface emotion, independently
 - **Reappraisal vs suppression** — detects how you are relating to your emotion, not just what it is
 - **Window of Tolerance** — knows whether you are calm, overwhelmed, or shut down
-- **PERMA flourishing** — tracks the full picture of your emotional wellbeing over time
+- **PERMA flourishing** — scores all five dimensions of wellbeing continuously: Positive emotion, Engagement, Relationships, Meaning, and Achievement — updated with every message
 - **Wise Mind detection** — recognises when you are in emotional mind, reasonable mind, or the balance between them
+- **PoliGuilt guilt typing** — distinguishes guilt from shame and identifies the specific guilt type beneath surface emotion
 
-Two guiding principles shape how every signal is used: validate before problem-solve, and non-judgment — there is no good or bad emotion inside Resonance.
+There is no good or bad emotion inside Resonance. Every signal is treated with equal weight.
 
 The science is serious because the people using it are real.
 
@@ -98,7 +101,7 @@ r.set_feedback(False)  # turn off
 
 ```
 ┌─ Resonance Update Available ─────────────────────────┐
-│  New version: 1.0.1  (you have 1.0.0)                │
+│  New version: 2.0.1  (you have 2.0.0)                │
 │  pip install --upgrade resonance-layer               │
 └───────────────────────────────────────────────────────┘
 ```
@@ -133,9 +136,13 @@ context = r.process("I've been so anxious about this")
 llm.chat(system=context.to_prompt(), message=message)
 ```
 
+Resonance v2 runs a custom-trained model built on real human expressions — primary emotion, shame/guilt separation, crisis detection, and all framework signals are produced by the model directly. Detection is learned, not rule-based.
+
 Resonance handles everything else — detection, profiling, injection, flagging. You handle the conversation.
 
 **Requirements:** Python 3.10+, runs fully embedded, no external server required.
+
+**First run:** model weights (~700MB) download automatically from HuggingFace on first use and are cached locally. After that, everything runs fully offline.
 
 **Install:**
 
