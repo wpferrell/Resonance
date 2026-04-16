@@ -60,6 +60,10 @@ The developer does not configure this. Resonance decides. You do not need to man
 
 ---
 
+Resonance learns in two ways. First, from every message â€” each call to r.process() reads the emotion, updates the user's local profile, and builds a richer picture of who they are over time. Patterns, tendencies, suppression signals, regulation style â€” all accumulating silently in the background. The LLM gets more accurate context with every conversation, no extra effort from the user or developer. Second, from explicit corrections â€” if a user taps a different emotion chip to say the detection was wrong, that correction feeds directly into their per-user reinforcement loop and adjusts future detections for them specifically. Both paths are local, both require no opt-in.
+
+---
+
 ## What the Injection Looks Like
 
 Every LLM receives a system-level emotional context block before the user's message. Here is what that block looks like across three scenarios.
