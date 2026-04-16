@@ -1,5 +1,5 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
-# Licensed under the Business Source License 1.1 — see LICENSE for details.
+# Licensed under the Business Source License 1.1  -  see LICENSE for details.
 
 # resonance/feedback.py
 # Handles anonymous feedback collection.
