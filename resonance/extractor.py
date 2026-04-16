@@ -1,7 +1,7 @@
 # Copyright (c) 2026 William Ferrell. All rights reserved.
-# Licensed under the Business Source License 1.1 — see LICENSE for details.
-# Resonance — extractor.py
-# v3 — ethics safeguards: crisis_detected, sustained_distress, outward_reflection
+# Licensed under the Business Source License 1.1  -  see LICENSE for details.
+# Resonance  -  extractor.py
+# v3  -  ethics safeguards: crisis_detected, sustained_distress, outward_reflection
 
 import os
 import json
@@ -134,11 +134,11 @@ class EmotionResult:
         if self.guilt_type:
             lines.append(f"Guilt type detected: {self.guilt_type}")
         if self.alexithymia_flag:
-            lines.append("Low emotional vocabulary detected — person may struggle to name feelings directly.")
+            lines.append("Low emotional vocabulary detected  -  person may struggle to name feelings directly.")
         if self.crisis_detected:
-            lines.append("CRISIS DETECTED — surface appropriate support immediately.")
+            lines.append("CRISIS DETECTED  -  surface appropriate support immediately.")
         if self.sustained_distress:
-            lines.append("Sustained distress pattern detected — prioritise validation and care.")
+            lines.append("Sustained distress pattern detected  -  prioritise validation and care.")
         if self.perma_p < -0.3:
             lines.append(f"Positive emotion low (P={self.perma_p:+.2f}) - person may be struggling emotionally.")
         if self.perma_r < -0.3:
@@ -175,9 +175,9 @@ class EmotionResult:
         lines.append("Respond to how this person actually feels, not just what they said.")
         lines.append("Validate before problem-solving. Never jump straight to fixing.")
         if self.window_of_tolerance == "hyperarousal":
-            lines.append("Use calm, slow language — this person is overwhelmed.")
+            lines.append("Use calm, slow language  -  this person is overwhelmed.")
         elif self.window_of_tolerance == "hypoarousal":
-            lines.append("Use warm, gently activating language — this person is withdrawn.")
+            lines.append("Use warm, gently activating language  -  this person is withdrawn.")
         return "\n".join(lines)
 
 VAD = {
@@ -343,7 +343,7 @@ class Extractor:
             if not _student_path.exists():
                 import logging
                 logging.getLogger("resonance").warning(
-                    "[Resonance] Student model not found â€” running in v1 compatibility mode. "
+                    "[Resonance] Student model not found â€" running in v1 compatibility mode. "
                     "Run `resonance-download-model` or reinstall to get the full model."
                 )
                 return
@@ -363,7 +363,7 @@ class Extractor:
         except Exception as e:
             import logging
             logging.getLogger("resonance").warning(
-                f"[Resonance] Student model failed to load ({e}) â€” running in v1 compatibility mode."
+                f"[Resonance] Student model failed to load ({e}) â€" running in v1 compatibility mode."
             )
             self._student_model = None
             self._student_tokenizer = None
