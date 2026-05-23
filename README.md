@@ -192,3 +192,17 @@ Free for individual and non-commercial use. Commercial use requires a license.
 - [GitHub](https://github.com/wpferrell/Resonance)  source code, issues, contributions
 
 
+
+
+## Feedback & Community
+
+Using Resonance in your project? We'd love to hear about it.
+
+- **Open a [Discussion](https://github.com/wpferrell/Resonance/discussions)** â€” share results, ask questions, suggest improvements
+- **File an [Issue](https://github.com/wpferrell/Resonance/issues)** â€” if something didn't work, tell us what happened
+- **HuggingFace model** â€” [huggingface.co/wpferrell/resonance-model](https://huggingface.co/wpferrell/resonance-model)
+
+We especially want to hear:
+- Which emotions the model detected correctly or incorrectly
+- Your use case and dataset
+- Any unexpected behaviour
